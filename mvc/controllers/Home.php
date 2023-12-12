@@ -1,12 +1,17 @@
 <?php 
-   require_once dirname(__DIR__). "/core/functions.php";
+    require_once dirname(__DIR__). "/models/User.php";
+    require_once dirname(__DIR__). "/core/functions.php";
     class Home {
 
         function sayHi($params){
            $c = 1000+3;
            $d = 10/2;
-           
-            view("home/index",compact('c','d'));
+        //    $model= new Model();
+        $user = new User();
+        $user->getAll();
+        $result = $user->getAll();
+
+        view("home/index",compact('result'));
 
 
         }
