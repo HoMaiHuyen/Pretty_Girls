@@ -1,24 +1,20 @@
 <?php
-// Make sure to require the necessary dependencies, such as PDO and the Model class
 require_once "Model.php";
 
-class User extends Model
+class ProductModel extends Model
 {
     protected $table = "products";
-
-    function getAll()
+    function getAllProduct()
     {
         if (!$this->connect) {
             return [];
         }
-
         try {
             $stmt = $this->connect->prepare("SELECT * FROM $this->table");
             $stmt->execute();
-
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
             return [];
         }
     }

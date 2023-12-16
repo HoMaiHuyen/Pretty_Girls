@@ -111,7 +111,7 @@
   
   .search-container input {
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #AAA7A7;
     border-radius: 15px;
     width: 300px;
     padding-left: 30px;
@@ -172,7 +172,6 @@ body {
     display: flex;
     height: 100vh;
     flex-direction: column; 
-    overflow: hidden;
 }
 
 #banner {
@@ -199,8 +198,7 @@ body {
 }
 .right-section {
   width: 100%;
-    flex: 1;
-    overflow: hidden;
+  flex: 1;
 }
 
 .right-section img {

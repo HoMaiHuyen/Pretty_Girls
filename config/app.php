@@ -1,3 +1,3 @@
 <?php 
 
-define("ROOT_URL","http://localhost:9999/Pretty_GIRLS");
+define("ROOT_URL","http://localhost/project1/");
