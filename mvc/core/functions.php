@@ -6,7 +6,9 @@ function view($view, $data){
     
      
 }
-
+function loadImage($image){
+    echo  ROOT_URL .'/public/image/'.$image;
+}
 
 
 ?>

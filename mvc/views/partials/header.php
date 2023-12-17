@@ -21,7 +21,7 @@
   <section>
     <div id="header">
       <div class="logo">
-          <img src="<?php echo ROOT_URL .'/public/image/Logo (1).png' ?>" style="width: 80px; height: 80px;" />
+          <img src="<?php loadImage('Logo (1).png') ?>" style="width: 80px; height: 80px;" />
       </div>
       </div>
       <div id="menu">
