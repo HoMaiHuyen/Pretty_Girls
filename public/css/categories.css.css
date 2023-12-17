@@ -1,24 +1,17 @@
 
 /*Categories*/
-:root{
-    --blue-color:#6E95B8;
-    --background-main-color:#F4FAFD;
-    --background-button-color: linear-gradient(#9FCBF4, #EAD8FC);
-    --white-color: white;
-    --black-color: black;
-    --lightgray:#cbc4c4;
-  }
 
 .card-item-product{
   background-color: var(--background-button-color);
-  border: none;
+  border: 1px solid var(--black-color);
   border-radius: 0;
-  margin: 50px;
+  /* margin: 10px; */
+  /* width: 50px; */
 }
 
 
 .img-product{
- width: 350px ;
+ width: 400px ;
   height: 400px;
   background-color: var(--background-button-color);
 }
@@ -62,23 +55,22 @@
 .rate > label:hover ~ input:checked ~ label {
   color: #FFC600; 
 }
-.button-footer{
-  display: flex;
-  position: relative;
-  bottom: 30px;
-}
-.btn-addtocart{
-    padding-right: 80px;
-    
-}
-.addtocart:hover{
-    background-image: var(--background-button-color);
-    color:var(--white-color);
-    border: 1px solid rgb(202, 196, 196);
-    
-}
+
 
 .name-title-categories{
-  color: var(--blue-color);
+  color: var(--black-color);
   font-size: 50px;
+}
+
+.button-footer {
+  text-align: center;
+}
+
+.btn, .btn-light, .btn-light-large {
+  margin-right: 60px;
+}
+
+
+.btn-light-large:last-child {
+  margin-right: 0;
 }

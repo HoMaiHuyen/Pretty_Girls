@@ -1,5 +1,5 @@
-<?php 
-require_once dirname(__DIR__)."/partials/header.php";?>
+<?php
+require_once dirname(__DIR__) . "/partials/header.php"; ?>
 <div class="container">
     <div class="row">
         <h1 class="name-title-categories">Face</h1>
@@ -23,13 +23,8 @@ require_once dirname(__DIR__)."/partials/header.php";?>
                     </div>
                 </div>
                 <div class="button-footer">
-                    <div class="btn-addtocart">
-                        <button type="button" class="btn btn-light">Add To Cart</button>
-                    </div>
-                    <div class="btn-buynow">
-                        <a href="#!" class="btn btn-light buynow" style="width:120px;">Buy Now</a>
-                    </div>
-
+                    <button type="button" class="btn btn-light">Add To Cart</button>
+                    <a href="#!" class="btn btn-light">Buy Now</a>
                 </div>
 
             </div>
@@ -54,15 +49,9 @@ require_once dirname(__DIR__)."/partials/header.php";?>
                     </div>
                 </div>
                 <div class="button-footer">
-                    <div class="btn-addtocart">
-                        <button type="button" class="btn btn-light addtocart">Add To Cart</button>
-                    </div>
-                    <div class="btn-buynow">
-                        <a href="#!" class="btn btn-light buynow" style="width:120px;">Buy Now</a>
-                    </div>
-
+                    <button type="button" class="btn btn-light">Add To Cart</button>
+                    <a href="#!" class="btn btn-light">Buy Now</a>
                 </div>
-
             </div>
             <div class="card card-item-product">
                 <img src="https://res.cloudinary.com/dfdcuhbhd/image/upload/v1702648479/Pretty%20G%E1%BB%89ls/qttpvu3dqi6qt2qopmwq.png" class="card-img-top img-product" alt="...">
@@ -83,13 +72,8 @@ require_once dirname(__DIR__)."/partials/header.php";?>
                     </div>
                 </div>
                 <div class="button-footer">
-                    <div class="btn-addtocart">
-                        <button type="button" class="btn btn-light addtocart">Add To Cart</button>
-                    </div>
-                    <div class="btn-buynow">
-                        <a href="#!" class="btn btn-light buynow" style="width:120px;">Buy Now</a>
-                    </div>
-
+                    <button type="button" class="btn btn-light">Add To Cart</button>
+                    <a href="#!" class="btn btn-light">Buy Now</a>
                 </div>
             </div>
         </div>
@@ -101,7 +85,6 @@ require_once dirname(__DIR__)."/partials/header.php";?>
             <div class="card card-item-product">
                 <img src="https://res.cloudinary.com/dfdcuhbhd/image/upload/v1702648495/Pretty%20G%E1%BB%89ls/fz3khs6bibajukshjlrz.png" class="card-img-top img-product" alt="...">
                 <div class="card-body">
-
                     <h5 class="card-title">Nourish Face</h5>
                     <p class="card-text">$35</p>
                     <div class="rate">
@@ -118,13 +101,8 @@ require_once dirname(__DIR__)."/partials/header.php";?>
                     </div>
                 </div>
                 <div class="button-footer">
-                    <div class="btn-addtocart">
-                        <button type="button" class="btn btn-light addtocart">Add To Cart</button>
-                    </div>
-                    <div class="btn-buynow">
-                        <a href="#!" class="btn btn-light buynow" style="width:120px;">Buy Now</a>
-                    </div>
-
+                    <button type="button" class="btn btn-light">Add To Cart</button>
+                    <a href="#!" class="btn btn-light">Buy Now</a>
                 </div>
             </div>
             <div class="card card-item-product">
@@ -147,19 +125,13 @@ require_once dirname(__DIR__)."/partials/header.php";?>
                     </div>
                 </div>
                 <div class="button-footer">
-                    <div class="btn-addtocart">
-                        <button type="button" class="btn btn-light addtocart">Add To Cart</button>
-                    </div>
-                    <div class="btn-buynow">
-                        <a href="#!" class="btn btn-light buynow" style="width:120px;">Buy Now</a>
-                    </div>
-
+                    <button type="button" class="btn btn-light">Add To Cart</button>
+                    <a href="#!" class="btn btn-light">Buy Now</a>
                 </div>
             </div>
             <div class="card card-item-product">
                 <img src="https://res.cloudinary.com/dfdcuhbhd/image/upload/v1702648536/Pretty%20G%E1%BB%89ls/kgjlrudafiirmbhxfzpq.png" class="card-img-top img-product" alt="...">
                 <div class="card-body">
-
                     <h5 class="card-title">Nourish Face</h5>
                     <p class="card-text">$35</p>
                     <div class="rate">
@@ -176,17 +148,13 @@ require_once dirname(__DIR__)."/partials/header.php";?>
                     </div>
                 </div>
                 <div class="button-footer">
-                    <div class="btn-addtocart">
-                        <button type="button" class="btn btn-light addtocart">Add To Cart</button>
-                    </div>
-                    <div class="btn-buynow">
-                        <a href="#!" class="btn btn-light buynow" style="width:120px;">Buy Now</a>
-                    </div>
-
+                    <button type="button" class="btn btn-light">Add To Cart</button>
+                    <a href="#!" class="btn btn-light btn-light-large">Buy Now</a>
                 </div>
             </div>
         </div>
     </div>
 
 </div>
-<?php require_once dirname(__DIR__)."/partials/footer.php";?>
+<?php require_once dirname(__DIR__) . "/partials/footer.php";
+?>
