@@ -1,5 +1,4 @@
 <?php
-require_once dirname(__DIR__) . "/core/DotEnvironment.php";
 class Model
 {
     protected $table;
@@ -7,8 +6,6 @@ class Model
 
     function __construct()
     {
-        $evn = new DotEnvironment();
-        $evn->load();
         $host     = getenv('DB_HOST'); // Because MySQL is running on the same computer as the web server
         $database = getenv('DB_NAME'); // Name of the database you use (you need first to CREATE DATABASE in MySQL)
         $user     = getenv('DB_USER'); // Default username to connect to MySQL is root

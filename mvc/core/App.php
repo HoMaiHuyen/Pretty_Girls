@@ -3,7 +3,7 @@ class App
 {
 
   protected $controller = "Home";
-  protected $action = "sayHi";
+  protected $action = "index";
   protected $params = [];
   function __construct()
   {
@@ -14,16 +14,15 @@ class App
     if (!isset($arr[1])) $arrr[1] = $this->action;
 
     //Xu li controller
-    if (file_exists("./mvc/controllers/" . $arr[0] . ".php")) {
-
+    if (file_exists("./mvc/controllers/" . ucfirst($this->controller) ."Controller.php")) {
+      
       $this->controller = $arr[0];
       unset($arr[0]);
     }
-    require_once "./mvc/controllers/" . $this->controller . ".php";
-
+    require_once "./mvc/controllers/" . ucfirst($this->controller) ."Controller.php";
     //Xu li Function
     if (isset($arr[1])) {
-      if (method_exists($this->controller, $arr[1])) {
+      if (method_exists($this->controller."Controller", $arr[1])) {
         $this->action = $arr[1];
       }
       unset($arr[1]);
@@ -31,8 +30,9 @@ class App
 
     // Xu li Params
     $this->params = $arr ? array_values($arr) : [];
-    $controller = new $this->controller;
-
+     $controller =$this->controller."Controller";
+    $controller = new $controller;
+   
     call_user_func([$controller, $this->action], $this->params);
   }
 

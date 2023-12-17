@@ -1,7 +1,7 @@
 <?php
 require_once "Model.php";
 
-class Products extends Model
+class Product extends Model
 {
     protected $table = "products";
     function getAllProduct()
@@ -18,7 +18,7 @@ class Products extends Model
             return [];
         }
     }
-    public function getOneProduct($id)
+    public function getOne($id)
     {
         if (!$this->connect) {
             return [];

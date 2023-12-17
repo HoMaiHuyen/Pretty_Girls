@@ -1,29 +1,19 @@
-<?php
-require_once dirname(dirname(dirname(__DIR__))) . "/mvc/models/Products.php";
-require_once dirname(dirname(dirname(__DIR__))) . "/mvc/controllers/Product.php";
 
-
-$id = 2;
-$db = new Products(); // Instantiate the database connection
-$productDetails = $db->getOneProduct($id);
-$products= $db->getAllProduct();
-
-?>
-
+<?php require_once dirname(__DIR__)."/partials/header.php";  ?>
 <section class="product-detail">
     <div class="card mb-2 " style="min-width:70%; border: none">
         <div class="row g-0" id="produc-detail-body">
             <div class="col-md-4">
-                <img class="product-detail-image" src="<?php echo $productDetails['image_url']  ?>" style="width: 100%; height:100%" alt="...">
+                <img class="product-detail-image" src="<?php echo $product['image_url']  ?>" style="width: 100%; height:100%" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body product-detail-body">
-                    <h1 class="card-title"><?php echo $productDetails['product_name']  ?></h1>
+                    <h1 class="card-title"><?php echo $product['product_name']  ?></h1>
                     <p class="card-text" style="color: #ED4D2D; font-size: 18px;">
-                        <?php echo $productDetails['price']  ?>VNĐ</p>
-                    <p class="card-text">Categories : <?php echo $productDetails['categories']  ?></p>
+                        <?php echo $product['price']  ?>VNĐ</p>
+                    <p class="card-text">Categories : <?php echo $product['categories']  ?></p>
                     <p class="card-text">Quantity : <input type="number" name="quantity" id="" value="1"></p>
-                    <p class="card-text"><?php echo $productDetails['describes']  ?>.</p>
+                    <p class="card-text"><?php echo $product['describes']  ?>.</p>
 
                     <div class="product-detail-button">
                         <button type="button" class="btn button-item1">Add to cart</button>
@@ -68,3 +58,6 @@ $products= $db->getAllProduct();
         
     </div>
 </section>
+
+<?php  
+require_once dirname(__DIR__)."/partials/footer.php"; ?>
