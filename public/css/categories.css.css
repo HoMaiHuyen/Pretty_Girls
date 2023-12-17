@@ -1,0 +1,84 @@
+
+/*Categories*/
+:root{
+    --blue-color:#6E95B8;
+    --background-main-color:#F4FAFD;
+    --background-button-color: linear-gradient(#9FCBF4, #EAD8FC);
+    --white-color: white;
+    --black-color: black;
+    --lightgray:#cbc4c4;
+  }
+
+.card-item-product{
+  background-color: var(--background-button-color);
+  border: none;
+  border-radius: 0;
+  margin: 50px;
+}
+
+
+.img-product{
+ width: 350px ;
+  height: 400px;
+  background-color: var(--background-button-color);
+}
+
+
+/* star */
+.rate {
+  float: left;
+  height: 46px;
+  position: relative;
+  bottom:20px;
+
+}
+.rate:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+}
+.rate:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+.rate:not(:checked) > label:before {
+  content: '★ ';
+}
+.rate > input:checked ~ label {
+  color: #FFC600;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #FFC600; 
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #FFC600; 
+}
+.button-footer{
+  display: flex;
+  position: relative;
+  bottom: 30px;
+}
+.btn-addtocart{
+    padding-right: 80px;
+    
+}
+.addtocart:hover{
+    background-image: var(--background-button-color);
+    color:var(--white-color);
+    border: 1px solid rgb(202, 196, 196);
+    
+}
+
+.name-title-categories{
+  color: var(--blue-color);
+  font-size: 50px;
+}

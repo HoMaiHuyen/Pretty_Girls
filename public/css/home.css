@@ -1,3 +1,12 @@
+:root{
+  --blue-color:#6E95B8;
+  --background-main-color:#F4FAFD;
+  --background-button-color: linear-gradient(#9FCBF4, #EAD8FC);
+  --white-color: white;
+  --black-color: black;
+  --lightgray:#cbc4c4;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -8,6 +17,7 @@
   /* ---------------- header ------------------ */
   
   #header {
+    
     box-sizing: border-box;
     width: 100%;
     padding: 2px 20px;
@@ -15,7 +25,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
+    background-color: var(--white-color);
     color: black;
   }
   
@@ -57,7 +67,7 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background-color:white;
+    background-color:var(--white-color);
     padding: 10px;
     width: 120px;
     z-index: 3; 
@@ -139,7 +149,6 @@
     color: #333;
   }
   
-
   /* Clear floats */
   form.example::after {
     content: "";
@@ -162,7 +171,6 @@
     color: black;
   }
   
-
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -206,3 +214,72 @@ body {
     height: 100%;
     object-fit: cover;
 }
+
+/* body*/
+.body-homepage{
+  background-color: var(--background-main-color);
+}
+
+.btn-light{
+  border: 1px solid var(--lightgray) ;
+  border-radius: 15px;
+  color:var(--blue-color);
+  background-color: var(--white-color);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.btn-light:hover{
+  background-image: var(--background-button-color);
+  color:var(--black-color);
+  border: 1px solid rgb(202, 196, 196);
+}
+.texture-spray{
+  border-radius:  200px ;
+  width: 300px;
+  height: 450px;
+  border: 1px solid var(--blue-color);
+  margin-left: 300px;
+  background-image: var(--background-button-color);
+  
+}
+.Milaganics-shiny{
+
+  background-image: var(--background-button-color);
+  width: 460px;
+}
+.Mliglanics-herbal{
+
+  background-image: var(--background-button-color);
+
+
+}
+
+.card-item-homepage{
+  display: flex;
+  padding:10px 0 0 320px ;
+  
+}
+.card-item{
+  background-color: var(--background-main-color);
+  border: none;
+  border-radius: 0;
+  width: 500px;
+  height: 700px;
+  padding-right: 80px;
+}
+
+.name-item{
+  color: var(--blue-color);
+}
+
+@keyframes text-animation { 
+  0% { color: var(--blue-color); } 
+  50% { color: var(--black-color); } 
+  100% { color: var(--blue-color)}
+   }
+.text-animation{ 
+    font-size:25px; 
+    -webkit-animation: text-animation  1000ms infinite;
+    animation-duration: text-animation  1000ms infinite; 
+    animation-name: text-animation  700ms infinite; 
+}   
+
