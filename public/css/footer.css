@@ -1,0 +1,41 @@
+
+#main-footer div p a{
+    list-style-type: none;
+    text-decoration: none;
+}
+
+.footer-qr-code{
+    width: 100px;
+    height: 100px;
+}
+
+.icon-item{
+    font-size: 20px;
+    margin-right: 10px;
+}
+.fa-facebook{
+    color: #1b85d6;
+}
+.fa-youtube{
+    color: #E12929;
+}
+.fa-instagram{
+    color: #D82D7E;
+}
+
+#footer-copyright a{
+    text-decoration: none;
+}
+#footer-copyright{
+    background-color: rgb(167, 173, 173);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+@media only screen and (max-width: 600px) {
+    #main-footer{
+        margin-top: 100px;
+    }
+    #footer{
+        margin-top: 100px;
+    }
+}

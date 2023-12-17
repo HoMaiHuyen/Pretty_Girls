@@ -1,7 +1,7 @@
 <?php 
     require_once dirname(__DIR__). "/models/User.php";
     require_once dirname(__DIR__). "/core/functions.php";
-    class Home {
+    class HomeController {
 
         function sayHi($params){
            $c = 1000+3;
