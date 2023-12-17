@@ -22,4 +22,9 @@ class Model
             $this->connect = null;
         }
     }
+    public function closeConnection() {
+        if ($this->connect) {
+            $this->connect = null; 
+        }
+    }
 }
