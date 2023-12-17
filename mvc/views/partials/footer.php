@@ -9,7 +9,7 @@
                         <hr class="mb-4 mt-0 d-inline-block mx-auto"
                             style="width: 60px; background-color: #7c4dff; height: 2px" />
                         <p>
-                            <img class="footer-qr-code" src="/public/image/QR_code_shop.png" alt="">
+                            <img class="footer-qr-code" src="<?php echo ROOT_URL .'/public/image/QR_code_shop.png' ?>" alt="">
                         </p>
                         <div>
                             <i class="fa-brands fa-facebook icon-item"></i>
