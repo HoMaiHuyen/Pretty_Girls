@@ -1,6 +1,5 @@
 <?php
     require_once dirname(__DIR__) . "/partials/header.php";
-    require_once dirname(dirname(dirname(__DIR__))) . "/mvc/controllers/Authentication.php";
 ?>
  <div class="background-container">
      <form class="login-form" action="#" method="post">

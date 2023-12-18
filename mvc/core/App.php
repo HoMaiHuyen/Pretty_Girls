@@ -30,7 +30,7 @@ class App
 
     // Xu li Params
     $this->params = $arr ? array_values($arr) : [];
-     $controller =$this->controller."Controller";
+    $controller =$this->controller."Controller";
     $controller = new $controller;
    
     call_user_func([$controller, $this->action], $this->params);
