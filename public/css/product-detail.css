@@ -1,39 +1,33 @@
-
 body {
     background-color: #F4FAFD;
+    font-size: 20px;
 }
-
 .product-detail {
     margin-top: 40px;
-    width: 80%;
+    width: 78%;
     height: auto;
     border: none;
     line-height: 1.8;
     padding: 20px;
-    margin-left: 120px;
+    margin-left:11%;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-
 /* -----------------image--------------------------------- */
 .product-detail-image {
     width: 300px;
     height: 450px;
     border: 1px solid #d0d9e0;
-    ;
-    /* border-radius: 20px; */
 }
 
 .product-detail-describle {
     padding-right: 50px;
 }
-
 /* ----------------------------button of product detail------------------------- */
 .product-detail-button {
     display: flex;
     margin-top: 30px;
     padding-bottom: 0;
 }
-
 .product-detail-button button {
     border: none;
     border-radius: 20px;
@@ -43,37 +37,32 @@ body {
     border: 1px solid #cbc4c4;
     color: #9FCBF4;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
+    font-size: 22px;
 }
 
 .button-item1:hover,
 .button-item2:hover {
     background-image: linear-gradient(#9FCBF4, #EAD8FC);
 }
-
+.produc-detail-body .card-text{
+    font-size: 25px;
+}
 /* ---------------------------------product recommend----------------------------------- */
+.card-product-recommend .card-text{
+    color: #ED4D2D;
+}
+.card-product-recommend .card-title, .card-text{
+    font-size: 25px;
+}
 .card-title:hover{
     color: #ED4D2D;
 }
 
-
-#product-recommend {
-    flex-wrap: wrap;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-left: 82px;
-    margin-top: 20px; 
-    margin-bottom: 20px;  
-     
+.card-product-recommend{
+    margin-left: 10%;
+    margin-bottom: 25px;
+   
 }
-
-.card-product-recommend {
-    width: 30%;     
-    margin: 30px;
-    margin-left: 30px;
-}
-
 .card-product-recommend .card-img-top{
     background-image: linear-gradient(#9FCBF4, #EAD8FC);
 }
@@ -84,28 +73,45 @@ body {
 .product-image{
     background-image: linear-gradient(#9FCBF4, #EAD8FC);
 }
-
+#list-product-recommend{
+    margin-top: 60px;
+}
 /* -------------------------Button ------------------------------------------------- */
 .card-product-recommend .btn{
     border-radius: 20px;
     border: 1px solid #cbc4c4;
-    height: 40px;
+    height: 55px;
     color: #9FCBF4;
+    text-align: center;
+    background-color: none;
+    font-size: 22px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
 
 }
+
 .card-product-recommend .btn-add-to-card{
-    width: 150px;
+    width: 180px;
     margin-right: 20px;
+   
 }
-.card-product-recommend .btn-buy-now{
-    width: 120px;
+
+.card-product-recommend .btn-buy-now {
+    width: 150px;
+}
+.card-product-recommend .btn-buy-now #link{    
+    text-decoration: none;
+    color:#9FCBF4 ;
+}
+.card-product-recommend .btn-buy-now #link:hover{    
+    text-decoration: none;
+    color:black;
 }
 .card-product-recommend .btn-add-to-card:hover,
 .card-product-recommend .btn-buy-now:hover {
     background-image: linear-gradient(#9FCBF4, #EAD8FC);
     color: black;
-}
-
+} 
 /* ------------------------------Rating------------------------------------------- */
 
 .rate {
@@ -133,7 +139,6 @@ body {
     content: '★ ';
 }
 
-/* Màu vàng cho hình sao đã chọn */
 .rate>input:checked~label,
 .rate>input:checked+label,
 .rate>label:hover,
@@ -141,17 +146,41 @@ body {
     color: #FFC600;
 }
 
-/* Màu vàng khi hover chỗ khác trên trang web */
 body:hover .rate>input:checked~label,
 body:hover .rate>input:checked+label {
     color: #FFC600;
 }
 
-/* Màu vàng khi hover chỗ khác trên trang web và input không được chọn */
 body:hover .rate:not(:checked)>label:hover,
 body:hover .rate:not(:checked)>input:hover~label {
     color: #FFC600;
 }
 
 /*------------------------------------------ Reponsive-------------------------------  */
+
+@media only screen and(width:375px){
+    .product-detail{
+        margin-left: 20px;
+        width: 100%;
+    }
+    .card-product-recommend{
+        margin-left: 10px;
+        width: 100%;
+    }
+    .card-product-recommend .btn{
+        font-size: 16px;
+    }
+    .card-product-recommend .btn-add-to-card{
+        width: 100px;
+        margin-right: 5px;
+       
+    }
+    
+    .card-product-recommend .btn-buy-now {
+        width:85px;
+    }
+    #input-quantity{
+        width: 40px;
+    }
+}
 
