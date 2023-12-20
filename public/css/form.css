@@ -1,0 +1,101 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: EB Garamond;
+}
+
+.background-container {
+    background-color: #F4FAFD;
+    height: 100%;
+}
+
+.login-form {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    color: #6E95B8;
+}
+
+.form-input {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #93B0CA;
+    border-radius: 10px;
+}
+
+.btn-primary {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ccc;
+    color: #6E95B8;
+    cursor: pointer;
+    border-radius: 50px;
+    background-color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #9FCBF4, #EAD8FC);
+}
+
+.additional-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.forgot-password {
+    text-align: right;
+}
+
+/* ===================Register======================= */
+
+.register-form {
+    position: absolute;
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    text-align: center;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+}
+
+.register-form h2 {
+    margin-bottom: 20px;
+    color: #6E95B8;
+}
+
+.register-form .additional-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+}
+
+.link {
+    text-align: center;
+}
+
+.register-link {
+    cursor: pointer;
+    text-decoration: underline;
+}
