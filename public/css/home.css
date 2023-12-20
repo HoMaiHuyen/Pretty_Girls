@@ -246,6 +246,20 @@
   background-color: var(--background-main-color);
 }
 
+.card-body-padding{
+  background-color: var(--background-main-color);
+  border: none ;
+}
+.card-title-name-body{
+  color: var(--blue-color);
+}
+
+.texture-spray{
+  border: 1px solid var(--blue-color);
+  background-image: var(--background-button-color);
+  border-radius: 50%;
+}
+
 .btn-light{
   border: 1px solid var(--lightgray) ;
   border-radius: 15px;
@@ -253,48 +267,11 @@
   background-color: var(--white-color);
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
+
 .btn-light:hover{
   background-image: var(--background-button-color);
   color:var(--black-color);
   border: 1px solid rgb(202, 196, 196);
-}
-.texture-spray{
-  border-radius:  200px ;
-  width: 300px;
-  height: 450px;
-  border: 1px solid var(--blue-color);
-  margin-left: 300px;
-  background-image: var(--background-button-color);
-  
-}
-.Milaganics-shiny{
-
-  background-image: var(--background-button-color);
-  width: 460px;
-}
-.Mliglanics-herbal{
-
-  background-image: var(--background-button-color);
-
-
-}
-
-.card-item-homepage{
-  display: flex;
-  padding:10px 0 0 320px ;
-  
-}
-.card-item{
-  background-color: var(--background-main-color);
-  border: none;
-  border-radius: 0;
-  width: 500px;
-  height: 700px;
-  padding-right: 80px;
-}
-
-.name-item{
-  color: var(--blue-color);
 }
 
 @keyframes text-animation { 
@@ -308,4 +285,57 @@
     animation-duration: text-animation  1000ms infinite; 
     animation-name: text-animation  700ms infinite; 
 }   
+
+
+@media screen and (min-width: 768px) and (max-width: 15536px) {
+  .card-body-padding{
+    margin-left: 180px;
+    padding-left: 0px;
+    background-color: var(--background-main-color);
+    border: none ;
+  }
+
+  .card-body-margin{
+    margin-top: 60px;
+    margin-left: 200px;
+  
+  }
+
+  .card-item-lastest{
+    max-width: 450px;max-height:250px;
+    margin-left: 180px;
+    margin-bottom: 450px;
+  }
+
+  .title-body {
+    padding-left: 150px;
+    padding-top: 20px;
+    color:#6E95B8;
+}
+
+.card-body-trial{
+  padding:30px 0px 0px 250px;
+}
+
+.card-title-large{
+  width:500px; font-size:25px;
+}
+
+.Milaganics-shiny{
+  background-image: var(--background-button-color);
+}
+
+.Mliglanics-herbal{
+  background-image: var(--background-button-color);
+  width: 300px;
+  height:250px;
+  padding:10px 10px 0px 10px;
+}
+.card-item-trial{
+  width: 1058px;max-height:550px;
+  margin-left: 188px;
+  padding:20px 0px 20px 30px;
+}
+
+}
 

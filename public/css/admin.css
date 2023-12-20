@@ -1,0 +1,33 @@
+@media screen and (min-width: 768px) and (max-width: 15536px) {
+
+
+
+}
+.sidebar-right{
+    padding-top: 30px;
+    padding-left: 110px;
+}
+.product-admin{
+    height: 300px;
+    width: 460px;
+    background-color:rgba(234, 216, 252, 1);
+
+}
+.cart-admin{
+    height: 300px;
+    width: 460px;
+    background-color:rgba(159, 203, 244, 1);
+
+}
+.user-admin{
+    height: 300px;
+    width: 460px;
+    background-color:rgba(247, 199, 34, 1);
+
+}
+.profile-admin{
+    height: 300px;
+    width: 460px;
+    background-color:rgba(237, 77, 45, 1);
+  
+}
