@@ -16,172 +16,198 @@
   
   /* ---------------- header ------------------ */
   
-  #header {
-    
-    box-sizing: border-box;
-    width: 100%;
-    padding: 2px 20px;
-    margin-top: 0px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--white-color);
-    color: black;
-  }
-  
-  #header .logo {
-    display: flex;
-    margin-top: 10px;
-  }
-  
-  #header .logo p {
-    margin-left: 20px;
-    margin-top: 22px;
-  }
-  
-  #menu .item a:hover {
-    color: red;
-  }
-  
-  #menu {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    position: relative; 
-    z-index: 2; 
-  }
-  
-  #menu .item {
-    margin: 0px 25px;
-    position: relative;
-  }
-  
-  #menu .item a {
-    color: black;
-    text-decoration: none;
-  }
-  
-  .sub-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color:var(--white-color);
-    padding: 10px;
-    width: 120px;
-    z-index: 3; 
-  }
-  
-  .item:hover .sub-menu {
-    display: block;
-  }
-  
-  .sub-menu-item {
-    margin-bottom: 5px;
-  }
-  
-  .sub-menu-item a {
-    color: black;
-    text-decoration: none;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 5px;
-  }
-  form.example input[type=text] {
-    padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
-  }
-  
-  /* Style the submit button */
-  form.example button {
-    float: left;
-    width: 20%;
-    padding: 10px;
-    background: #a9aaac;
-    color: rgb(122, 120, 120);
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none; 
-    cursor: pointer;
-  }
-  
-  form.example button:hover {
-    background: #929598;
-  }
-
-   /* -----------Search-------------- */
-   .search-container {
-    position: relative;
-  }
-  
-  .search-container input {
-    padding: 10px;
-    border: 1px solid #AAA7A7;
-    border-radius: 15px;
-    width: 300px;
-    padding-left: 30px;
-  }
-  
-  .search-container i {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    font-size: 18px;
-    color: #555;
-  }
-  
-  .search-container input:hover + i {
-    color: #333;
-  }
-  
-  .search-container input:focus {
-    outline: none;
-    border: 1px solid #555;
-  }
-  
-  .search-container input:focus + i {
-    color: #333;
-  }
-  
-  /* Clear floats */
-  form.example::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-
-  #icon {
-    display: flex;
-    z-index: 2; 
-  }
-  
-  #icon .item {
-    margin-left: 27px;
-    width: 20px;
-    height: 20px;
-  }
-
-  #icon .item a i {
-    color: black;
-  }
-  
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f8f8;
-    color: #333;
-    display: flex;
-    height: 100vh;
-    flex-direction: column; 
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: 2px 2px 2px 1px #E0E0E0;
 }
 
+.logo-container {
+  margin-right: 25px;
+}
+
+.main-menu {
+  display: flex;
+  align-items: center;
+  margin-right: 70px;
+}
+
+.main-menu a {
+  margin-right: 25px;
+  color: black;
+  font-size: 1rem;
+}
+
+.main-menu a:hover {
+  color: red;
+}
+
+.burger-icon.active span {
+  background-color: transparent;
+}
+
+.search-container {
+  margin-right: 180px;
+  position: absolute;
+  top: 20px;
+  right: 0;
+  z-index: 1;
+}
+
+.search-container input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  width: 300px;
+  padding-left: 30px;
+}
+
+.search-container .search-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+
+}
+
+.search-container i {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #555;
+}
+
+.search-container input:hover+i {
+  color: #333;
+}
+
+.search-container input:focus {
+  outline: none;
+  border: 1px solid #555;
+}
+
+.search-container input:focus+i {
+  color: #333;
+}
+
+.icon-nav {
+  display: flex;
+  align-items: center;
+}
+
+.icon-nav .item {
+  margin-left: 10px;
+}
+
+.head nav.main-menu a {
+  text-decoration: none;
+}
+
+.icon-nav .item1 i {
+  margin-right: 30px;
+  color: gray;
+}
+
+.icon-nav .item i {
+  margin-right: 30px;
+  color: gray;
+}
+
+@media screen and (min-width: 769px) {
+  .burger-menu {
+    display: none;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .head {
+    flex-wrap: wrap;
+  }
+
+  .head>a {
+    font-size: 1.2rem;
+  }
+
+  .burger-menu {
+    position: absolute;
+    display: block;
+    margin-right: -150px;
+    width: 30px;
+    height: 30px;
+    right: 0%;
+    top: 20%;
+
+  }
+
+  .main-menu {
+    width: 100%;
+    display: none;
+    margin-top: 20px;
+    margin-left: 15px;
+  }
+
+  .main-menu a {
+    display: block;
+    margin-left: 0;
+    padding: 15px 0;
+    text-decoration: none;
+  }
+
+  .main-menu a:hover {
+    color: red;
+  }
+
+  .main-menu a:hover {
+    text-decoration: line-through;
+    text-decoration-color: red;
+  }
+
+  .icon-nav {
+    display: none;
+    width: 30px;
+    height: 30px;
+  }
+
+  .active .icon-nav,
+  .active .main-menu {
+    display: block;
+  }
+
+  .active .icon-nav {
+    display: flex;
+    padding: 15px;
+    margin-left: 0;
+  }
+
+  .icon-nav .item1 i,
+  .icon-nav .item i {
+    font-size: 24px;
+  }
+
+  .search-container {
+    left: 100px;
+  }
+
+  .search-container input {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .search-container .search-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+
+}
+
+/* ===================BANNER==================== */
 #banner {
     display: flex;
     height: 100%;
@@ -215,7 +241,7 @@ body {
     object-fit: cover;
 }
 
-/* body*/
+/*================= BODY =======================*/
 .body-homepage{
   background-color: var(--background-main-color);
 }

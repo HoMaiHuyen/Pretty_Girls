@@ -14,7 +14,7 @@ class AuthController
         $email = "";
         $phone = "";
         $address = "";
-        $password = "";
+        $passwords = "";
         $confirm = "";
 
         $name_error = "";
@@ -29,7 +29,7 @@ class AuthController
             if (empty($name)) {
                 $name_error = "Please enter your name";
             } elseif (validate_username($name) == false) {
-                $name_error = "Ten chi chua chu cai va chu so";
+                $name_error = "The name contains only letters and numbers";
             }
 
             $email = isset($_POST['email']) ? $_POST['email'] : "";
@@ -53,25 +53,33 @@ class AuthController
                 $address_error = "Address is invalid";
             }
 
-            $password = isset($_POST['password']) ? $_POST['password'] : "";
-            if (empty($password)) {
+            $passwords = isset($_POST['passwords']) ? $_POST['passwords'] : "";
+            if (empty($passwords)) {
                 $password_error = "Please enter a password";
-            } elseif (validate_password($password) == false) {
+            } elseif (validate_password($passwords) == false) {
                 $password_error = "Password is not valid";
             }
 
             $confirm = isset($_POST['confirm']) ? $_POST['confirm'] : "";
             if (empty($confirm)) {
                 $confirm_error = "Please confirm your password";
-            } elseif (validate_confirm_password($password, $confirm) == false) {
+            } elseif (validate_confirm_password($passwords, $confirm) == false) {
                 $confirm_error = "Passwords do not match";
             }
         }
         if (empty($name_error) && empty($email_error) && empty($phone_error) && empty($address_error) && empty($password_error) && empty($confirm_error)) {
             //Insert vao database
             $user = new User();
-            $user->createUser($name, $email, $phone, $address, $password, $confirm);
-            echo "Success";
+            $user->createUser($name, $email, $phone, $address, $passwords, $confirm);
+
+            // Send Email
+            // $mailService = new MailService();
+            // $sendEmail = [
+            //     'email' => $email,
+            //     'name' => $name,
+            // ];
+            // $mailService->sendMail($sendEmail);
+
         } else {
             view("form/register", compact('name_error', 'email_error', 'phone_error', 'address_error', 'password_error', 'confirm_error'));
         }

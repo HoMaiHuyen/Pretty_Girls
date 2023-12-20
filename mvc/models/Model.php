@@ -14,7 +14,6 @@ class Model
         try {
             $this->connect = new PDO("mysql:host=$host;dbname=$database", $user, $password);
             $this->connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "success";
         } catch (PDOException $e) {
             $e->getMessage();
             $this->connect = null;
