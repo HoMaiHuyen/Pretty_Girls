@@ -18,5 +18,8 @@
         function show(){
             echo "Home - Show";
         }
+        function showProduct(){
+            // view("product"/"index";);
+        }
     }
 ?>
