@@ -6,10 +6,10 @@ require_once dirname(dirname(dirname(__DIR__))) . '/vendor/autoload.php';
 
 class MailService
 {
-    public function sendMail()
+    public function sendMail($email)
     {
         $mail = new PHPMailer(true);
-
+        print_r($email);
         try {
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
@@ -20,15 +20,12 @@ class MailService
             $mail->SMTPSecure = 'tls';
             $mail->Port       = 587;
             $mail->setFrom(getenv('MAIL_SHOP'), 'Mailer');
-            $mail->addAddress('sang.ho25@student.passerellesnumeriques.org', 'Sang');
+            $mail->addAddress($email[0], $email[1]);
             $mail->isHTML(true);
             $mail->Subject = '[ FORM CONTACT from Blue Cosmetics ]';
             
-            $content = 'Congratulations, you have successfully registered into the Blue Cosmetics shop system'.'<br/>
-            <strong>Name: </strong> '.$_POST['name'].'<br/>
-            <strong>Email: </strong> '.$_POST['email'].'<br/>
-            <strong>Phonenumber: </strong> '.$_POST['phone'].'<br/>';
-            $mail->Body    = $content;
+            
+            $mail->Body    = 'Helllo';
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';            
             // call function send() of phpMailer
             $mail->send();
