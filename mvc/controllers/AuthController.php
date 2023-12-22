@@ -1,5 +1,7 @@
 <?php
 require_once dirname(__DIR__) . "/models/User.php";
+// require_once dirname(__DIR__) . "/core/Services/Mail/MailService.php";
+require_once dirname(__DIR__). "/core/Services/Mail/WelcomeMailService.php";
 class AuthController
 {
 
@@ -70,15 +72,17 @@ class AuthController
         if (empty($name_error) && empty($email_error) && empty($phone_error) && empty($address_error) && empty($password_error) && empty($confirm_error)) {
             //Insert vao database
             $user = new User();
-            $user->createUser($name, $email, $phone, $address, $passwords, $confirm);
+            $user->createUser($name, $phone, $passwords, $email, $address, $confirm);
+            // echo "Sucssess";
 
             // Send Email
-            // $mailService = new MailService();
-            // $sendEmail = [
-            //     'email' => $email,
-            //     'name' => $name,
-            // ];
-            // $mailService->sendMail($sendEmail);
+            $mailService = new WelcomeMailService();
+            $sendEmail = [
+                'email' => $email,
+                'name' => $name,
+            ];
+            $mailService->setBodyEmail();
+            $mailService->sendMail($sendEmail);
 
         } else {
             view("form/register", compact('name_error', 'email_error', 'phone_error', 'address_error', 'password_error', 'confirm_error'));

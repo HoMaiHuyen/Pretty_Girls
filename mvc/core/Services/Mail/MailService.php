@@ -22,8 +22,7 @@ abstract class MailService
             $mail->setFrom(getenv('MAIL_SHOP'), 'Mailer');
             $mail->addAddress($email['email'], $email['name']);
             $mail->isHTML(true);
-            $mail->Subject = '[ FORM CONTACT from Blue Cosmetics ]';
-                       
+            $mail->Subject = '[ FORM CONTACT from Blue Cosmetics ]';        
             $mail->Body    = $this->bodyEmail;
             $mail->send();
             echo 'Message has been sent';
