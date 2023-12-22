@@ -21,7 +21,7 @@ class ProductController
         $search_key="";
         $keyword = isset($_POST['key']) ? htmlspecialchars($_POST['key']) : '';
         $productModel =new Product();
-        $searchResult = $productModel->search($keyword);
+        $searchResult= $productModel->search($keyword);
         if (!empty($keyword)) {
             if (empty($searchResult)) {
                 $search_key = "No results : " . htmlspecialchars($keyword)  ;

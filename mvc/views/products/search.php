@@ -74,8 +74,6 @@
                     $hair = [$product];
                 }
             endforeach ?>
-
-
         </div>
     </div>
 </section>
