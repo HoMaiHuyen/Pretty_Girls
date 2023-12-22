@@ -1,0 +1,73 @@
+
+/*product */
+/* star */
+.rate {
+    float: left;
+    height: 46px;
+    position: relative;
+    bottom:10px;
+  }
+  
+  
+  
+  .rate:not(:checked)>input {
+    position: absolute;
+    top: -9999px;
+  }
+  
+  .rate:not(:checked)>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+  }
+  
+  .rate:not(:checked)>label:before {
+    content: '★ ';
+  }
+  
+  .rate>input:checked~label,
+  .rate>input:checked+label,
+  .rate>label:hover,
+  .rate>input:checked~label:hover {
+    color: #FFC600;
+  }
+  
+  @media screen and (min-width: 300px) and (max-width: 865px) {
+  
+    
+  
+  }
+  
+  
+  .card-product{
+    position: relative;
+    height: 645px;
+  }
+  
+  .btn-light-buynow{
+    width: 105px;
+    color: var(--black-color);
+    position: absolute;
+    bottom: 16px;
+    right: 20px;
+  }
+  .btn-light-buynow a{
+    text-decoration: none;
+    color:var(--blue-color);
+  }
+  .btn-light-buynow a:hover{
+    color:var(--black-color);
+  }
+  .btn-light-addtocart{
+    position: absolute;
+    bottom: 16px;
+  }
+  
+  .card-image{
+    height: 400px;
+    width: 413px;
+  }
