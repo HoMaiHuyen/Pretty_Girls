@@ -24,10 +24,11 @@ class ProductController
         $searchResult = $productModel->search($keyword);
         if (!empty($keyword)) {
             if (empty($searchResult)) {
-                $search_key = "<p>No results found for: " . htmlspecialchars($keyword) . "</p>";
+                $search_key = "No results : " . htmlspecialchars($keyword)  ;
             } else {
-                $search_key = "<p>Showing results for: " . htmlspecialchars($keyword) . "</p>";
+                $search_key =  htmlspecialchars($keyword) ;
             }
         }
-}
+        view('products/search', compact('searchResult', 'keyword','search_key'));
+    }
 }

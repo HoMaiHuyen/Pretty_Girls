@@ -1,6 +1,7 @@
 <?php require_once dirname(dirname(dirname(__DIR__))) . "/config/app.php" ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,13 +13,14 @@
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/footer.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/product-detail.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/form.css' ?>">
+    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/product.css' ?>">
     <title>User Profile</title>
 </head>
 
 <body>
     <header class="head" id="myTopnav">
         <div class="logo-container">
-            <img src="/public/image/Logo (1).png" style="width: 80px; height: 80px;">
+            <img src="<?php loadImage('Logo (1).png') ?>" style="width: 80px; height: 80px;">
         </div>
         <nav class="main-menu" id="myTopnav">
             <a href="#">Home</a>
@@ -27,9 +29,12 @@
             <a href="#">Contact Us</a>
         </nav>
         <div class="search-container">
-            <input type="text" placeholder="Search...">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <button class="burger-menu" type="button" onclick="toggleMenu()">&#9776;</button>
+            <form action="<?php echo ROOT_URL . '/product/search' ?>" method="post">
+                <input type="text" placeholder="Search <?php echo isset($search_key) ? $search_key : ""  ?>" name='key'>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <!-- <button type="submit" name="submit" value="submit"><i class="fa-solid fa-magnifying-glass"></i></button> -->
+                <button class="burger-menu" type="button" onclick="toggleMenu()">&#9776;</button>
+            </form>
         </div>
         <div class="icon-nav">
             <div class="item1">
@@ -39,5 +44,5 @@
                 <a href="#"><i class="fa-solid fa-circle-user fa-xl"></i></a>
             </div>
         </div>
-        
+
     </header>
