@@ -38,4 +38,23 @@ class Product extends Model
             return [];
         }
     }
+    function search($keyword)
+    {
+        if (!$this->connect) {
+            return [];
+        }
+
+
+        try {
+            $sttm = $this->connect->prepare("SELECT * FROM $this->table WHERE product_name LIKE :keyword");
+            $sttm->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
+            $sttm->execute();
+            $searchResult = $sttm->fetchAll(PDO::FETCH_ASSOC);
+            return $searchResult;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
+
 }

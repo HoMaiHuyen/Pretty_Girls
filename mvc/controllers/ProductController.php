@@ -17,4 +17,17 @@ class ProductController
         $product = $productModel->getOne($id);
         view('products/show', compact('product','products'));   
     }
+    public  function search($keyword){
+        $search_key="";
+        $keyword = isset($_POST['key']) ? htmlspecialchars($_POST['key']) : '';
+        $productModel =new Product();
+        $searchResult = $productModel->search($keyword);
+        if (!empty($keyword)) {
+            if (empty($searchResult)) {
+                $search_key = "<p>No results found for: " . htmlspecialchars($keyword) . "</p>";
+            } else {
+                $search_key = "<p>Showing results for: " . htmlspecialchars($keyword) . "</p>";
+            }
+        }
+}
 }
