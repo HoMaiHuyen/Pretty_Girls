@@ -1,0 +1,129 @@
+.tab-user-profile {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+  }  
+ 
+  .tab button:hover {
+    background-color: #ddd;
+  }
+
+  .tab button.active {
+    background-image: linear-gradient(#9FCBF4, #EAD8FC) ;
+  }
+
+  .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+ 
+/* ---------------------------------------------------Imge profile----------------------------------------------------------- */
+#profile-user{
+  font-size: 25px;
+}
+#image-profile{
+  width: 16em;
+  height: 90%;
+  border: 1px solid #AAA7A7;
+  border-radius: 20px;
+  margin-left: 30%;
+  padding: 20px;
+}
+#output{
+  border: 1px solid #AAA7A7;
+  border-radius: 50%;
+  width:230px;
+  height:230px;
+  margin-top: 15px;
+}
+
+#button-upload-image {
+  width: 15em;
+  height: 50px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.form-group{
+  margin-bottom: 10px;
+}
+
+.form-control{
+  height: 55px;
+  font-size: 20px;
+}
+#button-upload-image:hover{
+   background-image: linear-gradient(#9FCBF4, #EAD8FC) ;
+   color: black;
+
+}
+
+#defaultOpen{
+    background-image: linear-gradient(#9FCBF4, #EAD8FC) ;
+}
+
+.button-item-save{
+    width: 200px;
+    height: 50px;
+    border: 1px solid #AAA7A7;
+    border-radius: 20px;
+    color: #6E95B8;
+}
+.button-item-back {
+    width: 100px;
+    height: 50px;
+    border: 1px solid #AAA7A7;
+    border-radius: 20px;
+    color: #6E95B8;
+}
+
+
+.button-item-save:hover,
+.button-item-back:hover{
+    background-image: linear-gradient(#9FCBF4, #EAD8FC) ;
+    color: black;
+}
+
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+   
+  }
+  .tabcontent {
+    animation: fadeEffect 1s;
+  }
+ 
+
+  @keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  .tabcontent th {
+    height: 50px;
+  }
+  #order .thead-table-purchase{
+    background-image: linear-gradient(#9FCBF4, #EAD8FC) ;
+  }
+
+@media only screen and(width:375px){
+  
+  #image-profile{
+
+    margin-left: 5%;
+  }
+}
