@@ -33,31 +33,31 @@
 #profile-user{
   font-size: 25px;
 }
-#image-profile{
+.main-profile{
   width: 16em;
-  height: 90%;
+  height: 82%;
   border: 1px solid #AAA7A7;
   border-radius: 20px;
-  margin-left: 30%;
-  padding: 20px;
+  margin-left: 16%;
+  padding: 10px;
 }
 #output{
   border: 1px solid #AAA7A7;
   border-radius: 50%;
-  width:230px;
-  height:230px;
-  margin-top: 15px;
+  width:210px;
+  height:210px;
+  margin-top: 10px;
 }
 
 #button-upload-image {
   width: 15em;
   height: 50px;
   border-radius: 20px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .form-group{
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .form-control{
@@ -80,6 +80,7 @@
     border: 1px solid #AAA7A7;
     border-radius: 20px;
     color: #6E95B8;
+    font-size: 20px;
 }
 .button-item-back {
     width: 100px;
@@ -87,6 +88,7 @@
     border: 1px solid #AAA7A7;
     border-radius: 20px;
     color: #6E95B8;
+    font-size: 20px;
 }
 
 
@@ -96,7 +98,9 @@
     color: black;
 }
 
-
+.card-profile form {
+  border-radius: 20px;
+}
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
@@ -123,7 +127,11 @@ table, th, td {
 @media only screen and(width:375px){
   
   #image-profile{
-
-    margin-left: 5%;
+    margin-right: 10%;
+    height: 100%;
   }
+  .main-profile{
+    margin-left: auto;
+  }
+
 }

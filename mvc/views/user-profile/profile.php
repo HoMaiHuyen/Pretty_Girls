@@ -10,21 +10,18 @@ if ($result[0]['role'] != 'admin') :
         <div id="profile" class="tabcontent">
             <div class="row">
                 <div class="col-md-4 mb-3 main-profile">
-                    <form action="/User/updateUser" method="post">
-                        <div class="d-flex flex-column align-items-center text-center" id="image-profile">
-                            <img src="<?php loadImage('Anh-user.png') ?>" alt="Avatar" id="output" class="rounded-circle">
-                            <div class="mt-3">
-                                <h4><?php echo $result[0]['user_name']; ?></h4>
-                                <div class="mb-3">
-                                    <input type="hidden" value="<?php echo $result[0]['id'] ?>" name="id">
-                                    <input type="file" id="image" accept="image*/" onchange="loadFile(event)" name="image" class=" d-none">
-                                    <label for="image" class="btn btn-outline-secondary pt-2 " id="button-upload-image">
-                                        <i class="fas fa-upload"></i> Ảnh
-                                    </label>
-                                </div>
+                    <div class="d-flex flex-column align-items-center text-center" id="image-profile">
+                        <img src="<?php loadImage('Anh-user.png') ?>" alt="Avatar" id="output" class="rounded-circle">
+                        <div class="mt-3">
+                            <h4><?php echo $result[0]['user_name']; ?></h4>
+                            <div class="mb-3">
+                                <input type="file" id="image" accept="image*/" onchange="loadFile(event)" name="image" class=" d-none">
+                                <label for="image" class="btn btn-outline-secondary pt-2 " id="button-upload-image">
+                                    <i class="fas fa-upload"></i> Avatar
+                                </label>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="col-md-7">
                     <div class="card card-profile">
@@ -50,7 +47,7 @@ if ($result[0]['role'] != 'admin') :
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="phone" class="col-sm-3 col-form-label">Phone number</label>
+                                    <label for="phone" class="col-sm-3 col-form-label">Phone </label>
                                     <div class="col-sm-9">
                                         <input type="phone" class="form-control" id="phone" name="phone" value="<?php echo $result[0]['phone'] ?>" placeholder="xxxx-xx-xxx">
                                     </div>
