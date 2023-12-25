@@ -38,12 +38,12 @@ class Product extends Model
             return [];
         }
     }
+
     function search($keyword)
     {
         if (!$this->connect) {
             return [];
         }
-
 
         try {
             $sttm = $this->connect->prepare("SELECT * FROM $this->table WHERE product_name LIKE :keyword");
@@ -51,7 +51,24 @@ class Product extends Model
             $sttm->execute();
             $searchResult = $sttm->fetchAll(PDO::FETCH_ASSOC);
             return $searchResult;
-        } catch (PDOException $e) {
+        }
+        catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
+
+    function popular(){
+        if(!$this->connect){
+            return [];
+        }
+        try {
+            $sttm=$this->connect->prepare("SELECT * FROM $this->table ORDER BY quantity ASC limit 4");
+            $sttm->execute();
+            $popularResult=$sttm->fetchAll(PDO::FETCH_ASSOC);
+            return $popularResult;
+        }
+        catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return [];
         }
