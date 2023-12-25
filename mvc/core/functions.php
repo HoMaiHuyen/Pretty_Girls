@@ -61,5 +61,6 @@ function validate_confirm_password($passwords, $confirmPassword)
         return false;
     }
     return true;
+   
 }
 
