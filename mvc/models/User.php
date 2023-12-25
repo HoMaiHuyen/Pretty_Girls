@@ -28,7 +28,7 @@ class User extends Model
             return [];
         }
         try {
-            $stmt = $this->connect->prepare("INSERT INTO users (user_name, phone, passwords, email, roles, address, image_url) VALUES (:user_name, :phone, :passwords, :email, null, :address, null)");
+            $stmt = $this->connect->prepare("INSERT INTO users (user_name, phone, passwords, email, role, address, image_url) VALUES (:user_name, :phone, :passwords, :email, null, :address, null)");
 
             $stmt->bindParam(':user_name', $user_name);
             $stmt->bindParam(':phone', $phone);
@@ -67,7 +67,7 @@ class User extends Model
             error_log("Error updating user: " . $e->getMessage());
             return false;
         }
-        $this->closeConnection();
+
     }
 
     public function getOneUser($id)

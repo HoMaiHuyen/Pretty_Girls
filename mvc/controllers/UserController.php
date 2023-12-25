@@ -26,9 +26,12 @@ class UserController  {
             $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
             $phoneClear = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
             $user= new User();
-            $user->updateUser($id,$nameClear, $phoneClear, $emailClear, $addressClear, $passwordClear);  
-           
-            header('Location:'. ROOT_URL.'/views/user-profile/profile.php');
+           $result= $user->updateUser($id,$nameClear, $phoneClear, $emailClear, $addressClear, $passwordClear);  
+            if ($result !== false) {
+            // Cập nhật thành công, chuyển hướng người dùng trở lại trang profile
+            header("Location:/project1/User/show/$id");
+            exit();
+            }
     }
     
 }

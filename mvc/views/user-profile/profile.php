@@ -60,7 +60,7 @@ if ($result[0]['role'] != 'admin') :
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-9 offset-sm-3">
-                                        <button type="submit" class="btn button-item-save px-4" <?php $result[0]['id'] ?><a href="<?php echo  ROOT_URL . '/User/show?id=$id' ?>">Save information</a></button>
+                                        <button type="submit" class="btn button-item-save px-4" <?php $result[0]['id'] ?>>Save information</a></button>
                                         <button type="button" class="btn button-item-back px-4 ml-2">Back</button>
                                     </div>
                                 </div>
