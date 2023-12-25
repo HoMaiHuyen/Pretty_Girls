@@ -3,20 +3,15 @@
     require_once dirname(__DIR__). "/core/functions.php";
     class HomeController {
 
-        function sayHi($params){
-           $c = 1000+3;
-           $d = 10/2;
-        //    $model= new Model();
-        $user = new User();
-        $user->getAll();
-        $result = $user->getAll();
-
-        view("home/index",compact('result'));
-
+        function index($params){
+           $user = new User();
+           $user->getAll();
+           $result = $user->getAll();
+            view("home/index",compact('result'));
 
         }
-        function show(){
-            echo "Home - Show";
+        function AboutUs($page){
+            view('about-us/about-us', compact($page));
         }
     }
 ?>
