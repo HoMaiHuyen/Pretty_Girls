@@ -1,5 +1,5 @@
 <?php
-
+require_once "Order.php";
 require_once "Model.php";
 class User extends Model
 {
@@ -89,5 +89,11 @@ class User extends Model
             return [];
         }
         $stmt = $this->closeConnection();
+    }
+
+    public function getOrders($id) {
+        $order = new Order($this->connect);
+        $result= $order->getOrdersByUserId($id);
+        return $result;
     }
 }

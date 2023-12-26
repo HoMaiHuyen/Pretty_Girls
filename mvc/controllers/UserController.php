@@ -6,7 +6,8 @@ class UserController  {
         $id = $params[0];
         $user=new User();
         $result = $user->getOneUser($id);  
-        view('user-profile/profile',compact('result'));
+        $orders= $user->getOrders($id);
+        view('user-profile/profile',compact('result','orders'));
     }
     public function updateUser(){
         if($_SERVER['REQUEST_METHOD']=='POST'){
@@ -28,7 +29,6 @@ class UserController  {
             $user= new User();
            $result= $user->updateUser($id,$nameClear, $phoneClear, $emailClear, $addressClear, $passwordClear);  
             if ($result !== false) {
-            // Cập nhật thành công, chuyển hướng người dùng trở lại trang profile
             header("Location:/project1/User/show/$id");
             exit();
             }

@@ -1,5 +1,4 @@
 <?php require_once dirname(__DIR__) . "/partials/header.php";
-
 if ($result[0]['role'] != 'admin') :
 ?>
     <section>
@@ -75,22 +74,30 @@ if ($result[0]['role'] != 'admin') :
             <table style="width: 100%;">
                 <thead class="thead-table-purchase">
                     <th>STT</th>
-                    <th>Product name</th>
-                    <th>Image</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
+                    <th>Code</th>
+                    <th>Date</th>
                     <th>Total price</th>
-                    <th>Status</th>
+                    <th>Order status</th>
+                    <th>Order details</th>      
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><?php ?></td>
-                        <td><?php ?></td>
-                        <td><?php ?></td>
-                        <td><?php ?></td>
-                        <td><?php ?></td>
-                        <td><?php ?></td>
-                    </tr>
+                    <?php foreach ($orders as $order) : ?>
+                        <tr>
+                            <td><?php echo $order['id'] ?></td>
+                            <td><?php echo $order['user_id'] ?></td>
+                            <td><?php echo  $order['date'] ?></td>
+                            <td><?php echo  $order['total_price'] ?></td>
+                            <td><?php if ($order['order_status'] == 'received') {
+                                    echo "<button class=btn btn-success'>" . $order['order_status'] ;
+                                } elseif($order['order_status'] == 'not received'){
+                                     echo "<button class=btn btn-danger'>" . $order['order_status'] ;
+                                }else{
+                                    echo "<button class=btn btn-primary'>" . $order['order_status'];
+                                }?></td>
+                              <td><?php ?></td>  
+
+                        </tr>
+                    <?php endforeach;  ?>
                 </tbody>
             </table>
         </div>
