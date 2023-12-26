@@ -59,8 +59,8 @@ if ($result[0]['role'] != 'admin') :
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-9 offset-sm-3">
-                                        <button type="submit" class="btn button-item-save px-4" <?php $result[0]['id'] ?>>Save information</a></button>
-                                        <button type="button" class="btn button-item-back px-4 ml-2">Back</button>
+                                        <button type="submit" class="btn button-item-save px-4" <?php $id = $result[0]['id'] ?>>Save information</a></button>
+                                        <button type="button" class="btn button-item-back px-4 ml-2"> Back</button>
                                     </div>
                                 </div>
                             </form>
@@ -88,11 +88,11 @@ if ($result[0]['role'] != 'admin') :
                             <td><?php echo  $order['date'] ?></td>
                             <td><?php echo  $order['total_price'] ?></td>
                             <td><?php if ($order['order_status'] == 'received') {
-                                    echo "<button class=btn btn-success'>" . $order['order_status'] ;
+                                    echo "<button class=btn btn-success'>" . $order['order_status']."</button>";
                                 } elseif($order['order_status'] == 'not received'){
-                                     echo "<button class=btn btn-danger'>" . $order['order_status'] ;
+                                     echo "<button class=btn btn-danger'>" . $order['order_status']."</button>" ;
                                 }else{
-                                    echo "<button class=btn btn-primary'>" . $order['order_status'];
+                                    echo "<button class=btn btn-primary'>" . $order['order_status']."</button>";
                                 }?></td>
                               <td><?php ?></td>  
 
