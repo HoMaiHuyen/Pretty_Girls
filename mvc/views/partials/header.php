@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/product.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/about-us.css' ?>">
     <title>Blue Cosmetic</title>
+    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/user-profile.css' ?>">
 </head>
 
 <body>
