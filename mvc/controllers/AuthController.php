@@ -1,7 +1,8 @@
 <?php
 require_once dirname(__DIR__) . "/models/User.php";
+// require_once dirname(__DIR__) . "/models/Model.php";
 // require_once dirname(__DIR__) . "/core/Services/Mail/MailService.php";
-require_once dirname(__DIR__). "/core/Services/Mail/WelcomeMailService.php";
+require_once dirname(__DIR__) . "/core/Services/Mail/WelcomeMailService.php";
 class AuthController
 {
 
@@ -84,8 +85,43 @@ class AuthController
             $mailService->setBodyEmail();
             $mailService->sendMail($sendEmail);
 
+            header("Location: " . $_ENV['ROOT_URL'] . "/auth/login");
         } else {
             view("form/register", compact('name_error', 'email_error', 'phone_error', 'address_error', 'password_error', 'confirm_error'));
+        }
+    }
+
+
+    public function login()
+    {
+        view("form/login");
+    }
+    public function postLogin()
+    {
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['passwords'] ?? '';
+
+        if (empty($email) || empty($password)) {
+            echo 'Vui lòng điền đầy đủ thông tin đăng nhập';
+            return false;
+        }
+
+        // Tạo đối tượng User
+        $user = new User();
+        // Gọi phương thức getOne từ đối tượng User
+        $data = $user->getOne($email);
+        if ($data) {
+            // Kiểm tra mật khẩu
+            $hashedPassword = $data['passwords'];
+            if (password_verify($password, $hashedPassword)) {
+                $_SESSION['user'] = $data;
+                header("Location: " . $_ENV['ROOT_URL']);
+                exit();
+            } else {
+                echo 'Sai mật khẩu';
+            }
+        } else {
+            echo "Email không tồn tại";
         }
     }
 }

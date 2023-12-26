@@ -43,7 +43,7 @@
                 <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
             </div>
             <div class="item">
-                <a href="#"><i class="fa-solid fa-circle-user fa-xl"></i></a>
+                <a href="<?= $_ENV['ROOT_URL'] ?>/auth/register/"><i class="fa-solid fa-circle-user fa-xl"></i></a>
             </div>
         </div>
 

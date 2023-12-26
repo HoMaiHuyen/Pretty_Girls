@@ -32,7 +32,7 @@ require_once dirname(__DIR__) . "/partials/header.php";
         </div>
         <button type="submit" class="btn-primary">REGISTER</button>
         <div class="additional-links">
-            <div class="link">Already have an account? <a href="#" class="register-link">Login</a></div>
+            <div class="link">Already have an account? <a href="<?= $_ENV['ROOT_URL'] ?>/auth/login" class="register-link">Login</a></div>
         </div>
     </form>
 </div>

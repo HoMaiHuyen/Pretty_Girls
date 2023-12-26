@@ -96,4 +96,22 @@ class User extends Model
         $result= $order->getOrdersByUserId($id);
         return $result;
     }
+
+    public function getOne($email)
+    {
+        if (!$this->connect) {
+            return [];
+        }
+        try {
+            $stmt = $this->connect->prepare("SELECT * FROM users WHERE email = :email");
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
+    
 }

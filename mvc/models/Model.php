@@ -24,4 +24,9 @@ class Model
             $this->connect = null; 
         }
     }
+
+    public function getConnect()
+    {
+        return $this->connect;
+    }
 }
