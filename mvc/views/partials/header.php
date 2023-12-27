@@ -25,8 +25,8 @@
         </div>
         <nav class="main-menu" id="myTopnav">
             <a href="Home">Home</a>
-            <a href="<?php echo ROOT_URL .'Product/index'?>">Product</a>
-            <a href="<?php echo ROOT_URL .'Home/AboutUs' ?>">About Us</a>
+            <a href="<?php echo ROOT_URL .'/Product/index'?>">Product</a>
+            <a href="<?php echo ROOT_URL .'/Home/AboutUs' ?>">About Us</a>
             <a href="#">Contact Us</a>
         </nav>
         <div class="search-container">
@@ -39,7 +39,7 @@
         </div>
         <div class="icon-nav">
             <div class="item1">
-                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="<?php echo ROOT_URL .'/Product/shoppingcart'?>"><i class="fa-solid fa-cart-shopping"></i></a>
             </div>
             <div class="item">
                 <a href="#"><i class="fa-solid fa-circle-user fa-xl"></i></a>
