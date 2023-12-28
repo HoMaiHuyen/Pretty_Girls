@@ -41,6 +41,9 @@
         <div class="icon-nav">
             <div class="item1">
                 <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                <?php if (isset($_SESSION['username'])) {
+                    echo 'Welcome, ' . $_SESSION['username'];
+                } ?>
             </div>
             <div class="item">
                 <a href="<?= $_ENV['ROOT_URL'] ?>/auth/register/"><i class="fa-solid fa-circle-user fa-xl"></i></a>

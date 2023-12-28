@@ -22,18 +22,18 @@ class User extends Model
         }
     }
 
-    public function createUser($user_name, $phone, $passwords, $email, $address)
+    public function createUser($user_name, $phone, $password, $email, $address)
     {
         if (!$this->connect) {
             return [];
         }
         try {
-            $stmt = $this->connect->prepare("INSERT INTO users (user_name, phone, passwords, email, role, address, image_url) VALUES (:user_name, :phone, :passwords, :email, null, :address, null)");
+            $stmt = $this->connect->prepare("INSERT INTO users (user_name, phone, password, email, role, address, image_url) VALUES (:user_name, :phone, :password, :email, null, :address, null)");
 
             $stmt->bindParam(':user_name', $user_name);
             $stmt->bindParam(':phone', $phone);
-            $hashed_password = password_hash($passwords, PASSWORD_DEFAULT);
-            $stmt->bindParam(':passwords', $hashed_password);
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $stmt->bindParam(':password', $hashed_password);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':address', $address);
             $stmt->execute();
@@ -113,5 +113,4 @@ class User extends Model
             return [];
         }
     }
-    
 }

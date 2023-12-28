@@ -17,7 +17,7 @@ class AuthController
         $email = "";
         $phone = "";
         $address = "";
-        $passwords = "";
+        $password = "";
         $confirm = "";
 
         $name_error = "";
@@ -56,24 +56,24 @@ class AuthController
                 $address_error = "Address is invalid";
             }
 
-            $passwords = isset($_POST['passwords']) ? $_POST['passwords'] : "";
-            if (empty($passwords)) {
+            $password = isset($_POST['password']) ? $_POST['password'] : "";
+            if (empty($password)) {
                 $password_error = "Please enter a password";
-            } elseif (validate_password($passwords) == false) {
+            } elseif (validate_password($password) == false) {
                 $password_error = "Password is not valid";
             }
 
             $confirm = isset($_POST['confirm']) ? $_POST['confirm'] : "";
             if (empty($confirm)) {
                 $confirm_error = "Please confirm your password";
-            } elseif (validate_confirm_password($passwords, $confirm) == false) {
-                $confirm_error = "Passwords do not match";
+            } elseif (validate_confirm_password($password, $confirm) == false) {
+                $confirm_error = "Password do not match";
             }
         }
         if (empty($name_error) && empty($email_error) && empty($phone_error) && empty($address_error) && empty($password_error) && empty($confirm_error)) {
             //Insert vao database
             $user = new User();
-            $user->createUser($name, $phone, $passwords, $email, $address, $confirm);
+            $user->createUser($name, $phone, $password, $email, $address, $confirm);
             // echo "Sucssess";
 
             // Send Email
@@ -84,8 +84,7 @@ class AuthController
             ];
             $mailService->setBodyEmail();
             $mailService->sendMail($sendEmail);
-
-            header("Location: " . $_ENV['ROOT_URL'] . "/auth/login");
+            //     header("Location: " . $_ENV['ROOT_URL'] . "auth/login");
         } else {
             view("form/register", compact('name_error', 'email_error', 'phone_error', 'address_error', 'password_error', 'confirm_error'));
         }
@@ -98,30 +97,36 @@ class AuthController
     }
     public function postLogin()
     {
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['passwords'] ?? '';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['email'] ? $_POST['email'] : "";
+            $password = $_POST['password'] ? $_POST['password'] : "";
 
-        if (empty($email) || empty($password)) {
-            echo 'Vui lòng điền đầy đủ thông tin đăng nhập';
-            return false;
-        }
-
-        // Tạo đối tượng User
-        $user = new User();
-        // Gọi phương thức getOne từ đối tượng User
-        $data = $user->getOne($email);
-        if ($data) {
-            // Kiểm tra mật khẩu
-            $hashedPassword = $data['passwords'];
-            if (password_verify($password, $hashedPassword)) {
-                $_SESSION['user'] = $data;
-                header("Location: " . $_ENV['ROOT_URL']);
-                exit();
+            if (!empty($email) && !empty($password)) {
+                // Tạo đối tượng User
+                $user = new User();
+                // Gọi phương thức getOne từ đối tượng User
+                $data = $user->getOne($email);
+                if ($data) {
+                    // Kiểm tra mật khẩu
+                    $hashedPassword = $data['password'];
+                    if (password_verify($password, $hashedPassword)) {
+                        $_SESSION['user'] = $data;
+                        $u =  $_SESSION['user'];
+                        $id = $u['id'];
+                        header("Location: " . $_ENV['ROOT_URL'] . "/Home/index?id=" . $id);
+                        exit();
+                    } else {
+                        $password_error = "Sai mật khẩu";
+                        view("form/login", compact("password_error"));
+                    }
+                } else {
+                    $email_error = "Email không tồn tại";
+                    view("form/login", compact("email_error"));
+                }
             } else {
-                echo 'Sai mật khẩu';
+                echo "<script>alert('Vui lòng điền đầy đủ thông tin đăng nhập');</script>";
+                view("form/login");
             }
-        } else {
-            echo "Email không tồn tại";
         }
     }
 }

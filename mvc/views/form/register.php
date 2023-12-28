@@ -22,11 +22,11 @@ require_once dirname(__DIR__) . "/partials/header.php";
         </div>
         <div class="password-container">
             <div class="mb-3">
-                <input class="form-input" name="passwords" type="password" placeholder="Your Password">
+                <input class="form-input" name="password" type="password" placeholder="Your Password">
                 <small class="form-text text-danger"> <?php echo isset($password_error) ? $password_error : ""  ?></small>
             </div>
             <div class="mb-3">
-                <input class="form-input" name="confirm" type="password" placeholder="Confirm Password">
+                <input class="form-input" id="confirm" name="confirm" type="password" placeholder="Confirm Password">
                 <small class="form-text text-danger"> <?php echo isset($confirm_error) ? $confirm_error : ""  ?></small>
             </div>
         </div>

@@ -1,30 +1,16 @@
 <?php
-require_once dirname(__DIR__) . "/partials/header.php";
-require_once dirname(dirname(__DIR__)) . "/models/User.php";
-require_once dirname(dirname(__DIR__)) . "/controllers/AuthController.php";
 session_start();
-
-$email_error = $password_error = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['email']) && isset($_POST['passwords'])) {
-        $loginController = new AuthController();
-        $loginController->postLogin();
-    } else {
-        echo 'Vui lòng điền đầy đủ thông tin đăng nhập';
-    }
-}
+require_once dirname(__DIR__) . "/partials/header.php";
 ?>
-
 <div class="background-container">
-    <form class="login-form" action="#" method="post">
+    <form class="login-form <?php echo isset($email_error) || isset($password_error) ? 'error' : ''; ?>" action="<?php echo ROOT_URL . "/auth/postLogin" ?>" method="post">
         <h2>LOGIN FORM</h2>
         <div class="mb-3">
             <input class="form-input" type="email" name="email" placeholder="Your Email">
             <small class="form-text text-danger"> <?php echo isset($email_error) ? $email_error : ""  ?></small>
         </div>
         <div class="mb-3">
-            <input class="form-input" type="password" name="passwords" placeholder="Your Password">
+            <input class="form-input" type="password" name="password" placeholder="Your Password">
             <small class="form-text text-danger"><?php echo isset($password_error) ? $password_error : ""  ?></small>
         </div>
         <button type="submit" class="btn-primary">LOGIN</button>
