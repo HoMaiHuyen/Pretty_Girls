@@ -19,7 +19,7 @@ abstract class MailService
             $mail->SMTPDebug=0; 
             $mail->SMTPSecure = 'tls';
             $mail->Port       = 587;
-            $mail->setFrom(getenv('MAIL_SHOP'), 'Mailer');
+            $mail->setFrom(getenv('MAIL_SHOP'), 'Blue Cosmetics');
             $mail->addAddress($email['email'], $email['name']);
             $mail->isHTML(true);
             $mail->Subject = '[ FORM CONTACT from Blue Cosmetics ]';        

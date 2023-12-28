@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/product-detail.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/form.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/product.css' ?>">
-    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/product.css' ?>">
+    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/user-profile.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/about-us.css' ?>">
     <title>Blue Cosmetic</title>
-    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/user-profile.css' ?>">
+    
 </head>
 
 <body>
@@ -25,9 +25,9 @@
             <img src="<?php loadImage('Logo (1).png') ?>" style="width: 80px; height: 80px;">
         </div>
         <nav class="main-menu" id="myTopnav">
-            <a href="Home">Home</a>
-            <a href="<?php echo ROOT_URL .'Product/index'?>">Product</a>
-            <a href="<?php echo ROOT_URL .'Home/AboutUs' ?>">About Us</a>
+            <a href="<?php echo ROOT_URL .'/Home/index'?>">Home</a>
+            <a href="<?php echo ROOT_URL .'/Product/index'?>">Product</a>
+            <a href="<?php echo ROOT_URL .'/Home/AboutUs' ?>">About Us</a>
             <a href="#">Contact Us</a>
         </nav>
         <div class="search-container">
