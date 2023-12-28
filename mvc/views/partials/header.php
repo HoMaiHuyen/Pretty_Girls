@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/product-detail.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/form.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/product.css' ?>">
-    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/product.css' ?>">
+    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/user-profile.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/about-us.css' ?>">
     <title>Blue Cosmetic</title>
+    
 </head>
 
 <body>
@@ -24,7 +25,7 @@
             <img src="<?php loadImage('Logo (1).png') ?>" style="width: 80px; height: 80px;">
         </div>
         <nav class="main-menu" id="myTopnav">
-            <a href="Home">Home</a>
+            <a href="<?php echo ROOT_URL .'/Home/index'?>">Home</a>
             <a href="<?php echo ROOT_URL .'/Product/index'?>">Product</a>
             <a href="<?php echo ROOT_URL .'/Home/AboutUs' ?>">About Us</a>
             <a href="#">Contact Us</a>
@@ -42,7 +43,7 @@
                 <a href="<?php echo ROOT_URL .'/Product/shoppingcart'?>"><i class="fa-solid fa-cart-shopping"></i></a>
             </div>
             <div class="item">
-                <a href="#"><i class="fa-solid fa-circle-user fa-xl"></i></a>
+                <a href="<?= $_ENV['ROOT_URL'] ?>/auth/register/"><i class="fa-solid fa-circle-user fa-xl"></i></a>
             </div>
         </div>
 
