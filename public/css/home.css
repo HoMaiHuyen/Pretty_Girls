@@ -250,14 +250,24 @@
   background-color: var(--background-main-color);
   border: none ;
 }
-.card-title-name-body{
+
+.title-body{
   color: var(--blue-color);
+  margin-left: 50px;
+}
+
+.image-popular-product{
+  border-radius: 5px;
+  width: 400px;
+  height: 500px;
 }
 
 .texture-spray{
   border: 1px solid var(--blue-color);
   background-image: var(--background-button-color);
   border-radius: 50%;
+  width: 300px;
+  height: 400px;
 }
 
 .btn-light{
@@ -286,7 +296,6 @@
     animation-name: text-animation  700ms infinite; 
 }   
 
-
 @media screen and (min-width: 768px) and (max-width: 15536px) {
   .card-body-padding{
     margin-left: 250px;
@@ -301,39 +310,17 @@
   
   }
 
-  .card-item-lastest{
-    width: 450px;
-    height:250px;
-    margin-left: 250px;
-    margin-bottom: 500px;
-  }
-
-  .title-body {
-    padding-left: 150px;
-    padding-top: 20px;
-    color:#6E95B8;
-}
-
-.card-title-large{
-  width:500px; font-size:25px;
-}
-
-.Milaganics-shiny{
-  background-image: var(--background-button-color);
-}
-
 .Mliglanics-herbal{
-  background-image: var(--background-button-color);
   width: 300px;
   height:250px;
   padding:10px 10px 0px 10px;
 }
-.card-item-trial{
-  width: 1124px;
-  height:300px;
-  margin-left: 260px;
-  padding:20px 0px 20px 30px;  
 
+.card-item-trial{
+  width: 1540px;
+  height:300px;
+  margin-left: 70px;
+  padding:20px 0px 20px 30px;  
   /* top right bottom left */
 }
 .card-body-trial{
