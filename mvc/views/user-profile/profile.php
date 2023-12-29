@@ -71,7 +71,7 @@ if ($result[0]['role'] != 'admin') :
         </div>
         <div id="order" class="tabcontent" style="margin-bottom:100px ;">
 
-            <table style="width: 100%;">
+            <table class="table table-hover" style="width: 100%;">
                 <thead class="thead-table-purchase">
                     <th>STT</th>
                     <th>Code</th>

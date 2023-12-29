@@ -55,11 +55,11 @@
   border-radius: 20px;
   margin-top: 5px;
 }
-
+.card-profile
 .form-group{
   margin-bottom: 10px;
 }
-
+.card-profile
 .form-control{
   height: 40px;
   font-size: 18px;
@@ -101,12 +101,13 @@
 .card-profile form {
   border-radius: 20px;
 }
-table, th, td {
+
+/* table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
    
-  }
+  } */
   .tabcontent {
     animation: fadeEffect 1s;
   }

@@ -206,7 +206,10 @@
   }
 
 }
-
+.active-menu {
+  border-bottom: 2px solid #ED4D2D;
+  color: #ED4D2D;
+}
 /* ===================BANNER==================== */
 #banner {
     display: flex;
