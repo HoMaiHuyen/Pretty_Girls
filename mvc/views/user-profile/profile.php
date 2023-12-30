@@ -42,7 +42,7 @@ if ($result[0]['role'] != 'admin') :
                                 <div class="form-group row">
                                     <label for="email" class="col-sm-3 col-form-label">Email:</label>
                                     <div class="col-sm-9">
-                                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $result[0]['email'] ?>" placeholder="Example@example.com">
+                                        <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($result[0]['email']) ? $result[0]['email'] : "" ?>" placeholder="Example@example.com">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -78,7 +78,7 @@ if ($result[0]['role'] != 'admin') :
                     <th>Date</th>
                     <th>Total price</th>
                     <th>Order status</th>
-                    <th>Order details</th>      
+                    <th>Order details</th>
                 </thead>
                 <tbody>
                     <?php foreach ($orders as $order) : ?>
@@ -88,13 +88,13 @@ if ($result[0]['role'] != 'admin') :
                             <td><?php echo  $order['date'] ?></td>
                             <td><?php echo  $order['total_price'] ?></td>
                             <td><?php if ($order['order_status'] == 'received') {
-                                    echo "<button class=btn btn-success'>" . $order['order_status']."</button>";
-                                } elseif($order['order_status'] == 'not received'){
-                                     echo "<button class=btn btn-danger'>" . $order['order_status']."</button>" ;
-                                }else{
-                                    echo "<button class=btn btn-primary'>" . $order['order_status']."</button>";
-                                }?></td>
-                              <td><?php ?></td>  
+                                    echo "<button class=btn btn-success'>" . $order['order_status'] . "</button>";
+                                } elseif ($order['order_status'] == 'not received') {
+                                    echo "<button class=btn btn-danger'>" . $order['order_status'] . "</button>";
+                                } else {
+                                    echo "<button class=btn btn-primary'>" . $order['order_status'] . "</button>";
+                                } ?></td>
+                            <td><?php ?></td>
 
                         </tr>
                     <?php endforeach;  ?>
@@ -109,5 +109,7 @@ endif;
 ?>
 <script src="<?php echo ROOT_URL . '/public/js/user-profile.js' ?>"></script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
 </html>
