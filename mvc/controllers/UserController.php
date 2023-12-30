@@ -63,4 +63,42 @@ class UserController
             }
         }
     }
+    public function shoppingCart()
+    {
+        if (isset($_POST['addcart']) && ($_POST['addcart'])) {
+            $id = $_POST['PId'];
+            $name = $_POST['PName'];
+            $image = $_POST['Image'];
+            $price = $_POST['PPrice'];
+            if(isset($_POST['PQuantity']) && $_POST['PQuantity']>0 ){
+                $qty=$_POST['PQuantity'];
+            }
+            else{
+                $qty=1;
+            }
+            $flag = 0;
+            $i = 0;
+            foreach ($_SESSION['cart'] as $item) {
+                if ($item[0] == $id) {
+                    $newqty = $qty + $item[4];
+                    $_SESSION['cart'][$i][4] = $newqty;
+                    $flag = 1;
+                    break;
+                }
+                $i++;
+            }
+            if ($flag == 0) {
+                $item = array($id, $name, $image, $price, $qty);
+                $_SESSION['cart'][] = $item;
+            }
+        }
+        view('user-profile/shoppingcart');
+    }
+    public function deleteItem()
+    {
+        if (isset($_GET['id']) && ($_GET['id'] >= 0)) {
+            array_splice($_SESSION['cart'], $_GET['id'],1);
+            view('user-profile/shoppingcart');
+        }
+    }
 }

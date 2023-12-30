@@ -31,7 +31,4 @@ class ProductController
         }
         view('products/search', compact('searchResult', 'keyword','search_key'));
     }
-    public function shoppingcart(){
-        view('products/shoppingcart');
-    }
 }
