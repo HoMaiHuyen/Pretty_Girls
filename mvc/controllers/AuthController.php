@@ -113,7 +113,7 @@ class AuthController
                     $hashedPassword = $data['password'];
                     if (password_verify($password, $hashedPassword)) {
                         // Bắt đầu session
-                        session_start();
+                    
                         $_SESSION['user_id'] = $data['id'];
                         // Chuyển hướng người dùng đến trang sau khi đăng nhập thành công
                         header("Location: " . $_ENV['ROOT_URL'] . "/Home/AboutUs");
