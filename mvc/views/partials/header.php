@@ -1,3 +1,4 @@
+
 <?php require_once dirname(dirname(dirname(__DIR__))) . "/config/app.php" ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +17,7 @@
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/user-profile.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/about-us.css' ?>">
     <title>Blue Cosmetic</title>
-    
+
 </head>
 
 <body>
@@ -25,9 +26,9 @@
             <img src="<?php loadImage('Logo (1).png') ?>" style="width: 80px; height: 80px;">
         </div>
         <nav class="main-menu" id="myTopnav">
-            <a href="<?php echo ROOT_URL .'/Home/index'?>">Home</a>
-            <a href="<?php echo ROOT_URL .'/Product/index'?>">Product</a>
-            <a href="<?php echo ROOT_URL .'/Home/AboutUs' ?>">About Us</a>
+            <a href="<?php echo ROOT_URL . '/Home/index' ?>">Home</a>
+            <a href="<?php echo ROOT_URL . '/Product/index' ?>">Product</a>
+            <a href="<?php echo ROOT_URL . '/Home/AboutUs' ?>">About Us</a>
             <a href="#">Contact Us</a>
         </nav>
         <div class="search-container">
@@ -40,11 +41,22 @@
         </div>
         <div class="icon-nav">
             <div class="item1">
+
                 <a href="<?php echo ROOT_URL .'/Product/shoppingcart'?>"><i class="fa-solid fa-cart-shopping"></i></a>
             </div>
-            <div class="item">
-                <a href="<?= $_ENV['ROOT_URL'] ?>/auth/register/"><i class="fa-solid fa-circle-user fa-xl"></i></a>
-            </div>
+         
+            <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <?php isset($_SESSION['user_id'])?>
+                    <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-circle-user fa-xl" style="color: gray; margin-right: 50px;font-size: 25px;"></i>
+                    </a>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="<?php echo ROOT_URL . '/auth/register' ?>">Register</a></li>
+                <li><a class="dropdown-item" href="<?php echo ROOT_URL . '/auth/login' ?>">Login</a></li>
+                <li><a class="dropdown-item" href="#">Logout</a></li>
+                <li><a class="dropdown-item" href="<?php echo ROOT_URL . '/User/show?session_id=' . 'session_id' ?>">Profile</a></li>
+            </ul>
         </div>
 
     </header>

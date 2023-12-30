@@ -1,4 +1,12 @@
-<?php require_once dirname(__DIR__) . "/partials/header.php"; ?>
+<?php
+
+// $user_id = $_SESSION['user_id'];
+// $session_id = session_id();
+
+// Output the session ID
+// echo "The current session ID is: " . $session_id;
+require_once dirname(__DIR__) . "/partials/header.php";
+?>
 
 <section>
     <div class="container-fluid">
@@ -74,6 +82,6 @@
 
 
 </section>
-<?php 
-require_once dirname(__DIR__) . "/partials/footer.php";  
+<?php
+require_once dirname(__DIR__) . "/partials/footer.php";
 ?>

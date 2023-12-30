@@ -1,4 +1,5 @@
 <?php
+
 require_once dirname(__DIR__) . "/models/User.php";
 // require_once dirname(__DIR__) . "/models/Model.php";
 // require_once dirname(__DIR__) . "/core/Services/Mail/MailService.php";
@@ -84,7 +85,7 @@ class AuthController
             ];
             $mailService->setBodyEmail();
             $mailService->sendMail($sendEmail);
-            //     header("Location: " . $_ENV['ROOT_URL'] . "auth/login");
+            header("Location: " . $_ENV['ROOT_URL'] . "/auth/login");
         } else {
             view("form/register", compact('name_error', 'email_error', 'phone_error', 'address_error', 'password_error', 'confirm_error'));
         }
@@ -98,33 +99,35 @@ class AuthController
     public function postLogin()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = $_POST['email'] ? $_POST['email'] : "";
-            $password = $_POST['password'] ? $_POST['password'] : "";
+            $email = $_POST['email'] ?? "";
+            $password = $_POST['password'] ?? "";
 
             if (!empty($email) && !empty($password)) {
                 // Tạo đối tượng User
                 $user = new User();
                 // Gọi phương thức getOne từ đối tượng User
                 $data = $user->getOne($email);
+                // Xác thực thông tin đăng nhập
                 if ($data) {
                     // Kiểm tra mật khẩu
                     $hashedPassword = $data['password'];
                     if (password_verify($password, $hashedPassword)) {
-                        $_SESSION['user'] = $data;
-                        $u =  $_SESSION['user'];
-                        $id = $u['id'];
-                        header("Location: " . $_ENV['ROOT_URL'] . "/Home/index?id=" . $id);
+                        // Bắt đầu session
+                    
+                        $_SESSION['user_id'] = $data['id'];
+                        // Chuyển hướng người dùng đến trang sau khi đăng nhập thành công
+                        header("Location: " . $_ENV['ROOT_URL'] . "/Home/AboutUs");
                         exit();
                     } else {
-                        $password_error = "Sai mật khẩu";
+                        $password_error = "Wrong password";
                         view("form/login", compact("password_error"));
                     }
                 } else {
-                    $email_error = "Email không tồn tại";
+                    $email_error = "Email does not exist";
                     view("form/login", compact("email_error"));
                 }
             } else {
-                echo "<script>alert('Vui lòng điền đầy đủ thông tin đăng nhập');</script>";
+                echo "<script>alert('Please fill in your login information completely');</script>";
                 view("form/login");
             }
         }
