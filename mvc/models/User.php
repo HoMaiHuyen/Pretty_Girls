@@ -67,7 +67,6 @@ class User extends Model
             error_log("Error updating user: " . $e->getMessage());
             return false;
         }
-
     }
 
     public function getOneUser($id)
@@ -91,9 +90,10 @@ class User extends Model
         $stmt = $this->closeConnection();
     }
 
-    public function getOrders($id) {
+    public function getOrders($id)
+    {
         $order = new Order($this->connect);
-        $result= $order->getOrdersByUserId($id);
+        $result = $order->getOrdersByUserId($id);
         return $result;
     }
 

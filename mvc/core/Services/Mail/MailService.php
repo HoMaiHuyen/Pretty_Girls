@@ -25,7 +25,6 @@ abstract class MailService
             $mail->Subject = '[ FORM CONTACT from Blue Cosmetics ]';        
             $mail->Body    = $this->bodyEmail;
             $mail->send();
-            echo 'Message has been sent';
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
