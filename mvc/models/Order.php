@@ -29,7 +29,27 @@ class Order extends Model
         }
         $stmt = $this->closeConnection();
     }
-
+     public function getOrderInfo($orderId)
+    {
+        if (!$this->connect) {
+            return [];
+        }
+        try {
+            $query = "SELECT orders.order_id, orders.user_id, orders.date, orders.total_price, orders.payment_method, order_status.status_name
+                      FROM $this->table
+                      INNER JOIN order_status ON orders.order_status_id = order_status.id
+                      WHERE orders.order_id = :order_id";
+            $stmt = $this->connect->prepare($query);
+            $stmt->bindParam(':order_id', $orderId);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+        $this->closeConnection();
+    }
     public function getAllOrder()
     {
         if (!$this->connect) {

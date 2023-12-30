@@ -88,13 +88,16 @@ if ($result[0]['role'] != 'admin') :
                             <td><?php echo  $order['date'] ?></td>
                             <td><?php echo  $order['total_price'] ?></td>
                             <td><?php if ($order['order_status'] == 'received') {
-                                    echo "<button class=btn btn-success'>" . $order['order_status'] . "</button>";
-                                } elseif ($order['order_status'] == 'not received') {
-                                    echo "<button class=btn btn-danger'>" . $order['order_status'] . "</button>";
-                                } else {
-                                    echo "<button class=btn btn-primary'>" . $order['order_status'] . "</button>";
-                                } ?></td>
-                            <td><?php ?></td>
+                                    echo "<button class=btn btn-success'>" . $order['order_status']."</button>";
+                                } elseif($order['order_status'] == 'not received'){
+                                     echo "<button class=btn btn-danger'>" . $order['order_status']."</button>" ;
+                                }else{
+                                    echo "<button class=btn btn-primary'>" . $order['order_status']."</button>";
+                                }?></td>
+                              <td>
+                              <a href="<?php echo ROOT_URL.'/Checkout/updateOrder?id='.$order['id'] ?>"><i class="fa-solid fa-pencil"></i></a>
+                              <a href="<?php ?>"><i class="fa-solid fa-trash"></i></a>
+                              </td>  
 
                         </tr>
                     <?php endforeach;  ?>

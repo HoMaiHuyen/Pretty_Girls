@@ -34,7 +34,9 @@ class CheckoutController  {
 }
 
     function createOrderDetail($order_id){
-
+      
+          $order_item = new OrderItem();
+          $order_item->
 
     }
 }
