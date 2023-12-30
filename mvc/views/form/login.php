@@ -1,8 +1,5 @@
 <?php
-session_start();
 $session_id = session_id();
-// Output the session ID
-// echo "The current session ID is: " . $session_id;
 require_once dirname(__DIR__) . "/partials/header.php";
 ?>
 <div class="background-container">

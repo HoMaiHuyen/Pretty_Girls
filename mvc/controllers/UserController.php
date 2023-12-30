@@ -1,37 +1,31 @@
 <?php
+require_once  dirname(__DIR__) . "/core/Middlewares/AuthMiddleware.php";
 require_once dirname(__DIR__) . "/models/User.php";
 require_once dirname(__DIR__) . "/core/functions.php";
 class UserController
-{
+{   
+    public function __construct()
+    {
+        $authMiddleware= new AuthMiddleware();
+
+    }
     public function index()
     {
         view('user-profile/profile', null);
     }
-    // public function show($params)
-    // {
-    //     $id = $params[0];
-    //     $user = new User();
-    //     $result = $user->getOneUser($id);
-    //     $orders = $user->getOrders($id);
-    //     view('user-profile/profile', compact('result', 'orders'));
-    // }
+   
 
     public function show()
     {
-        // Đảm bảo rằng đã khởi động session
-        session_start();
+  
+        $user_id = $_SESSION['user_id'];
 
-        // Kiểm tra xem có ID phiên đăng nhập trong session hay không
-        if (isset($_SESSION['user_id'])) {
-            $user_id = $_SESSION['user_id'];
-
-            // Lấy thông tin người dùng từ user ID
+  
             $user = new User();
             $result = $user->getOneUser($user_id);
             $orders = $user->getOrders($user_id);
 
             if ($result) {
-                // Truyền kết quả lấy được vào view
                 view(
                     'user-profile/profile',
                     compact(
@@ -39,15 +33,10 @@ class UserController
                         'orders'
                     )
                 );
-            } else {
-                // Không tìm thấy thông tin người dùng
-                echo "Không tìm thấy thông tin người dùng!";
-            }
-        } else {
-            // Phiên đăng nhập không tồn tại
-            echo "Phiên đăng nhập không tồn tại!";
-        }
+            } 
+      
     }
+    
     public function updateUser()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
