@@ -33,11 +33,23 @@ class CheckoutController  {
           }            
 }
 
-    function createOrderDetail($order_id){
-      
+    function createOrderDetail($order_id, $product_id){
+          $order = new Order();
+          $order->findOrder($order_id);
+          if(empty($order)){
+              header('Location:'. $_ENV['ROOT_URL'].'/shoppinCart/index');
+           }
+          $quantity = $order['quantity'];
+
+          $product = new Product();
+          $product ->findProductById($order_id);
           $order_item = new OrderItem();
-          $order_item->
+        //  $order_item->createOrderItem($order_id);
+          
+
+
 
     }
+
 }
 ?>

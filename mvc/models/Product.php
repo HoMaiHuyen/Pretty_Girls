@@ -38,6 +38,23 @@ class Product extends Model
             return [];
         }
     }
+
+    function findProductById($product_id)
+    {
+        if (!$this->connect) {
+            return [];
+        }
+        try {
+            $stmt = $this->connect->prepare('SELECT id  FROM $this->table WHERE id=:product_id');
+            $stmt->execute([
+                ':product_id' => $product_id
+            ]);
+            return  $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
     function search($keyword)
     {
         if (!$this->connect) {

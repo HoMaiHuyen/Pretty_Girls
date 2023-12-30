@@ -59,4 +59,13 @@ class OrderItem extends Model
             $e->getMessage();
         }
     }
+    public function inforOrderItem(){
+         if (!$this->connect) {
+            return [];
+        }
+        $stmt = $this->connect->prepare("SELECT odder_items.order_id , orders.quantity , products.price FROM $this->table
+        JOIN products ON product.products.id = odder_items.product_id 
+        
+        ");
+    }
 }
