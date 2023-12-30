@@ -70,12 +70,8 @@
                             </div>
                         </div>
                     </div>
-            <?php } else {
-                    $hair = [$product];
-                }
+            <?php } 
             endforeach ?>
-
-
         </div>
     </div>
 </section>

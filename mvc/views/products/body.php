@@ -18,14 +18,14 @@
 <section>
     <div class="container">
         <div class="row">
-            <h2 style='color:var(--blue-color);padding-top:30px;'>FACE</h2>
+            <h2 class="title-face">FACE</h2>
             <?php   
             foreach ($products as $product) :
                 if ($product['categories'] == 'face') {
             ?>
                     <div class="col-sm-4" style="padding-bottom: 20px;">
                         <div class="card card-product">
-                            <img src="<?php echo $product['image_url'] ?>" class="card-image" alt="..." style="background-image: linear-gradient(#9FCBF4, #EAD8FC);">
+                            <img src="<?php echo $product['image_url'] ?>" class="card-image" alt="<?php $product['image_name'] ?>">
                             <div class="card-body">
                                 <h4 class="card-title" style="color: black;"><?php echo $product['product_name'] ?></h4>
                                 <br>
@@ -55,13 +55,13 @@
             endforeach ?>
             <?php
             if (!empty($hair))
-                echo "<h2 style='color:var(--blue-color);'>HAIR</h2>";
+                echo "<h2 class='title-face'>HAIR</h2>";
             foreach ($products as $product) :
                 if ($product['categories'] == 'hair') {
             ?>
                     <div class="col-sm-4" style="padding-bottom: 20px;  ">
                         <div class="card card-product">
-                            <img src="<?php echo $product['image_url'] ?>" class="card-image" alt="..." style="background-image: linear-gradient(#9FCBF4, #EAD8FC);">
+                            <img src="<?php echo $product['image_url'] ?>" class="card-image" alt="<?php $product['image_name'] ?>">
                             <div class="card-body">
                                 <h4 class="card-title" style="color: black;"><?php echo $product['product_name'] ?></h4>
                                 <br>
@@ -85,9 +85,7 @@
                             </div>
                         </div>
                     </div>
-            <?php } else {
-                    $hair = [$product];
-                }
+            <?php }
             endforeach ?>
         </div>
     </div>

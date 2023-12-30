@@ -70,4 +70,9 @@
   .card-image{
     height: 400px;
     width: 413px;
+    background-image: linear-gradient(#9FCBF4, #EAD8FC);
   }
+
+.title-face{
+  color:var(--blue-color);padding-top:30px;
+}

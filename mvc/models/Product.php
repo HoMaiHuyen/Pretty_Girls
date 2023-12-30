@@ -57,4 +57,20 @@ class Product extends Model
         }
     }
 
+    function popular(){
+        if(!$this->connect){
+            return [];
+        }
+        try {
+            $sttm=$this->connect->prepare("SELECT * FROM $this->table ORDER BY quantity ASC limit 8");
+            $sttm->execute();
+            $popularResult=$sttm->fetchAll(PDO::FETCH_ASSOC);
+            return $popularResult;
+        }
+        catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
+
 }
