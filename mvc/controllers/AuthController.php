@@ -103,13 +103,11 @@ class AuthController
             $password = $_POST['password'] ?? "";
 
             if (!empty($email) && !empty($password)) {
-                // Tạo đối tượng User
                 $user = new User();
-                // Gọi phương thức getOne từ đối tượng User
                 $data = $user->getOne($email);
                 // Xác thực thông tin đăng nhập
                 if ($data) {
-                    // Kiểm tra mật khẩu
+ 
                     $hashedPassword = $data['password'];
                     if (password_verify($password, $hashedPassword)) {
                         // Bắt đầu session

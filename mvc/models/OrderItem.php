@@ -1,10 +1,8 @@
 <?php
 class OrderItem extends Model
 {
-    protected $table = "odder_items";
-    var $order_id;
-    var $price;
-    var $product_id;
+    protected $table = "order_items";
+   
 
 
     public  function getForOrder($order_id)
@@ -43,29 +41,50 @@ class OrderItem extends Model
         }
     }
 
-    public function findOrderDetail($order_item_id)
+    public function findOrderDetail($order_id)
     {
         if (!$this->connect) {
             return [];
         }
         try {
-            $stmt = $this->connect->prepare("SELECT * FROM $this->table WHERE order_detail_id=:order_detail_id");
+            $stmt = $this->connect->prepare("SELECT order_id FROM $this->table WHERE order_id=:order_id");
             $stmt->execute([
-                ':order_detail_id' => $order_item_id
-            ]);
-            $stmt->setFetchMode(PDO::FETCH_CLASS);
-            return $stmt->fetch();
+                ':order_id' => $order_id
+            ]);          
+            $result= $stmt->fetchColumn();
+
+            if ($result !== false) {      
+            return $result;
+        } else {
+            return null;
+        }
+
         } catch (Exception $e) {
             $e->getMessage();
         }
     }
-    public function inforOrderItem(){
-         if (!$this->connect) {
+
+    public function inforOrderItem($order_id)
+    {
+        if (!$this->connect) {
             return [];
         }
-        $stmt = $this->connect->prepare("SELECT odder_items.order_id , orders.quantity , products.price FROM $this->table
-        JOIN products ON product.products.id = odder_items.product_id 
-        
-        ");
+
+        try {
+            $stmt = $this->connect->prepare("SELECT $this->table.order_id AS order_id, $this->table.quantity AS quantity, products.price  AS unit_price, products.id AS product_id, products.product_name AS product_name
+                                        FROM $this->table
+                                        JOIN products ON products.id = $this->table.product_id
+                                        JOIN orders ON orders.id = $this->table.order_detail_id
+                                        WHERE $this->table.order_id = :order_id");
+
+            $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);                            
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return $result;
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            throw $e;
+        }
     }
+
 }

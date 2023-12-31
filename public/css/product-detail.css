@@ -28,7 +28,7 @@ body {
     margin-top: 30px;
     padding-bottom: 0;
 }
-.product-detail-button button {
+.product-detail-button .button-item1 +.button-item2 {
     border: none;
     border-radius: 20px;
     padding: 10px 20px;
@@ -77,7 +77,7 @@ body {
     margin-top: 60px;
 }
 /* -------------------------Button ------------------------------------------------- */
-.card-product-recommend .btn{
+.card-product-recommend .btn-add-to-card +.btn-add-to-card{
     border-radius: 20px;
     border: 1px solid #cbc4c4;
     height: 55px;
@@ -91,13 +91,13 @@ body {
 }
 
 .card-product-recommend .btn-add-to-card{
-    width: 180px;
-    margin-right: 20px;
+    width: 100px;
+    margin-right: 10px;
    
 }
 
 .card-product-recommend .btn-buy-now {
-    width: 150px;
+    width: 90px;
 }
 .card-product-recommend .btn-buy-now #link{    
     text-decoration: none;

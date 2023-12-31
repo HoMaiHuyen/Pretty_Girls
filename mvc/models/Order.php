@@ -22,6 +22,8 @@ class Order extends Model
             $stmt->bindParam(':user_id', $userId);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
             return $result;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -29,20 +31,26 @@ class Order extends Model
         }
         $stmt = $this->closeConnection();
     }
-     public function getOrderInfo($orderId)
+    public function getOrderInfo($orderId, $user_id)
     {
         if (!$this->connect) {
             return [];
         }
         try {
-            $query = "SELECT orders.order_id, orders.user_id, orders.date, orders.total_price, orders.payment_method, order_status.status_name
-                      FROM $this->table
-                      INNER JOIN order_status ON orders.order_status_id = order_status.id
-                      WHERE orders.order_id = :order_id";
+            $query = "SELECT orders.id as orderId, orders.user_id as userId ,  orders.date as Dates, orders.total_price as total_price,
+                    orders.payment_method as payment, order_status.status_name as status
+                    FROM orders
+                    INNER JOIN order_status ON orders.order_status_id = order_status.id
+                    INNER JOIN users ON orders.user_id = users.id
+                    WHERE orders.id =:order_id and user_id = :user_id;";
             $stmt = $this->connect->prepare($query);
-            $stmt->bindParam(':order_id', $orderId);
-            $stmt->execute();
+
+            $stmt->execute([
+                ':order_id' => $orderId,
+                ':user_id' => $user_id
+            ]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
             return $result;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -95,12 +103,12 @@ class Order extends Model
             return [];
         }
         try {
-            $stmt = $this->connect->prepare("SELECT * FROM $this->table WHERE order_id =:order_id");
+            $stmt = $this->connect->prepare("SELECT id FROM $this->table WHERE order_id =:order_id");
             $stmt->setAttribute(PDO::FETCH_OBJ);
             $stmt->execute([
                 ":order_id" => $order_id
             ]);
-            $stmt->fetch();
+            $stmt->fetchColumn();
             return $stmt;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -118,10 +126,9 @@ class Order extends Model
         try {
             $stmt = $this->connect->prepare("DELETE FROM $this->table WHERE order_id=:order_id");
             $stmt->execute([
-                ':order_id'=>$order_id
+                ':order_id' => $order_id
             ]);
             return $stmt->rowCount();
-
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return [];

@@ -23,10 +23,7 @@
     border: 1px solid #D8BEBE; 
     margin-left: 20px;
 }
-/* #checkout-infor-order
-.table-hover{
-    margin-top: 15px;
-} */
+
 .checkout-infor-order-title, .checkout-infor-user-title{
     margin-top: 15px;
     color: #ED4D2D;
