@@ -24,13 +24,13 @@
                         $totalAll += $total;
                     ?>
                         <tr>
-                            <td><?php echo $stt ?></td>
+                            <td><?php echo $stt+1 ?></td>
                             <td><?php echo $item[1] ?> </td>
                             <td><img src='<?php echo $item[2] ?>' alt='' style="width:50px;height:40px;"></td>
                             <td><?php echo $item[4] ?></td>
                             <td><?php echo $item[3] ?></td>
                             <td><?php echo $total ?></td>
-                            <td><a href="<?php echo ROOT_URL . '/user/deleteItem/&id=' . $stt ?>"><i class='fa-solid fa-trash'></i></a></td>
+                            <td><a href="<?php echo ROOT_URL . '/user/deleteItem&id=' . $stt ?>"><i class='fa-solid fa-trash'></i></a></td>
                         </tr>
                         <?php $stt++;     ?>
                     <?php

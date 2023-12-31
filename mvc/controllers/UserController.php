@@ -92,6 +92,7 @@ class UserController
                 $_SESSION['cart'][] = $item;
             }
         }
+        // header('location:../product/index');
         view('user-profile/shoppingcart');
     }
     public function deleteItem()
@@ -100,5 +101,6 @@ class UserController
             array_splice($_SESSION['cart'], $_GET['id'],1);
             view('user-profile/shoppingcart');
         }
-    }
+    
+}
 }

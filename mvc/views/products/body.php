@@ -26,7 +26,9 @@
                     <form action="<?php echo ROOT_URL . '/user/shoppingCart' ?>" method="post">
                         <div class="col-sm-4" style="padding-bottom: 20px;">
                             <div class="card card-product">
-                                <img src="<?php echo $product['image_url'] ?>" class="card-image" alt="..." style="background-image: linear-gradient(#9FCBF4, #EAD8FC);">
+                                <a href="<?php echo ROOT_URL . '/Product/show&id=' . $product['id'] ?>">
+                                    <img src="<?php echo $product['image_url'] ?>" class="card-image" alt="..." style="background-image: linear-gradient(#9FCBF4, #EAD8FC);">
+                                </a>
                                 <div class="card-body">
                                     <h4 class="card-title" style="color: black;"><?php echo $product['product_name'] ?></h4>
                                     <br>
@@ -49,7 +51,7 @@
                                     <button type="button" class="btn btn-light btn-light-buynow"><a href="#!">Buy Now</a></button>
                                 </div>
                                 <div>
-                                    <input type="hidden" name="PId" value="<?php  echo  $product['id'] ?>">
+                                    <input type="hidden" name="PId" value="<?php echo  $product['id'] ?>">
                                     <input type='hidden' name='PName' value="<?php echo $product['product_name'] ?>">
                                     <input type='hidden' name='Image' value=" <?php echo $product['image_url'] ?>">
                                     <input type='hidden' name='PPrice' value=" <?php echo $product['price'] ?>">
@@ -71,7 +73,9 @@
                     <form action="<?php echo ROOT_URL . '/user/shoppingCart' ?>" method="post">
                         <div class="col-sm-4" style="padding-bottom: 20px;  ">
                             <div class="card card-product">
-                                <img src="<?php echo $product['image_url'] ?>" class="card-image" alt="..." style="background-image: linear-gradient(#9FCBF4, #EAD8FC);">
+                                <a href="<?php echo ROOT_URL . '/Product/show&id=' . $product['id'] ?>">
+                                    <img src="<?php echo $product['image_url'] ?>" class="card-image" alt="..." style="background-image: linear-gradient(#9FCBF4, #EAD8FC);">
+                                </a>
                                 <div class="card-body">
                                     <h4 class="card-title" style="color: black;"><?php echo $product['product_name'] ?></h4>
                                     <br>

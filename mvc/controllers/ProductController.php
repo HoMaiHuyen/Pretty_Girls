@@ -11,12 +11,15 @@ class ProductController
         view('products/index', compact('products'));
     }
     public function show($params){
-        $id = $params[0];
+        if(isset($_GET['id'])&&($_GET['id']>-0)){
+            $id=$_GET['id'];
+    //   $id = $params[0];
         $productModel = new Product();
         $products = $productModel->getAllProduct();
         $product = $productModel->getOne($id);
         view('products/show', compact('product','products'));   
     }
+}
     public  function search($keyword){
         $search_key="";
         $keyword = isset($_POST['key']) ? htmlspecialchars($_POST['key']) : '';
