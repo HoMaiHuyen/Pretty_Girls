@@ -130,4 +130,9 @@ class AuthController
             }
         }
     }
+    public function logout(){
+           unset($_SESSION['user_id']);
+            header("Location: " . $_ENV['ROOT_URL'] . "/auth/login");
+
+    }
 }

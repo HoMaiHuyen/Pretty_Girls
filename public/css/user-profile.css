@@ -69,6 +69,7 @@
 .card-profile form {
   border-radius: 20px;
 }
+
 .orther-page{
   margin: 0;
   padding: 0;
@@ -83,7 +84,7 @@
   text-align: center;
   margin: 10px;
   border: 1px solid #ccc;
-  max-width: 400px;
+  max-width: 300px;
 }
 #profile{
     margin-top: 20px;

@@ -7,7 +7,7 @@
     width: 35% ;
     height: 30rem;   
     border-radius: 20px;
-    margin-left: 10%;
+    margin-left: 12%;
     border: 1px solid #D8BEBE;   
     background: #F4FAFD;
 }
@@ -21,10 +21,23 @@
     height: 30rem;
     border-radius: 20px;
     border: 1px solid #D8BEBE; 
-    margin-left: 20px;
+    margin-left: 25px;
 }
 
 .checkout-infor-order-title, .checkout-infor-user-title{
     margin-top: 15px;
     color: #ED4D2D;
+}
+
+#checkout-infor-order {
+    position: relative;
+}
+
+.checkout-button-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+
+    
 }

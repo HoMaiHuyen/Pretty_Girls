@@ -2,6 +2,9 @@
 require_once dirname(__DIR__) . "/core/functions.php";
 require_once dirname(__DIR__) . "/models/Order.php";
 require_once dirname(__DIR__) . "/models/User.php";
+require_once dirname(__DIR__) . "/models/OrderItem.php";
+
+
 class CheckoutController
 {
   function index($params)
@@ -9,8 +12,8 @@ class CheckoutController
     $id = $params[0];
     $user = new User();
     $orderModer = new Order();
-    $result = $user->getOneUser($id);   
-    $orders = $orderModer->getOrdersByUserId($id);   
+    $result = $user->getOneUser($id);
+    $orders = $orderModer->getOrdersByUserId($id);
     view('user-profile/index', compact('result'));
   }
 
@@ -37,28 +40,33 @@ class CheckoutController
       }
     }
   }
+  public function viewOrder($user_id)
+  {
 
-  public function viewOrder(){
+    $user_id = $_SESSION['user_id'];
 
+    $user = new User();
+    $result = $user->getOneUser($user_id);
+    $orders = $user->getOrders($user_id);
+
+    if ($orders) {
+      view('user-profile/order-page',compact('orders'));
+    }
   }
+
   public function orderItem($order_id)
-{
-   
-            $orderModel = new Order();
-            $orderDetails = $orderModel->findOrder($order_id);
+  {
+    $order_id = isset($_GET['id']) ? $_GET['id'] : '';
+    $orderModel = new Order();
+    $orderModel->findOrder($order_id);
 
-            $productModel = new Product();
-            $orderItemModel = new OrderItem();
-            $orderItems = $orderItemModel->inforOrderItem($order_id);
-
-            if (empty($orderDetails) || empty($orderItems)) {
-                header('Location:' . $_ENV['ROOT_URL'] . '/shoppinCart/index');
-                exit(); 
-            }
-            view('user-profile/profile', compact('orderDetails', 'orderItems'));
-        } 
-       }
-
-
-
-
+    $orderItemModel = new OrderItem();
+    $orderItems = $orderItemModel->inforOrderItem($order_id);
+  print_r($orderItems);
+    if (empty($orderDetails) || empty($orderItems)) {
+      header('Location:' . $_ENV['ROOT_URL'] . '/checkout/viewOrder');
+      exit();
+    }
+    view('user-profile/profile', compact('orderDetails', 'orderItems'));
+  }
+}

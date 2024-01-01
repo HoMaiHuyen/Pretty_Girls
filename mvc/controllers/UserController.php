@@ -2,41 +2,40 @@
 require_once  dirname(__DIR__) . "/core/Middlewares/AuthMiddleware.php";
 require_once dirname(__DIR__) . "/models/User.php";
 require_once dirname(__DIR__) . "/core/functions.php";
+require_once dirname(__DIR__) . "/models/Order.php";
+require_once dirname(__DIR__) . "/models/OrderItem.php";
 class UserController
-{   
+{
     public function __construct()
     {
-        $authMiddleware= new AuthMiddleware();
-
+        $authMiddleware = new AuthMiddleware();
     }
     public function index()
     {
-        view('user-profile/profile', null);
+        view('user-profile/index', null);
     }
-   
+
 
     public function show()
     {
-  
+
         $user_id = $_SESSION['user_id'];
 
-  
-            $user = new User();
-            $result = $user->getOneUser($user_id);
-            $orders = $user->getOrders($user_id);
 
-            if ($result) {
-                view(
-                    'user-profile/profile',
-                    compact(
-                        'result',
-                        'orders'
-                    )
-                );
-            } 
-      
+        $user = new User();
+        $result = $user->getOneUser($user_id);
+
+
+        if ($result) {
+            view(
+                'user-profile/index',
+                compact(
+                    'result'
+                )
+            );
+        }
     }
-    
+
     public function updateUser()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -70,37 +69,43 @@ class UserController
             $name = $_POST['PName'];
             $image = $_POST['Image'];
             $price = $_POST['PPrice'];
-            if(isset($_POST['PQuantity']) && $_POST['PQuantity']>0 ){
-                $qty=$_POST['PQuantity'];
-            }
-            else{
-                $qty=1;
+            if (isset($_POST['PQuantity']) && $_POST['PQuantity'] > 0) {
+                $qty = $_POST['PQuantity'];
+            } else {
+                $qty = 1;
             }
             $flag = 0;
-            $i = 0;
-            foreach ($_SESSION['cart'] as $item) {
-                if ($item[0] == $id) {
-                    $newqty = $qty + $item[4];
-                    $_SESSION['cart'][$i][4] = $newqty;
+            foreach ($_SESSION['cart'] as $key => $item) {
+                if ($item['product_id'] == $id) {
+                    $newqty = $qty + $item['quantity'];
+                    $_SESSION['cart'][$key]['quantity'] = $newqty;
                     $flag = 1;
                     break;
                 }
-                $i++;
             }
             if ($flag == 0) {
-                $item = array($id, $name, $image, $price, $qty);
+                $item = array('product_id' => $id, 'product_name' => $name, 'image_url' => $image, 'price' => $price, 'quantity' => $qty);
                 $_SESSION['cart'][] = $item;
             }
+             header('Location:'. $_ENV['ROOT_URL'].'/Product/index');
         }
-        // header('location:../product/index');
         view('user-profile/shoppingcart');
     }
     public function deleteItem()
     {
         if (isset($_GET['id']) && ($_GET['id'] >= 0)) {
-            array_splice($_SESSION['cart'], $_GET['id'],1);
+            array_splice($_SESSION['cart'], $_GET['id'], 1);
             view('user-profile/shoppingcart');
         }
-    
-}
+    }
+
+    public function checkout()
+    {
+        $_SESSION['cart'];
+        $user_id = $_SESSION['user_id'];
+        $userModel = new User();
+        $user = $userModel->getOneUser($user_id);;
+        view('user-profile/checkout-page', compact('user'));
+    }
+    public function checkouted 
 }

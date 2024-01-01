@@ -1,10 +1,11 @@
 <?php require_once dirname(__DIR__) . "/partials/header.php"; ?>
+<section class="shoppingcart-page">
 <form action="" method=" ">
-    <?php if (count($_SESSION['cart']) > 0) { ?>
+    <?php if (isset($_SESSION['cart'])) { ?>
         <div class="container">
-            <table class="table table-bordered">
+            <table class="table table-bordered mt-4">
                 <thead>
-                    <tr>
+                    <tr class="h">
                         <th>STT</th>
                         <th>Product Name</th>
                         <th>Image</th>
@@ -19,16 +20,16 @@
                     $total = 0;
                     $stt = 0;
                     $totalAll = 0;
-                    foreach ($_SESSION['cart'] as  $item) {
-                        $total = $item[4] * $item[3];
+                    foreach ($_SESSION['cart'] as $key => $item) {
+                        $total = $item['price'] * $item['quantity'];
                         $totalAll += $total;
                     ?>
                         <tr>
                             <td><?php echo $stt+1 ?></td>
-                            <td><?php echo $item[1] ?> </td>
-                            <td><img src='<?php echo $item[2] ?>' alt='' style="width:50px;height:40px;"></td>
-                            <td><?php echo $item[4] ?></td>
-                            <td><?php echo $item[3] ?></td>
+                            <td><?php echo $item['product_name'] ?> </td>
+                            <td><img src='<?php echo $item['image_url'] ?>' alt='' style="width:150px;height:140px;"></td>
+                            <td><?php echo $item['quantity'] ?></td>
+                            <td><?php echo $item['price'] ?></td>
                             <td><?php echo $total ?></td>
                             <td><a href="<?php echo ROOT_URL . '/user/deleteItem&id=' . $stt ?>"><i class='fa-solid fa-trash'></i></a></td>
                         </tr>
@@ -51,7 +52,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button type="submit" name="" class="btn btn-light btn-light-checkout">Checkout</button>
+                <a class="btn btn-primary" href="<?php echo ROOT_URL . '/User/checkout' ?>" style="width: 100px;">Checkout</a>
             </div>
         </div>
     <?php } else {
@@ -59,4 +60,5 @@
     }
     ?>
 </form>
+</section>
 <?php require_once dirname(__DIR__) . "/partials/footer.php"; ?>

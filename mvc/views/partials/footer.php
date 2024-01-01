@@ -1,4 +1,5 @@
-<div class="container-fluid mb-0 " style="padding: 0;" id="footer">
+</main>
+<div class="container-fluid mb-0  mt-4" style="padding: 0;" id="footer">
     <footer class="text-center text-lg-start text-white" style="background-color: #000;   box-shadow: 0px -5px 15px 0px rgba(0, 0, 0, 0.75);" id="main-footer">
         <section class="p-md-2">
             <div class="container text-center text-md-start mt-5">

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/about-us.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/checkout-page.css' ?>">
     <title>Blue Cosmetic</title>
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 </head>
 
@@ -42,6 +43,7 @@
         </div>
         <div class="icon-nav">
             <div class="item1">
+             <?php isset($_SESSION['user_id'])?>
                 <a href="<?php echo ROOT_URL .'/user/shoppingCart'?>"><i class="fa-solid fa-cart-shopping"></i></a>
             </div>
          
@@ -54,9 +56,10 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="<?php echo ROOT_URL . '/auth/register' ?>">Register</a></li>
                 <li><a class="dropdown-item" href="<?php echo ROOT_URL . '/auth/login' ?>">Login</a></li>
-                <li><a class="dropdown-item" href="#">Logout</a></li>
+                <li><a class="dropdown-item" href="<?php echo ROOT_URL . '/auth/logout' ?>">Logout</a></li>
                 <li><a class="dropdown-item" href="<?php echo ROOT_URL . '/User/show?session_id=' . 'session_id' ?>">Profile</a></li>
             </ul>
         </div>
 
     </header>
+<main  style="min-height: 550px;">

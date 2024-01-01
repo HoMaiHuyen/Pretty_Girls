@@ -1,17 +1,8 @@
 <?php 
-session_start();
 require_once dirname(__DIR__) . "/partials/header.php";
-$cart = array(
-    array('name'=>'San pham 1', 'id'=> 1, 'price'=> 35000),
-    array('name'=>'San pham 2', 'id'=> 2, 'price'=> 30000),
-    array('name'=>'San pham 3', 'id'=> 3, 'price'=> 36000),
-    array('name'=>'San pham 4', 'id'=> 4, 'price'=> 30000),
-);
-$_SESSION['cart']=$cart;
-$_SESSION['id']=1;
-$carts =$_SESSION['cart'];
+$carts = $_SESSION['cart'];
 $total_price=0;
-if(isset($cart)) :
+if(isset($carts)) :
 ?>
 <section>
     <div class="container-fluid">
@@ -19,7 +10,7 @@ if(isset($cart)) :
             <div class="row mt-5 checkout-page">
                 <div class="col-md-7" id="checkout-infor-user">
                     <h2 class="checkout-infor-user-title">Thông tin thanh toán</h2>
-                    <?php foreach($result as $user) ?>
+                    <?php foreach($user as $user) ?>
                     <div class="checkout-form">
                         <div class="mb-3">
                             <label for="name" class="form-label"></label>
@@ -52,16 +43,18 @@ if(isset($cart)) :
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($carts as $cart) :  ?>
-                                <tr>
-                                    <th scope="row"><?php echo $cart['name'] ?></th>
-                                    <td><?php echo $cart['name'] ?></td>
-                                    <td><?php echo $cart['price'] ?></td>
-                                    <?php
-                                    $total_price += $cart['price'];
+                                   <?php foreach($_SESSION['cart'] as $key => $item) :?>
+                                        <tr>
+                                                <th scope="row"><?php echo  $item['product_name']; ; ?></th>
+                                                <td><?php echo $item['quantity']; ?></td>
+                                                <td><?php echo $item['price']?></td>
+                                                 <?php
+                                                    $total_price += $item['price'];        
                                     ?>
-                                </tr>
-                                <?php endforeach; ?>
+                                     
+                                        </tr>
+
+                                <?php endforeach?>
                                 <tr>
                                     <th colspan="2">Tổng cộng</th>
                                     <td><?php echo  $total_price ?></td>
@@ -69,7 +62,7 @@ if(isset($cart)) :
                             </tbody>
                         </table>
                         <div class="form-group">
-                            <input type="hidden" name="total_price" value="<?= $total_price; ?>">
+                            <input type="hidden" name="total_price" value="<?= $_SESSION['user_id']; ?>">
                         </div>
                     </div>
                     <div class="payment-options pl-4">

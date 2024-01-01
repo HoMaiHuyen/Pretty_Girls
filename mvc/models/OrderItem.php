@@ -71,14 +71,17 @@ class OrderItem extends Model
         }
 
         try {
-            $stmt = $this->connect->prepare("SELECT $this->table.order_id AS order_id, $this->table.quantity AS quantity, products.price  AS unit_price, products.id AS product_id, products.product_name AS product_name
+            $sql = ("SELECT order_items.order_id AS order_id, $this->table.quantity AS quantity,
+             products.price  AS unit_price, products.id AS product_id, products.product_name AS product_name
                                         FROM $this->table
-                                        JOIN products ON products.id = $this->table.product_id
-                                        JOIN orders ON orders.id = $this->table.order_detail_id
-                                        WHERE $this->table.order_id = :order_id");
+                                        JOIN products ON products.id =order_items.product_id
+                                        JOIN orders ON orders.id = order_items.order_id
+                                        WHERE order_items.order_id = :order_id");
 
-            $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);                            
-            $stmt->execute();
+            $stmt = $this->connect->prepare($sql);                           
+            $stmt->execute([
+                ':order_id'=>$order_id
+            ]);
             $result = $stmt->fetch();
             return $result;
         } catch (Exception $e) {
