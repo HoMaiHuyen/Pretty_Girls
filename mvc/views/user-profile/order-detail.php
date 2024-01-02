@@ -17,12 +17,7 @@
 <?php endforeach ?>
 </div>
 </section>
-<section>
-<div>
-    
-</div>
 
-</section>
 
 
 
