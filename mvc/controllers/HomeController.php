@@ -13,5 +13,8 @@
         function AboutUs($page){
             view('about-us/about-us', compact($page));
         }
+        function admin(){
+            view('admin/index');
+        }
     }
 ?>
