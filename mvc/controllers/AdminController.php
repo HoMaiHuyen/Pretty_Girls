@@ -8,41 +8,88 @@ class AdminController
         // Tạo đối tượng model
         $user = new User();
 
-        // Gọi phương thức getAllUsers() trong model
-        $users = $user->getAllUsers();
-
-        if ($users) {
-            // Truyền dữ liệu $users vào view
-            view("crudUser/index", ['users' => $users]);
-        }
+        // Gọi phương thức getAll() trong model
+        $users = $user->getAll();
+        view("crudUser/index", compact('users'));
     }
-    public function deleteUser($id)
+
+    public function delete()
     {
-        // deleteUser.php
-        // Kiểm tra xem đã truyền id vào hay chưa
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        $data = [];
 
-            // Tạo đối tượng model
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
             $userModel = new User();
+            $user = $userModel->getOneUser($id);
 
-            // Gọi phương thức deleteUser() trong model để xóa người dùng
-            $result = $userModel->deleteUser($id);
+            if ($user) {
+                $result = $userModel->deleteUser($id);
+                if ($result) {
+                    $data['success'] = 'User has been deleted';
+                } else {
+                    $data['error'] = 'Failed to delete user';
+                }
+            }
+        }
+
+        // Lấy lại danh sách người dùng sau khi xóa
+        $users = $userModel->getAll();
+        $data['users'] = $users;
+        view('crudUser/index', compact($data));
+    }
+
+    // public function update()
+    // {
+    //     $userModel = new User();
+    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //         $id = $_POST['id'];
+    //         $user_name = $_POST['user_name'];
+    //         $phone = $_POST['phone'];
+    //         $email = $_POST['email'];
+    //         $address = $_POST['address'];
+    //         $password = $_POST['password'];
+
+    //         $result = $userModel->updateUser($id, $user_name, $phone, $email, $address, $password);
+
+    //         if ($result) {
+    //             $success = "User updated successfully.";
+    //             // Redirect or show success message
+    //         } else {
+    //             $error = "Failed to update user.";
+    //             // Show error message
+    //         }
+    //     }
+    //     view('crudUser/update', compact('result'));
+    // }
+
+    public function update()
+    {
+        $userModel = new User();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+            $user_name = $_POST['user_name'];
+            $phone = $_POST['phone'];
+            $email = $_POST['email'];
+            $address = $_POST['address'];
+            $password = $_POST['password'];
+
+            $result = $userModel->updateUser(
+                $id,
+                $user_name,
+                $phone,
+                $email,
+                $address,
+                $password
+            );
 
             if ($result) {
-                // Xử lý thành công
-                // Ví dụ: chuyển hướng đến trang danh sách người dùng
-                // header("Location: userList.php");
-                view("crusUser/index");
-                exit();
+                $success = "User updated successfully.";
+                // Redirect or show success message
             } else {
-                // Xử lý lỗi
-                // Ví dụ: hiển thị thông báo lỗi
-                echo "Failed to delete user.";
+                $error = "Failed to update user.";
+                // Show error message
             }
-        } else {
-            // Xử lý lỗi nếu không có id được truyền vào
-            echo "Invalid user id.";
         }
+        view('crudUser/update', compact($result));
     }
 }

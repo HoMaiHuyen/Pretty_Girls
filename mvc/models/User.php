@@ -61,7 +61,6 @@ class User extends Model
             $stmt->bindParam(':address', $address);
             $stmt->bindParam(':password', $password);
             $stmt->execute();
-
             $result = $stmt->rowCount();
             return $result;
         } catch (PDOException $e) {
@@ -115,58 +114,20 @@ class User extends Model
         }
     }
 
-    // Delete user
-    // Model
     public function deleteUser($id)
     {
         if (!$this->connect) {
-            return false;
+            return [];
         }
         try {
-            $stmt = $this->connect->prepare("DELETE FROM users WHERE id=:id");
-            $stmt->bindParam(':id', $id);
+            $stmt = $this->connect->prepare("DELETE FROM users WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
-            $result = $stmt->rowCount();
-            return $result;
+            $rowCount = $stmt->rowCount();
+            return $rowCount;
         } catch (PDOException $e) {
             error_log("Error deleting user: " . $e->getMessage());
             return false;
-        }
-    }
-
-
-
-
-    public function getAllUsers()
-    {
-        if (!$this->connect) {
-            return []; // or return false; depending on how you handle errors
-        }
-
-        try {
-            $sql = "SELECT * FROM users";
-            $stmt = $this->connect->prepare($sql);
-            $stmt->execute();
-
-            $usersHtml = '';
-
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $usersHtml .= '<tr>';
-                $usersHtml .= '<td>' . $row["id"] . '</td>';
-                $usersHtml .= '<td>' . $row["user_name"] . '</td>';
-                $usersHtml .= '<td>' . $row["phone"] . '</td>';
-                $usersHtml .= '<td>' . $row["address"] . '</td>';
-                $usersHtml .= '<td>' . $row["email"] . '</td>';
-                $usersHtml .= '<td>';
-                $usersHtml .= '<a href="edit.php?id=' . $row["id"] . '" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>';
-                $usersHtml .= '<a href="delete.php?id=' . $row["id"] . '" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>';
-                $usersHtml .= '</td>';
-                $usersHtml .= '</tr>';
-            }
-
-            return $usersHtml;
-        } catch (PDOException $e) {
-            echo "Failed: " . $e->getMessage();
         }
     }
 }
