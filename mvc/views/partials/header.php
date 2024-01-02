@@ -41,8 +41,7 @@
         </div>
         <div class="icon-nav">
             <div class="item1">
-
-                <a href="<?php echo ROOT_URL .'/Product/shoppingcart'?>"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="<?php echo ROOT_URL .'/user/shoppingCart'?>"><i class="fa-solid fa-cart-shopping"></i></a>
             </div>
          
             <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
