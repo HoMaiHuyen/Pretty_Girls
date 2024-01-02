@@ -1,4 +1,4 @@
-<?
+<?php
 require_once "Model.php";
 
 class OrderStatus extends Model
@@ -10,15 +10,21 @@ class OrderStatus extends Model
             return [];
         }
         try {
-            $stmt = $this->connect->prepare("SELECT * FROM $this->table WHERE id=:order_id");
-            $stmt->setFetchMode(PDO::FETCH_OBJ);
+            $stmt = $this->connect->prepare("SELECT * FROM $this->table WHERE id=:order_status_id");
+    
             $stmt->execute([
-                ':id'=>$order_status_id
+                ':order_status_id'=>$order_status_id
             ]);
-            $stmt ->fetch();
-            return $stmt;
+            $result=  $stmt ->fetch(PDO::FETCH_ASSOC);
+            if ($result !== false) {
+                return $result;
+            } else {
+                return []; // Trả về mảng rỗng nếu không có dữ liệu
+            }
+           
         }catch(Exception $e){
             $e->getMessage();
         }
+        $this->closeConnection();
     }
 }

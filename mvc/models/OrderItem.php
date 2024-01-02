@@ -2,7 +2,7 @@
 class OrderItem extends Model
 {
     protected $table = "order_items";
-   
+
 
 
     public  function getForOrder($order_id)
@@ -27,8 +27,8 @@ class OrderItem extends Model
             return [];
         }
         try {
-            $stmt = $this->connect->prepare("INSERT INTO $this->table (order_id,product_id, quantity ,price, image_url )
-            VALUES (:order_id, :product_id, :quantity, :price, :image_url) ON DUPLICATE KEY UPDATE quantity+=quantity ");
+            $stmt = $this->connect->prepare("INSERT INTO $this->table (order_id, product_id, quantity, unit_price, image_url)
+            VALUES (:order_id, :product_id, :quantity, :price, :image_url)");           
             $stmt->bindParam(':order_id', $order_id);
             $stmt->bindParam(':product_id', $product_id);
             $stmt->bindParam(':quantity', $quantity);
@@ -37,7 +37,8 @@ class OrderItem extends Model
             $stmt->execute();
             return $stmt->rowCount();
         } catch (Exception $e) {
-            $e->getMessage();
+           
+            return 0;
         }
     }
 
@@ -50,15 +51,14 @@ class OrderItem extends Model
             $stmt = $this->connect->prepare("SELECT order_id FROM $this->table WHERE order_id=:order_id");
             $stmt->execute([
                 ':order_id' => $order_id
-            ]);          
-            $result= $stmt->fetchColumn();
+            ]);
+            $result = $stmt->fetchColumn();
 
-            if ($result !== false) {      
-            return $result;
-        } else {
-            return null;
-        }
-
+            if ($result !== false) {
+                return $result;
+            } else {
+                return null;
+            }
         } catch (Exception $e) {
             $e->getMessage();
         }
@@ -71,23 +71,22 @@ class OrderItem extends Model
         }
 
         try {
-            $sql = ("SELECT order_items.order_id AS order_id, $this->table.quantity AS quantity,
-             products.price  AS unit_price, products.id AS product_id, products.product_name AS product_name
-                                        FROM $this->table
-                                        JOIN products ON products.id =order_items.product_id
-                                        JOIN orders ON orders.id = order_items.order_id
-                                        WHERE order_items.order_id = :order_id");
+            $sql = ("SELECT order_items.order_id AS order_id, order_items.quantity AS quantity,
+                products.price  AS unit_price, products.id AS product_id,
+                products.product_name AS product_name
+                FROM $this->table
+                JOIN products ON products.id = order_items.product_id
+                JOIN orders ON orders.id = order_items.order_id
+                WHERE order_items.order_id = :order_id");
 
-            $stmt = $this->connect->prepare($sql);                           
-            $stmt->execute([
-                ':order_id'=>$order_id
-            ]);
-            $result = $stmt->fetch();
+            $stmt = $this->connect->prepare($sql);
+            $stmt->execute([':order_id' => $order_id]);
+
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         } catch (Exception $e) {
             error_log($e->getMessage());
             throw $e;
         }
     }
-
 }

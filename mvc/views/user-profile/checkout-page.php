@@ -2,11 +2,12 @@
 require_once dirname(__DIR__) . "/partials/header.php";
 $carts = $_SESSION['cart'];
 $total_price=0;
+$product =[];
 if(isset($carts)) :
 ?>
 <section>
     <div class="container-fluid">
-        <form action="<?php echo ROOT_URL .'/Checkout/makeOrder'?>" method="post">
+        <form action="<?php echo ROOT_URL .'/user/checkouted'?>" method="post">
             <div class="row mt-5 checkout-page">
                 <div class="col-md-7" id="checkout-infor-user">
                     <h2 class="checkout-infor-user-title">Thông tin thanh toán</h2>
@@ -49,12 +50,16 @@ if(isset($carts)) :
                                                 <td><?php echo $item['quantity']; ?></td>
                                                 <td><?php echo $item['price']?></td>
                                                  <?php
-                                                    $total_price += $item['price'];        
+                                                    $total_price += $item['price'];   
+                                                    $product=array('product_id'=>$item['product_id'],'quantity'=>$item['quantity'] );   
+                                                     
                                     ?>
-                                     
-                                        </tr>
 
-                                <?php endforeach?>
+                                        </tr>   
+
+                                <?php endforeach ;
+                                ?>
+                                
                                 <tr>
                                     <th colspan="2">Tổng cộng</th>
                                     <td><?php echo  $total_price ?></td>
@@ -62,7 +67,9 @@ if(isset($carts)) :
                             </tbody>
                         </table>
                         <div class="form-group">
-                            <input type="hidden" name="total_price" value="<?= $_SESSION['user_id']; ?>">
+                           
+                            <input type="hidden" name="total_price" value="<?=  $total_price  ?>">
+                            <input type="hidden" name="order_status_id"  value="1">
                         </div>
                     </div>
                     <div class="payment-options pl-4">

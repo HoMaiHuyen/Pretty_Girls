@@ -43,7 +43,7 @@
         </div>
         <div class="icon-nav">
             <div class="item1">
-             <?php isset($_SESSION['user_id'])?>
+             
                 <a href="<?php echo ROOT_URL .'/user/shoppingCart'?>"><i class="fa-solid fa-cart-shopping"></i></a>
             </div>
          

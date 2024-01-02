@@ -34,4 +34,5 @@ class ProductController
         }
         view('products/search', compact('searchResult', 'keyword','search_key'));
     }
+   
 }

@@ -4,6 +4,8 @@ require_once dirname(__DIR__) . "/models/User.php";
 require_once dirname(__DIR__) . "/core/functions.php";
 require_once dirname(__DIR__) . "/models/Order.php";
 require_once dirname(__DIR__) . "/models/OrderItem.php";
+require_once dirname(__DIR__) . "/models/OrderStatus.php";
+
 class UserController
 {
     public function __construct()
@@ -87,10 +89,11 @@ class UserController
                 $item = array('product_id' => $id, 'product_name' => $name, 'image_url' => $image, 'price' => $price, 'quantity' => $qty);
                 $_SESSION['cart'][] = $item;
             }
-             header('Location:'. $_ENV['ROOT_URL'].'/Product/index');
+            header('Location:' . $_ENV['ROOT_URL'] . '/Product/index');
         }
         view('user-profile/shoppingcart');
     }
+
     public function deleteItem()
     {
         if (isset($_GET['id']) && ($_GET['id'] >= 0)) {
@@ -99,6 +102,19 @@ class UserController
         }
     }
 
+    public function viewOrder($user_id)
+    {
+
+        $user_id = $_SESSION['user_id'];
+
+        $user = new User();
+        $result = $user->getOneUser($user_id);
+        $orders = $user->getOrders($user_id);
+
+        if ($orders) {
+            view('user-profile/order-page', compact('orders'));
+        }
+    }
     public function checkout()
     {
         $_SESSION['cart'];
@@ -107,5 +123,67 @@ class UserController
         $user = $userModel->getOneUser($user_id);;
         view('user-profile/checkout-page', compact('user'));
     }
-    public function checkouted 
+
+    public function checkouted()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $name = $_POST['name'] ?? '';
+            $phone = $_POST['phone'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $address = $_POST['address'] ?? '';
+
+            $order_status_id = $_POST['order_status_id'] ?? '';
+            $user_id = $_SESSION['user_id'] ?? '';
+            $payment = $_POST['payment'] ?? '';
+            $total_price = $_POST['total_price'] ?? '';
+
+            $current = new DateTime();
+            $currentFormated = $current->format('Y-m-d');
+
+            $order = new Order();
+            $order_id = $order->createOrder($user_id, $order_status_id, $currentFormated, $total_price, $payment);
+
+            if ($order_id) {
+                $order_item = new OrderItem();
+                $products = $_SESSION['cart'];
+
+                foreach ($products as $product) {
+                    $product_id = $product['product_id'];
+                    $product_image = $product['image_url'];
+                    $unit_price = $product['price'];
+                    $quantity = $product['quantity'];
+
+                    $order_item->createOrderItem($order_id, $product_id, $quantity, $unit_price, $product_image);
+                }
+            }
+
+            if (empty($result)) {
+                header('Location:' . $_ENV['ROOT_URL'] . '/User/show');
+                exit();
+            }
+            header('Location:' . $_ENV['ROOT_URL'] . '/User/show');
+        }
+    }
+
+    public function viewOrderItem()
+    {
+        $products = $_SESSION['cart'];
+        $order_itemModal = new OrderItem();
+        $order_id = $_GET['id'];
+        echo $order_id;
+        $message_error = '';
+
+        $order_item = $order_itemModal->inforOrderItem($order_id);
+        view('user-profile/order-detail', compact('order_item','products'));
+
+
+       
+    }
+    public function deleteOrder($order_id){
+        $order_id = $_GET['id'];
+        $orrder = new Order();
+        $orrder->delete($order_id);  
+        view('user-profile/order-page', compact(''));
+    }
 }

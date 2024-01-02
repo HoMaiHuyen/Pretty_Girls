@@ -26,7 +26,7 @@
                     ?>
                         <tr>
                             <td><?php echo $stt+1 ?></td>
-                            <td><?php echo $item['product_name'] ?> </td>
+                            <td><?php echo isset($item['product_name'])?$item['product_name'] : ""  ?> </td>
                             <td><img src='<?php echo $item['image_url'] ?>' alt='' style="width:150px;height:140px;"></td>
                             <td><?php echo $item['quantity'] ?></td>
                             <td><?php echo $item['price'] ?></td>
@@ -55,8 +55,12 @@
                 <a class="btn btn-primary" href="<?php echo ROOT_URL . '/User/checkout' ?>" style="width: 100px;">Checkout</a>
             </div>
         </div>
-    <?php } else {
-        header('Location:' . ROOT_URL. '/product/index');
+    <?php } else {?>
+      
+      <div> 
+      <h4>Đon hàng của bạn không có gì</h4>
+      </div>
+      <?php
     }
     ?>
 </form>

@@ -1,6 +1,5 @@
 <?php 
 require_once dirname(__DIR__) . "/partials/header.php";
-
 foreach($result as $user) :
 ?>
 <section>
@@ -73,7 +72,7 @@ foreach($result as $user) :
               </div>
           
               <div class="card col-md-3 mx-auto my-links">
-                <a href="<?php echo ROOT_URL . '/checkout/viewOrder?id='.$_SESSION['user_id'] ?>" class="text-center">
+                <a href="<?php echo ROOT_URL . '/user/viewOrder?id='.$_SESSION['user_id'] ?>" class="text-center">
                   <h2>Block 2</h2>
                   <p>View Order</p>
                 </a>
