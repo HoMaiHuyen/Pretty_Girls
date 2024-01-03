@@ -1,7 +1,9 @@
 <?php require_once dirname(__DIR__) . "/partials/header.php"; ?>
+ <?php if(isset($_SESSION['cart'])){
+        if (!$_SESSION['cart']==[]) { ?>
 <section class="shoppingcart-page">
     <form action="" method=" ">
-        <?php if (isset($_SESSION['cart'])) { ?>
+       
             <div class="container">
                 <table class="table table-bordered mt-4">
                     <thead>
@@ -55,7 +57,11 @@
                     <a class="btn btn-primary" href="<?php echo ROOT_URL . '/User/checkout' ?>" style="width: 100px;">Checkout</a>
                 </div>
             </div>
-        <?php } else { ?>
+    
+    </form>
+</section>
+     <?php      } }
+      else { ?>
 
             <div class="container-fluid">
                 <div class="row d-flex align-items-center justify-content-center">
@@ -65,13 +71,12 @@
                             <img src="https://vitatree.com.vn/tp/T0269/img/tmp/shopping-cart.svg" style="width: 320px; height: 300px;" alt="">
                         </div>
                           <h4 class="hover-effect">Currently your shopping cart is empty, please click the button to continue shopping</h4>
-                        <button type="button" class="btn btn-outline-success mt-4"><a href="#">Shopping</a></button>
+                        <button type="button" class="btn btn-outline-success mt-4"><a href="<?php echo ROOT_URL.'/Product/index'?>">Shopping</a></button>
                     </div>
                 </div>
             </div>
-        <?php
-        }
-        ?>
-    </form>
-</section>
-<?php require_once dirname(__DIR__) . "/partials/footer.php"; ?>
+<?php
+        }  ?>
+    
+ <?php 
+ require_once dirname(__DIR__) . "/partials/footer.php"; ?>

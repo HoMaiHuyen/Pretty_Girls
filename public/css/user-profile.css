@@ -9,6 +9,9 @@
   margin-left: 14%;
   padding: 10px;
 }
+.card-profile{
+  height: 75%;
+}
 #output{
   border: 1px solid #AAA7A7;
   border-radius: 50%;
@@ -25,7 +28,7 @@
 }
 .card-profile
 .form-group{
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
 .card-profile
 .form-control{
@@ -67,7 +70,8 @@
 }
 
 .card-profile form {
-  border-radius: 20px;
+  border-radius: 50px;
+  height: 75%;
 }
 /* 
 .orther-page{

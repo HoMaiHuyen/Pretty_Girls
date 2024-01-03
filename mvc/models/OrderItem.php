@@ -73,11 +73,11 @@ class OrderItem extends Model
         try {
             $sql = ("SELECT order_items.order_id AS order_id, order_items.quantity AS quantity,
                 products.price  AS unit_price, products.id AS product_id,
-                products.product_name AS product_name
+                products.product_name AS product_name , products.image_url AS image_url, orders.total_price AS total_price
                 FROM $this->table
                 JOIN products ON products.id = order_items.product_id
                 JOIN orders ON orders.id = order_items.order_id
-                WHERE order_items.order_id = :order_id");
+                WHERE order_items.order_id =:order_id");
 
             $stmt = $this->connect->prepare($sql);
             $stmt->execute([':order_id' => $order_id]);

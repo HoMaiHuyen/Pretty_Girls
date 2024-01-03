@@ -20,7 +20,7 @@ foreach($result as $user) :
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <div class="card card-profile">
+                    <div class="card card-profile" style="height: 95%;" >
                         <div class="card-body">
                             <form action="<?php echo ROOT_URL.'/User/updateUser' ?>" method="post">
                                 <input type="hidden" value="" name="id">
@@ -33,7 +33,7 @@ foreach($result as $user) :
                                 <div class="form-group row">
                                     <label for="email" class="col-sm-3 col-form-label">Email:</label>
                                     <div class="col-sm-9">
-                                        <input type="email" class="form-control" id="email" name="email" value="" placeholder="Example@example.com">
+                                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $user['email'] ?>" placeholder="Example@example.com">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -89,6 +89,8 @@ foreach($result as $user) :
           </div>
 
     </section>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
 </body>
 </html>

@@ -4,6 +4,8 @@ $carts = $_SESSION['cart'];
 $total_price=0;
 $product =[];
 if(isset($carts)) :
+if(!empty($message)) :
+
 ?>
 <section>
     <div class="container-fluid">
@@ -96,7 +98,7 @@ if(isset($carts)) :
     </div>
 </section>
 
-<?php endif ?>
+<?php endif; endif ?>
 </body>
 </html>
 

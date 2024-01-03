@@ -77,6 +77,7 @@ class UserController
                 $qty = 1;
             }
             $flag = 0;
+           
             foreach ($_SESSION['cart'] as $key => $item) {
                 if ($item['product_id'] == $id) {
                     $newqty = $qty + $item['quantity'];
@@ -120,8 +121,13 @@ class UserController
         $_SESSION['cart'];
         $user_id = $_SESSION['user_id'];
         $userModel = new User();
-        $user = $userModel->getOneUser($user_id);;
-        view('user-profile/checkout-page', compact('user'));
+        $user = $userModel->getOneUser($user_id);
+        $message='success';
+        if(!$user){
+            $message='failed';
+            view('user-profile/checkout-page', compact('user','message'));
+        }
+        view('user-profile/checkout-page', compact('user','message'));
     }
 
     public function checkouted()
@@ -156,8 +162,9 @@ class UserController
 
                     $order_item->createOrderItem($order_id, $product_id, $quantity, $unit_price, $product_image);
                 }
+                
             }
-
+           
             if (empty($result)) {
                 header('Location:' . $_ENV['ROOT_URL'] . '/User/show');
                 exit();
@@ -171,19 +178,18 @@ class UserController
         $products = $_SESSION['cart'];
         $order_itemModal = new OrderItem();
         $order_id = $_GET['id'];
-        echo $order_id;
         $message_error = '';
 
         $order_item = $order_itemModal->inforOrderItem($order_id);
         view('user-profile/order-detail', compact('order_item','products'));
-
-
        
     }
+    
     public function deleteOrder($order_id){
         $order_id = $_GET['id'];
         $orrder = new Order();
-        $orrder->delete($order_id);  
-        view('user-profile/order-page', compact(''));
+       $result= $orrder->delete($order_id);  
+       header('Location: '.$_ENV['ROOT_URL'].'/user/viewOrder');
+        view('user-profile/order-page');
     }
 }

@@ -98,7 +98,7 @@ class Order extends Model
             $stmt->bindParam(':payment_method', $payment_method);
 
             $stmt->execute();
-           $lastInsertId = $this->connect->lastInsertId();
+            $lastInsertId = $this->connect->lastInsertId();
             return $lastInsertId;
         } catch (PDOException $e) {
             // Log the error or throw a custom exception
@@ -116,13 +116,13 @@ class Order extends Model
             return [];
         }
         try {
-            $stmt = $this->connect->prepare("SELECT id FROM $this->table WHERE id =:order_id");
+            $stmt = $this->connect->prepare("SELECT * FROM $this->table WHERE id =:order_id");
 
             $stmt->execute([
                 ":order_id" => $order_id
             ]);
-            $stmt->fetchColumn();
-            return $stmt;
+            $result = $stmt->fetch();
+            return $result;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return [];
@@ -136,16 +136,21 @@ class Order extends Model
         if (!$this->connect) {
             return [];
         }
+
         try {
-            $stmt = $this->connect->prepare("DELETE FROM $this->table WHERE order_id=:order_id");
-            $stmt->execute([
+
+            $stmt = $this->connect->prepare("DELETE FROM $this->table WHERE id=:order_id");
+            $result = $stmt->execute([
                 ':order_id' => $order_id
             ]);
-            return $stmt->rowCount();
+
+            $result=   $stmt->rowCount();
+            return $result;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return [];
+        } finally {
+            $this->closeConnection();
         }
-        $stmt = $this->closeConnection();
     }
 }
