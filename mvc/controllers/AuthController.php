@@ -75,9 +75,7 @@ class AuthController
             //Insert vao database
             $user = new User();
             $user->createUser($name, $phone, $password, $email, $address, $confirm);
-            // echo "Sucssess";
 
-            // Send Email
             $mailService = new WelcomeMailService();
             $sendEmail = [
                 'email' => $email,
@@ -105,7 +103,7 @@ class AuthController
             if (!empty($email) && !empty($password)) {
                 $user = new User();
                 $data = $user->getOne($email);
-                // Xác thực thông tin đăng nhập
+             
                 if ($data) {
  
                     $hashedPassword = $data['password'];
@@ -113,7 +111,7 @@ class AuthController
                         // Bắt đầu session
                     
                         $_SESSION['user_id'] = $data['id'];
-                        // Chuyển hướng người dùng đến trang sau khi đăng nhập thành công
+                      
                         header("Location: " . $_ENV['ROOT_URL'] . "/Home/AboutUs");
                         exit();
                     } else {

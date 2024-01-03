@@ -38,6 +38,7 @@ class Order extends Model
         }
         $stmt = $this->closeConnection();
     }
+    
     public function getOrderInfo($orderId)
     {
         if (!$this->connect) {
@@ -116,12 +117,12 @@ class Order extends Model
             return [];
         }
         try {
-            $stmt = $this->connect->prepare("SELECT * FROM $this->table WHERE id =:order_id");
+            $stmt = $this->connect->prepare("SELECT id FROM $this->table WHERE id =:order_id");
 
             $stmt->execute([
                 ":order_id" => $order_id
             ]);
-            $result = $stmt->fetch();
+            $result = $stmt->fetchColumn();
             return $result;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();

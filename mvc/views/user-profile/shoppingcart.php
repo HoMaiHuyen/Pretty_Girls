@@ -38,7 +38,6 @@
                             <?php $stt++;     ?>
                         <?php
                         }
-
                         ?>
                     </tbody>
                 </table>

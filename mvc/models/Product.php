@@ -97,7 +97,7 @@ class Product extends Model
             return [];
         }
         try {
-            $stmt = $this->connect->prepare("UPDATE $this->table SET quantity =:quantity WHERE id=:product_id ");
+            $stmt = $this->connect->prepare("UPDATE $this->table SET quantity-=:quantity WHERE id=:product_id ");
             $stmt->bindParam(':id',$product_id );
             $stmt->bindParam(':quantity', $quantity);
             $stmt->execute();
