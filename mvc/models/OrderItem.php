@@ -71,7 +71,7 @@ class OrderItem extends Model
         }
 
         try {
-            $sql = ("SELECT order_items.order_id AS order_id, order_items.quantity AS quantity,
+            $sql = ("SELECT order_items.id AS id, order_items.order_id AS order_id, order_items.quantity AS quantity, orders.date AS date,
                 products.price  AS unit_price, products.id AS product_id,
                 products.product_name AS product_name , products.image_url AS image_url, orders.total_price AS total_price
                 FROM $this->table

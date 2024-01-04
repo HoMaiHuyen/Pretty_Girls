@@ -52,7 +52,7 @@ if(!empty($message)) :
                                                 <td><?php echo $item['quantity']; ?></td>
                                                 <td><?php echo $item['price']?></td>
                                                  <?php
-                                                    $total_price += $item['price'];   
+                                                    $total_price += $item['price']*$item['quantity'];   
                                                     $product=array('product_id'=>$item['product_id'],'quantity'=>$item['quantity'] );   
                                                      
                                     ?>

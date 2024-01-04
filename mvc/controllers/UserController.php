@@ -5,6 +5,8 @@ require_once dirname(__DIR__) . "/core/functions.php";
 require_once dirname(__DIR__) . "/models/Order.php";
 require_once dirname(__DIR__) . "/models/OrderItem.php";
 require_once dirname(__DIR__) . "/models/OrderStatus.php";
+require_once dirname(__DIR__) . "/models/Product.php";
+
 
 class UserController
 {
@@ -135,7 +137,7 @@ class UserController
             $phone = $_POST['phone'] ?? '';
             $email = $_POST['email'] ?? '';
             $address = $_POST['address'] ?? '';
-
+            $message = '';
             $order_status_id = $_POST['order_status_id'] ?? '';
             $user_id = $_SESSION['user']['user_id'] ?? '';
             $payment = $_POST['payment'] ?? '';
@@ -153,25 +155,43 @@ class UserController
             );
             $order = new Order();
             $order_id = $order->createOrder($user_id, $order_status_id, $currentFormated, $total_price, $payment);
+            $product = new Product();
+            $productModel = $_SESSION['cart'];
+            $qtyUpdate=0;
+           foreach($productModel as $products){
 
+                $quantityP= $products['quantity'];
+                $product_id =$products['product_id'];
+                $kq=  $product->getOne($product_id);
+                $ql= $kq['quantity'];
+              
+                $qtyUpdate = $ql - $quantityP;
+                $product->updateProduct($product_id, $qtyUpdate  ); 
+
+           }
             if ($order_id) {
                 $order_item = new OrderItem();
-                $products = $_SESSION['cart'];
+              
 
-                foreach ($products as $product) {
+                foreach ($productModel as $product) {
                     $product_id = $product['product_id'];
                     $product_image = $product['image_url'];
                     $unit_price = $product['price'];
                     $quantity = $product['quantity'];
 
                     $order_item->createOrderItem($order_id, $product_id, $quantity, $unit_price, $product_image);
+                    $message='success';
                 }
+                
             }
-            if (empty($result)) {
-                header('Location:' . $_ENV['ROOT_URL'] . '/User/show');
-                exit();
-            }
-            header('Location:' . $_ENV['ROOT_URL'] . '/User/show');
+           unset($_SESSION['cart']);
+           if($message=='success'){
+           echo 
+           '<script>confirm("Your order was successful\nCustomer name: ' . $name . '\nAddress: ' . $address . '\nPhone number: ' . $phone . '\nTotal price: ' . $total_price . '\nDate: '.$currentFormated .'");
+        window.location.href = "' . $_ENV['ROOT_URL'] . '/user/viewOrder";
+      </script>';
+
+           }
         }
     }
 
@@ -187,18 +207,35 @@ class UserController
 
         view('user-profile/order-page', compact('orders', 'userInfor'));
     }
-    public function deleteOrder($order_id)
-    {
-        $order_id = $_GET['id'];
-        $orrder = new Order();
-        $orrder->getOrderInfo($order_id);
-        $date = new DateTime();
+  public function deleteOrder($order_id)
+{
+    $order_id = $_GET['id'];
+    $orrder = new Order();
+    $result= $orrder->getOrderInfo($order_id);
+ $message = '';
+    if ($result) {
+        $created_at = new DateTime($result['created_at']);
 
+        $currentDateTime = new DateTime();
 
-        $orrder->delete($order_id);
-        header('Location: ' . $_ENV['ROOT_URL'] . '/user/viewOrder');
-        view('user-profile/order-page');
+        $interval = $created_at->diff($currentDateTime);
+
+        $timeThreshold = new DateInterval('PT12H');
+   
+        if ($interval->format('%s') > $timeThreshold->format('%s')) {
+
+            $message = 'failed';
+        } else {
+    
+            $orrder->delete($order_id);
+            $message = 'success';
+            view('user-profile/order-page', compact('message'));
+        }
+       //  header('Location: ' . $_ENV['ROOT_URL'] . '/user/viewOrder?message='. $message);
     }
+}
+
+
     public function updateInforOrder()
     {
         $message = '';
@@ -209,7 +246,7 @@ class UserController
         $user_id = $_SESSION['user']['user_id'];
         $order = new Order();
         $orderDetails = $order->getOrdersByUserId($user_id);
- 
+        print_r($orderDetails);
 
         if ($orderDetails) {
             $created_at = new DateTime($orderDetails['created_at']);

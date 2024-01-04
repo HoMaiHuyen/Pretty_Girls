@@ -41,7 +41,7 @@ class Order extends Model
         }
         try {
             $query = "SELECT orders.id as orderId, orders.user_id as userId ,  orders.date as Dates, orders.total_price as total_price,
-                    orders.payment_method as payment, order_status.status_name as status
+                    orders.payment_method as payment, order_status.status_name as status, orders.created_at
                     FROM orders
                     INNER JOIN order_status ON orders.order_status_id = order_status.id
                     INNER JOIN users ON orders.user_id = users.id
@@ -52,7 +52,7 @@ class Order extends Model
                 ':order_id' => $orderId,
 
             ]);
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $result;
         } catch (PDOException $e) {
@@ -97,7 +97,7 @@ class Order extends Model
             $lastInsertId = $this->connect->lastInsertId();
             return $lastInsertId;
         } catch (PDOException $e) {
-            // Log the error or throw a custom exception
+           
             error_log("Error creating order: " . $e->getMessage());
             return false;
         } finally {
