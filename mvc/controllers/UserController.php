@@ -6,6 +6,7 @@ require_once dirname(__DIR__) . "/models/Order.php";
 require_once dirname(__DIR__) . "/models/OrderItem.php";
 require_once dirname(__DIR__) . "/models/OrderStatus.php";
 require_once dirname(__DIR__) . "/models/Product.php";
+require_once dirname(__DIR__) . "/models/Shop.php";
 
 
 class UserController
@@ -68,6 +69,8 @@ class UserController
     
     public function shoppingCart()
     {
+        $shopModel = new Shop();
+        $resultShop = $shopModel->getShop();
         if (isset($_POST['addcart']) && ($_POST['addcart'])) {
             $id = $_POST['PId'];
             $name = $_POST['PName'];
@@ -94,7 +97,7 @@ class UserController
             }
             header('Location:' . $_ENV['ROOT_URL'] . '/Product/index');
         }
-        view('user-profile/shoppingcart');
+        view('user-profile/shoppingcart',compact('resultShop'));
     }
 
     public function deleteItem()
@@ -166,7 +169,7 @@ class UserController
                 $ql= $kq['quantity'];
               
                 $qtyUpdate = $ql - $quantityP;
-                $product->updateProduct($product_id, $qtyUpdate  ); 
+                $product->updateProductQ($product_id, $qtyUpdate  ); 
 
            }
             if ($order_id) {
