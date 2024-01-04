@@ -32,7 +32,6 @@
         </div>
     </form>
 </section>
-
 <section>
     <div class="container">
         <div class="row">
