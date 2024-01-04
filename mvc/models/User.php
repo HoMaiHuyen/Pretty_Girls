@@ -45,23 +45,20 @@ class User extends Model
         }
     }
 
-    public function updateUser($id, $user_name, $phone, $email, $address, $password)
+    public function updateUser($id, $user_name, $phone, $email, $address)
     {
         if (!$this->connect) {
             return false; // Consistent return type
         }
         try {
-            $stmt = $this->connect->prepare("UPDATE $this->table SET user_name=:user_name, phone=:phone, 
-            password=:password, email=:email, address=:address WHERE id=:id");
+            $stmt = $this->connect->prepare("UPDATE $this->table SET user_name=:user_name, phone=:phone, email=:email, address=:address WHERE id=:id");
 
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':user_name', $user_name);
             $stmt->bindParam(':phone', $phone);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':address', $address);
-            $stmt->bindParam(':password', $password);
             $stmt->execute();
-
             $result = $stmt->rowCount();
             return $result;
         } catch (PDOException $e) {
@@ -77,7 +74,7 @@ class User extends Model
         }
         try {
             $stmt = $this->connect->prepare("SELECT * FROM $this->table WHERE id=:id");
-            $stmt->setFetchMode(PDO::FETCH_OBJ);
+            // $stmt->setFetchMode(PDO::FETCH_OBJ);
             $stmt->execute(
                 [
                     ":id" => $id
@@ -112,6 +109,23 @@ class User extends Model
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return [];
+        }
+    }
+
+    public function deleteUser($id)
+    {
+        if (!$this->connect) {
+            return [];
+        }
+        try {
+            $stmt = $this->connect->prepare("DELETE FROM users WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $rowCount = $stmt->rowCount();
+            return $rowCount;
+        } catch (PDOException $e) {
+            error_log("Error deleting user: " . $e->getMessage());
+            return false;
         }
     }
 }

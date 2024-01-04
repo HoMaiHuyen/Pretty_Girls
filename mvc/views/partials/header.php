@@ -1,4 +1,3 @@
-
 <?php require_once dirname(dirname(dirname(__DIR__))) . "/config/app.php" ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,12 +47,12 @@
              
                 <a href="<?php echo ROOT_URL .'/user/shoppingCart'?>"><i class="fa-solid fa-cart-shopping"></i></a>
             </div>
-         
+
             <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php isset($_SESSION['user_id'])?>
-                    <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-circle-user fa-xl" style="color: gray; margin-right: 50px;font-size: 25px;"></i>
-                    </a>
+                <?php isset($_SESSION['user_id']) ?>
+                <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-circle-user fa-xl" style="color: gray; margin-right: 50px;font-size: 25px;"></i>
+                </a>
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="<?php echo ROOT_URL . '/auth/register' ?>">Register</a></li>
