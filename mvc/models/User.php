@@ -83,7 +83,7 @@ class User extends Model
                     ":id" => $id
                 ]
             );
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return [];

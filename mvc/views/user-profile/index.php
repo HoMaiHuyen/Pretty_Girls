@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__DIR__) . "/partials/header.php";
-foreach ($result as $user) :
+
 ?>
     <section>
         <div id="profile" class="tabcontent">
@@ -11,7 +11,7 @@ foreach ($result as $user) :
                         <div class="mt-3">
                             <h4><?php echo $user['user_name'] ?></h4>
                             <div class="mb-3">
-                                <input type="file" id="image" accept="image*/" onchange="loadFile(event)" name="image" class=" d-none">
+                                <input type="file" id="image" accept="image*/"  name="image" class=" d-none">
                                 <label for="image" class="btn btn-outline-secondary pt-2 " id="button-upload-image">
                                     <i class="fas fa-upload"></i> Avatar
                                 </label>
@@ -60,17 +60,17 @@ foreach ($result as $user) :
                 </div>
             </div>
         </div>
-    <?php endforeach;  ?>
+
     <div class="container-fluid orther-page">
         <div class="row">
-            <div class="card col-md-3  mx-auto my-links">
+            <div class="card col-md-3 my-links">
 
                 <a href="#!" class="text-center">
                     <p>Shopping center</p>
                 </a>
             </div>
 
-            <div class="card col-md-3 mx-auto my-links">
+            <div class="card col-md-3 my-links">
                 <a href="<?php echo ROOT_URL . '/user/viewOrder' ?>" class="text-center">
                     <h2>Block 2</h2>
                     <p>View Order</p>
@@ -78,7 +78,7 @@ foreach ($result as $user) :
 
             </div>
 
-            <div class="card col-md-3 mx-auto my-links">
+            <div class="card col-md-3 my-links">
                 <a href="#!" class="text-center">
                     <p>Feedback</p>
                 </a>

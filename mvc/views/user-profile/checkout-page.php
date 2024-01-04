@@ -13,7 +13,7 @@ if(!empty($message)) :
             <div class="row mt-5 checkout-page">
                 <div class="col-md-7" id="checkout-infor-user">
                     <h2 class="checkout-infor-user-title">Thông tin thanh toán</h2>
-                    <?php foreach($user as $user) ?>
+            
                     <div class="checkout-form">
                         <div class="mb-3">
                             <label for="name" class="form-label"></label>
@@ -75,22 +75,22 @@ if(!empty($message)) :
                         </div>
                     </div>
                     <div class="payment-options pl-4">
-                        <label for="payment">Thanh toán</label>
+                        <label for="payment">Payment</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" value="cash" name="payment" id="cash">
                             <label class="form-check-label" for="cash">
-                                Thanh toán bằng tiền mặt
+                                Card on delivery
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="payment" value="card" id="card" checked>
                             <label class="form-check-label" for="card">
-                                Thanh toán bằng thẻ
+                                Credit card
                             </label>
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Thanh toán</button>
+                        <button type="submit" class="btn btn-btn-outline-success">Place order</button>
                     </div>
                 </div>
             </div>

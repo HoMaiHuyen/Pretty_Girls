@@ -1,8 +1,6 @@
 <?php
 
 require_once dirname(__DIR__) . "/models/User.php";
-// require_once dirname(__DIR__) . "/models/Model.php";
-// require_once dirname(__DIR__) . "/core/Services/Mail/MailService.php";
 require_once dirname(__DIR__) . "/core/Services/Mail/WelcomeMailService.php";
 class AuthController
 {
@@ -103,17 +101,23 @@ class AuthController
             if (!empty($email) && !empty($password)) {
                 $user = new User();
                 $data = $user->getOne($email);
-             
+
                 if ($data) {
- 
+
                     $hashedPassword = $data['password'];
                     if (password_verify($password, $hashedPassword)) {
-                        // Bắt đầu session
-                    
-                        $_SESSION['user_id'] = $data['id'];
-                      
-                        header("Location: " . $_ENV['ROOT_URL'] . "/Home/AboutUs");
-                        exit();
+
+
+                        $_SESSION['user']['user_id'] = $data['id'];
+                        if ($data['role'] == 'admin') {
+                            $_SESSION['user']['user_id'] = $data['id'];
+                            header("Location: " . $_ENV['ROOT_URL'] . "/Home/admin");
+                            exit();
+                        } else {
+                            $_SESSION['user']['user_id'] = $data['id'];
+                            header("Location: " . $_ENV['ROOT_URL'] . "/Home/index");
+                            exit();
+                        }
                     } else {
                         $password_error = "Wrong password";
                         view("form/login", compact("password_error"));
@@ -128,9 +132,9 @@ class AuthController
             }
         }
     }
-    public function logout(){
-           unset($_SESSION['user_id']);
-            header("Location: " . $_ENV['ROOT_URL'] . "/auth/login");
-
+    public function logout()
+    {
+        unset($_SESSION['user']['user_id']);
+        header("Location: " . $_ENV['ROOT_URL'] . "/auth/login");
     }
 }

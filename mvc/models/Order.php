@@ -5,24 +5,19 @@ class Order extends Model
 {
 
     protected $table = 'orders';
-    var $user_id;
-    var $total_price;
-    var $date;
-    var $payment_method;
-    var $order_status_id;
-
     public function getOrdersByUserId($userId)
     {
         if (!$this->connect) {
             return [];
         }
         try {
-            $query = "SELECT orders.id as orderId, orders.user_id as userId ,  orders.date as Dates, orders.total_price as total_price,
-                    orders.payment_method as payment, order_status.status_name as status
-                    FROM $this->table
-                    INNER JOIN order_status ON orders.order_status_id = order_status.id
-                    INNER JOIN users ON orders.user_id = users.id
-                    WHERE orders.user_id =:user_id";
+            $query =  "SELECT orders.id as orderId, orders.user_id as userId ,  orders.date as Dates, orders.total_price as total_price,
+          orders.payment_method as payment, order_status.status_name as status, orders.created_at AS created_at
+          FROM $this->table
+          INNER JOIN order_status ON orders.order_status_id = order_status.id
+          INNER JOIN users ON orders.user_id = users.id
+          WHERE orders.user_id = :user_id";
+
             $stmt = $this->connect->prepare($query);
 
             $stmt->execute([
@@ -38,7 +33,7 @@ class Order extends Model
         }
         $stmt = $this->closeConnection();
     }
-    
+
     public function getOrderInfo($orderId)
     {
         if (!$this->connect) {
@@ -145,7 +140,30 @@ class Order extends Model
                 ':order_id' => $order_id
             ]);
 
-            $result=   $stmt->rowCount();
+            $result =   $stmt->rowCount();
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        } finally {
+            $this->closeConnection();
+        }
+    }
+    public function updateOrder($user_id, $order_status_id, $date, $total_price, $payment_method)
+    {
+        if (!$this->connect) {
+            return [];
+        }
+        try {
+            $stmt = $this->connect->prepare("UPDATE $this->table SET user_id=:user_id, 
+        order_status_id=:order_status_id, date:=date, total_price=:total_price, payment_method=:payment_method,NOW() ");
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':order_status_id', $order_status_id);
+            $stmt->bindParam(':date', $date);
+            $stmt->bindParam(':total_price', $total_price);
+            $stmt->bindParam(':payment_method', $payment_method);
+            $stmt->execute();
+            $result = $stmt->rowCount();
             return $result;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();

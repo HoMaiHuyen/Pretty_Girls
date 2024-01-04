@@ -1,94 +1,124 @@
 <?php require_once dirname(__DIR__) . "/partials/header.php";
+
 if ($orders) {
 ?>
-  <div class="d-flex justify-content-center mt-4 mb-2">
-    <h3>Your orders</h3>
+  <div class="d-flex justify-content-center ">
   </div>
-  <div id="order" class="container" style="margin-bottom:100px ;">
-    <table class="table table-sm text-center table-bordered ml-5" style="width: 90%;">
-      <thead class="thead-table-purchase">
-        <th>Code</th>
-        <th>Date</th>
-        <th>Total price</th>
-        <th>Order status</th>
-        <th>Action</th>
-        <th>View more</th>
-      </thead>
-      <tbody>
-        <?php foreach ($orders as $order) : ?>
-          <tr>
-            <td><?php echo $order['orderId'] ?></td>
-            <td><?php echo $order['Dates'] ?></td>
-            <td><?php echo  $order['total_price'] ?></td>
-            <td><?php if ($order['status'] == 'Ordered ') {
-                  echo "<button class=btn btn-success'>" . $order['status'] . "</button>";
-                } elseif ($order['status'] == 'Paid') {
-                  echo "<button class=btn btn-danger'>" . $order['status'] . "</button>";
-                } else {
-                  echo "<button class=btn btn-primary'>" . $order['status']  . "</button>";
-                } ?></td>
-            <td>
-              <button type="button" class="btn btn-outline-success">
-                <a href="<?php echo ROOT_URL . '/checkout/createOrderDetail&id=' . $order['orderId'] ?>"><i class="fa-solid fa-pencil"></i></a>
-              </button>
-              <button type="button" class="btn btn-outline-success" <?php $order['orderId'] ?> data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                <a target="_self" href="<?php echo ROOT_URL . '/user/viewOrderItem&id=' . $order['orderId'] ?>">Detail</a>
-              </button>
-            </td>
-          </tr>
-        <?php endforeach;  ?>
-      </tbody>
-    </table>
+  <div class="py-5">
+    <div class="container" id="order-page">
+      <div class="">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table">
+              <thead class="table-header">
+                <tr>
+                  <th>ID</th>
+                  <th>Tatol price</th>
+                  <th>Quantity</th>
+                  <th>Order status</th>
+                  <th>Action</th>
+                  <th>View</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider table-divider-color">
+                <?php foreach ($orders as $order) : ?>
+                  <tr>
+                    <th scope="row"><?php echo $order['orderId'] ?></th>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <h5>Do you want delete your order</h5>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-outline-danger">
-              <a class="ml-3" href="<?php echo ROOT_URL . '/user/deleteOrder&id=' . $order['orderId'] ?>">Yes</a>
-            </button>
+                    <td><?php echo $order['Dates'] ?></td>
+                    <td><?php echo  $order['total_price'] ?></td>
+                    <td><?php if ($order['status'] == 'Ordered ') { ?>
+                        <span class="badge badge-warning rounded-pill d-inline">Onboarding</span>
+                      <?php
+                        } elseif ($order['status'] == 'Paid') {
+                      ?>
+                        <span class="badge badge-warning rounded-pill d-inline">Onboarding</span>
+
+                      <?php
+                        } else {
+                      ?>
+                        <span class="badge badge-warning rounded-pill d-inline">Onboarding</span>
+                      <?php  } ?>
+                    </td>
+                    <td>
+                      <button type="button" class="btn  <?php $order['orderId'] ?>  btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                        <i class="fa-solid fa-pencil"></i>
+                      </button>
+                      <button type="button" class="btn btn-outline-success" <?php $order['orderId'] ?> data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-outline-secondary">
+                        <a  href="<?php echo ROOT_URL . '/user/viewOrderItem&id=' . $order['orderId'] ?>">Detail</a>
+                      </button>
+                    </td>
+                  </tr>
+                <?php endforeach;  ?>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5>Do you want delete your order</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-outline-danger">
+            <a class="ml-3" href="<?php echo ROOT_URL . '/user/deleteOrder&id=' . $order['orderId'] ?>">Yes</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="POST" action="<?php echo ROOT_URL.'/User/updateInforOrder' ?>">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel1">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel1">Update information order</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <h5>Information detai for your order</h5>
-            <div>
-              <h6>Product name : <?php echo $item['product_name'] ?> </h6>
-              <p class="card-text">Unit price : <?php echo $item['unit_price'] ?></p>
-              <?php $total_for_product = $item['quantity'] * $item['unit_price'] ?>
-              <p class="card-text">Total : <?php echo $total_for_product ?></p>
-
+          <div class="modal-body" id="body-modal">
+            <div class="col mb-3">
+              <input type="text" class="form-control" name="user_name" placeholder="First name" value="<?php echo isset($_SESSION['user']['user_name']) ? $_SESSION['user']['user_name'] :""; ?>" aria-label="First name">
+            </div>
+            <div class="col mb-3">
+              <input type="text" class="form-control" name="phone" placeholder="Last name" value="<?php echo isset($_SESSION['user']['phone']) ? $_SESSION['user']['phone'] :""; ?>" aria-label="Last name">
+            </div>
+            <div class="col mb-3">
+              <input type="text" class="form-control" name="email" value="<?php echo isset($_SESSION['user']['email']) ? $_SESSION['user']['email'] :""; ?>" placeholder="Email" aria-label="Email">
+            </div> 
+             <div class="col mb-3">
+              <input type="text" class="form-control" name="address" value="<?php echo isset($_SESSION['user']['address']) ? $_SESSION['user']['address'] :""; ?>" placeholder="Email" aria-label="Email">
+            </div>
+            <div class="col mb-3">
+              <textarea class="form-control" value="" placeholder="Comments" aria-label="Comments"></textarea>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">OK</button>
-
+            <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-outline-danger">Save</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
+  </div>
+
+
 
   </div>
 <?php  } else { ?>

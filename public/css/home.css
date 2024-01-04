@@ -300,9 +300,9 @@
     animation-name: text-animation  700ms infinite; 
 }   
 
-@media screen and (min-width: 768px) and (max-width: 15536px) {
+@media screen and (min-width: 768px) and (max-width: 1000px) {
   .card-body-padding{
-    margin-left: 250px;
+    margin-left: 20px;
     padding-left: 0px;
     background-color: var(--background-main-color);
     border: none ;

@@ -1,0 +1,11 @@
+
+#body-modal input {
+    height: 40px;
+  }
+  
+.table-header{
+  background-color: rgb(27, 141, 185);
+}
+#order-page table {
+  border-radius: 50px;
+}
