@@ -51,7 +51,8 @@ class User extends Model
             return false; // Consistent return type
         }
         try {
-            $stmt = $this->connect->prepare("UPDATE $this->table SET user_name=:user_name, phone=:phone, password=:password, email=:email, address=:address WHERE id=:id");
+            $stmt = $this->connect->prepare("UPDATE $this->table SET user_name=:user_name, phone=:phone, 
+            password=:password, email=:email, address=:address WHERE id=:id");
 
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':user_name', $user_name);
@@ -82,7 +83,7 @@ class User extends Model
                     ":id" => $id
                 ]
             );
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return [];

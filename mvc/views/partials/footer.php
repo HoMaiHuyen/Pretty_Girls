@@ -1,4 +1,5 @@
-<div class="container-fluid mb-0 " style="padding: 0;" id="footer">
+</main>
+<div class="container-fluid mb-0  mt-4" style="padding: 0;" id="footer">
     <footer class="text-center text-lg-start text-white" style="background-color: #000;   box-shadow: 0px -5px 15px 0px rgba(0, 0, 0, 0.75);" id="main-footer">
         <section class="p-md-2">
             <div class="container text-center text-md-start mt-5">
@@ -83,7 +84,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 <script src="<?php echo ROOT_URL . '/public/js/home.js' ?>"></script>
-<script src="<?php echo ROOT_URL . '/public/js/user-profile.js' ?>"></script>
+
 </body>
 
 </html>

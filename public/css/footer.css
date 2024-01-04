@@ -8,7 +8,9 @@
     width: 100px;
     height: 100px;
 }
-
+#footer{
+    margin-top:50px;
+}
 .icon-item{
     font-size: 20px;
     margin-right: 10px;

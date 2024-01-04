@@ -7,14 +7,14 @@ class AuthMiddleware{
       }  
       public function check(){
            
-            if(empty($_SESSION['user_id'])){
-                header('Location:' .$_ENV['ROOT_URL'].'/Home/AboutUs');
+            if(empty($_SESSION['user']['user_id'])){
+                header('Location:' .$_ENV['ROOT_URL'].'/Home/index');
                 exit();
             } 
             $userModel = new User();
-            $user= $userModel->getOneUser($_SESSION['user_id']);
+            $user= $userModel->getOneUser($_SESSION['user']['user_id']);
             if(empty($user)){
-                header('Location:' .$_ENV['ROOT_URL'].'/Home/AboutUs');
+                header('Location:' .$_ENV['ROOT_URL'].'/Home/index');
                 exit();
             }
             

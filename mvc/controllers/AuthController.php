@@ -1,8 +1,6 @@
 <?php
 
 require_once dirname(__DIR__) . "/models/User.php";
-// require_once dirname(__DIR__) . "/models/Model.php";
-// require_once dirname(__DIR__) . "/core/Services/Mail/MailService.php";
 require_once dirname(__DIR__) . "/core/Services/Mail/WelcomeMailService.php";
 class AuthController
 {
@@ -75,9 +73,7 @@ class AuthController
             //Insert vao database
             $user = new User();
             $user->createUser($name, $phone, $password, $email, $address, $confirm);
-            // echo "Sucssess";
 
-            // Send Email
             $mailService = new WelcomeMailService();
             $sendEmail = [
                 'email' => $email,
@@ -103,21 +99,25 @@ class AuthController
             $password = $_POST['password'] ?? "";
 
             if (!empty($email) && !empty($password)) {
-                // Tạo đối tượng User
                 $user = new User();
-                // Gọi phương thức getOne từ đối tượng User
                 $data = $user->getOne($email);
-                // Xác thực thông tin đăng nhập
+
                 if ($data) {
-                    // Kiểm tra mật khẩu
+
                     $hashedPassword = $data['password'];
                     if (password_verify($password, $hashedPassword)) {
-                        // Bắt đầu session
-                    
-                        $_SESSION['user_id'] = $data['id'];
-                        // Chuyển hướng người dùng đến trang sau khi đăng nhập thành công
-                        header("Location: " . $_ENV['ROOT_URL'] . "/Home/AboutUs");
-                        exit();
+
+
+                        $_SESSION['user']['user_id'] = $data['id'];
+                        if ($data['role'] == 'admin') {
+                            $_SESSION['user']['user_id'] = $data['id'];
+                            header("Location: " . $_ENV['ROOT_URL'] . "/Home/admin");
+                            exit();
+                        } else {
+                            $_SESSION['user']['user_id'] = $data['id'];
+                            header("Location: " . $_ENV['ROOT_URL'] . "/Home/index");
+                            exit();
+                        }
                     } else {
                         $password_error = "Wrong password";
                         view("form/login", compact("password_error"));
@@ -131,5 +131,10 @@ class AuthController
                 view("form/login");
             }
         }
+    }
+    public function logout()
+    {
+        unset($_SESSION['user']['user_id']);
+        header("Location: " . $_ENV['ROOT_URL'] . "/auth/login");
     }
 }

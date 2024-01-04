@@ -9,6 +9,10 @@ function loadImage($image)
 {
     echo  ROOT_URL . '/public/image/' . $image;
 }
+  function model($model){
+        require_once "./mvc/models/".$model.".php";
+        return new $model;
+    }
 
 
 function validate_username($name)
