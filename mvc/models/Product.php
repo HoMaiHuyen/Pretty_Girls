@@ -90,24 +90,80 @@ class Product extends Model
             return [];
         }
     }
-   
-    function updateProduct($product_id, $quantity)
+
+    /// admin
+    function deleteProduct($id)
     {
         if (!$this->connect) {
             return [];
         }
+
         try {
-            $stmt = $this->connect->prepare("UPDATE $this->table SET quantity=:quantity WHERE id=:product_id ");
-            $stmt->bindParam(':product_id',$product_id );
-            $stmt->bindParam(':quantity', $quantity);
-            $stmt->execute();
-            $result=  $stmt->rowCount();
-
-            return $result;
-
+            $stmt = $this->connect->prepare("DELETE FROM $this->table WHERE id = :id");
+            $stmt->execute(
+                [
+                    ":id" => $id
+                ]
+            );
+            return true;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return [];
         }
     }
+
+    function updateProduct($id, $name, $description, $categories, $image_name, $fileimage, $qty, $price)
+{
+    if (!$this->connect) {
+        return false; // Return false instead of an empty array when there's no connection
+    }
+
+    try {
+        if ($fileimage !== "") {
+            $stmt = $this->connect->prepare("UPDATE $this->table SET product_name = :product_name, description = :description, categories = :categories, image_name = :image_name, image_url = :fileimage, quantity = :quantity, price = :price WHERE id = :id");
+            $stmt->bindParam(':fileimage', $fileimage); 
+        } else {
+            $stmt = $this->connect->prepare("UPDATE $this->table SET product_name = :product_name, description = :description, categories = :categories, image_name = :image_name, quantity = :quantity, price = :price WHERE id = :id");
+        }
+
+        // Common bindings for both cases
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':product_name', $name);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':categories', $categories);
+        $stmt->bindParam(':image_name', $image_name);
+        $stmt->bindParam(':quantity', $qty);
+        $stmt->bindParam(':price', $price);
+
+        $stmt->execute();
+
+        return true;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+
+function insertProduct($name, $description, $categories, $image_name, $image_url, $qty, $price)
+{
+    if (!$this->connect) {
+        return [];
+    }
+    try {
+        $stmt = $this->connect->prepare("INSERT INTO $this->table (product_name,description,categories,image_name,image_url, quantity, price) VALUES (:product_name, :description, :categories, :image_name, :image_url, :quantity, :price)");
+        $stmt->bindParam(':product_name', $name);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':categories', $categories);
+        $stmt->bindParam(':image_name', $image_name);
+        $stmt->bindParam(':image_url', $image_url);
+        $stmt->bindParam(':quantity', $qty);
+        $stmt->bindParam(':price', $price);
+        $stmt->execute();  // Corrected from exec() to execute()
+        return true;  // Indicate success
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+
 }

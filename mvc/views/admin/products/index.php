@@ -1,43 +1,43 @@
  <?php require_once dirname(__DIR__) . '/partials/header.php';  ?>
+
  <div id="layoutSidenav_content">
      <main>
          <div class="container-fluid px-4">
              <h1 class="mt-4">Products</h1>
-        
+
              <div class="card mb-4">
                  <div class="card-header">
                      <i class="fas fa-table me-1"></i>
-                     DataTable Example
+                     <th><a href="<?php echo ROOT_URL . '/admin/insertProduct' ?>"><button type="button" class="btn btn-light btn-light" style="background-color:blue">Add Product</button></a></th>
                  </div>
                  <div class="card-body">
-                     <table id="datatablesSimple">
+
+                     <table id="datatablesSimple" class="table table-bordered">
                          <thead>
                              <tr>
-                                 <th>Name</th>
-                                 <th>Position</th>
-                                 <th>Office</th>
-                                 <th>Age</th>
-                                 <th>Start date</th>
-                                 <th>Salary</th>
+                                 <th>ID Produt</th>
+                                 <th>Product Name</th>
+                                 <th>Image</th>
+                                 <th>Quantity</th>
+                                 <th>Price</th>
+                                 <th colspan="2"><button type="button" class="btn btn-light btn-light-action" style="background-color:blue">Action</button></th>
                              </tr>
                          </thead>
                          <tbody>
-                             <tr>
-                                 <td>Tiger Nixon</td>
-                                 <td>System Architect</td>
-                                 <td>Edinburgh</td>
-                                 <td>61</td>
-                                 <td>2011/04/25</td>
-                                 <td>$320,800</td>
-                             </tr>
-                             <tr>
-                                 <td>Garrett Winters</td>
-                                 <td>Accountant</td>
-                                 <td>Tokyo</td>
-                                 <td>63</td>
-                                 <td>2011/07/25</td>
-                                 <td>$170,750</td>
-                             </tr>
+                             <?php
+                                foreach ($resultProduct as $product) {
+                                ?>
+                                 <tr>
+                                     <td><?php echo $product['id'] ?></td>
+                                     <td><?php echo $product['product_name'] ?></td>
+                                     <td><img src='<?php  echo  $product['image_url'] ?>' alt='<?php echo $product['image_name'] ?>' style="width:50px;height:40px;"></td>
+                                     <td><?php echo $product['quantity'] ?></td>
+                                     <td><?php echo $product['price'] ?></td>
+                                     <th><a href="<?php echo ROOT_URL . '/admin/deleteProduct&id=' . $product['id'] ?>"><i class='fa-solid fa-trash'></i></th>
+                                     <th><a href="<?php echo ROOT_URL . '/admin/updateProduct&id=' . $product['id'] ?>"><i class="fa fa-pencil-square" aria-hidden="true" name=""></i></th>
+                                 </tr>
+
+                             <?php } ?>
                          </tbody>
                      </table>
                  </div>
