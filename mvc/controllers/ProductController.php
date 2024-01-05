@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__DIR__) . "/models/Product.php";
-
+require_once dirname(__DIR__) . "/models/Shop.php";
 
 class ProductController 
 {
@@ -8,19 +8,25 @@ class ProductController
     {
         $product = new Product();
         $products = $product->getAllProduct();
-        view('products/index', compact('products'));
+        $shopModel = new Shop();
+        $resultShop = $shopModel->getShop();
+        view('products/index', compact('products', 'resultShop'));
     }
     public function show($params){
+        $shopModel = new Shop();
+        $resultShop = $shopModel->getShop();
         if(isset($_GET['id'])&&($_GET['id']>-0)){
             $id=$_GET['id'];
     //   $id = $params[0];
         $productModel = new Product();
         $products = $productModel->getAllProduct();
         $product = $productModel->getOne($id);
-        view('products/show', compact('product','products'));   
+        view('products/show', compact('product','products', 'resultShop'));   
     }
 }
     public  function search($keyword){
+        $shopModel = new Shop();
+        $resultShop = $shopModel->getShop();
         $search_key="";
         $keyword = isset($_POST['key']) ? htmlspecialchars($_POST['key']) : '';
         $productModel = new Product();
@@ -32,7 +38,7 @@ class ProductController
                 $search_key =  htmlspecialchars($keyword) ;
             }
         }
-        view('products/search', compact('searchResult', 'keyword','search_key'));
+        view('products/search', compact('searchResult', 'keyword','search_key','resultShop'));
     }
         function product(){
            
