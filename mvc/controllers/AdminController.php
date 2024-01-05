@@ -2,9 +2,11 @@
 require_once dirname(__DIR__) . "/models/Product.php";
 require_once dirname(__DIR__) . "/models/User.php";
 require_once dirname(__DIR__) . '/core/functions.php';
+require_once dirname(__DIR__) . '/models/OrderItem.php';
+
 class AdminController
 {
-    
+
     public function index()
     {
         $user = new User();
@@ -75,11 +77,11 @@ class AdminController
             $price = floatval($_POST['PPrice']);
             $image_url = $_ENV['ROOT_URL'] . '/public/image/' . basename($_FILES["PImage_url"]["name"]);
             if (isset($_FILES["PImage_url"]["tmp_name"]) && !empty($_FILES["PImage_url"]["tmp_name"])) {
-                
+
                 $imageFileType = strtolower(pathinfo($_FILES["PImage_url"]["name"], PATHINFO_EXTENSION));
 
                 if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-        
+
                     echo "Only JPG, JPEG, PNG, and GIF files are allowed.";
                     return;
                 }
@@ -88,7 +90,7 @@ class AdminController
 
                 move_uploaded_file($_FILES["PImage_url"]["tmp_name"], $target_file);
             } else {
-                
+
                 echo "Please choose an image.";
                 return;
             }
@@ -107,7 +109,7 @@ class AdminController
 
     function insertProduct1()
     {
-        $filetypeError="";
+        $filetypeError = "";
 
         if (isset($_POST['insertProduct1'])) {
             $productModel = new Product();
@@ -120,23 +122,23 @@ class AdminController
             $image_url = $_ENV['ROOT_URL'] . '/public/image/' . basename($_FILES["PImage_url"]["name"]);
 
             if (isset($_FILES["PImage_url"]["tmp_name"]) && !empty($_FILES["PImage_url"]["tmp_name"])) {
-                
+
                 $imageFileType = strtolower(pathinfo($_FILES["PImage_url"]["name"], PATHINFO_EXTENSION));
 
                 if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-                    
-                    $filetypeError="you should choose photo";
-                return  $filetypeError ;
+
+                    $filetypeError = "you should choose photo";
+                    return  $filetypeError;
                 }
-                
+
                 $target_dir = dirname(dirname(__DIR__)) . '/public/image/';
                 $target_file = $target_dir . basename($_FILES["PImage_url"]["name"]);
-               
+
 
                 move_uploaded_file($_FILES["PImage_url"]["tmp_name"], $target_file);
             } else {
-                
-                $filetypeError="you should choose photo";
+
+                $filetypeError = "you should choose photo";
             }
 
             $insertProduct = $productModel->insertProduct($name, $description, $categories, $image_name, $image_url, $qty, $price);
@@ -145,5 +147,18 @@ class AdminController
                 exit();
             }
         }
+    }
+
+    public function viewOrder()
+    {
+        $orderModel = new Order();
+        $orders = $orderModel->getAllOrderUser();
+        view('admin/order/index', compact('orders'));
+    }
+    public function searchUserHasMaxOrder(){
+        $orderModel = new Order();
+        $orders = $orderModel->getAllOrderUser();
+        $userHasOrder = $orderModel->findUserHasMaxOrder();
+        view('admin/order/revenue', compact('userHasOrder', 'orders'));
     }
 }

@@ -34,5 +34,10 @@ class ProductController
         }
         view('products/search', compact('searchResult', 'keyword','search_key'));
     }
-   
+        function product(){
+           
+        $product = new Product();
+        $products = $product->getAllProduct();
+        view('products/product', compact('products'));
+        }
 }

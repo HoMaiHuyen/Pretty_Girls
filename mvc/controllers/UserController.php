@@ -166,7 +166,7 @@ class UserController
                 $ql= $kq['quantity'];
               
                 $qtyUpdate = $ql - $quantityP;
-                $product->updateProduct($product_id, $qtyUpdate  ); 
+                $product->updateProductQ($product_id, $qtyUpdate  ); 
 
            }
             if ($order_id) {
@@ -212,7 +212,7 @@ class UserController
     $order_id = $_GET['id'];
     $orrder = new Order();
     $result= $orrder->getOrderInfo($order_id);
- $message = '';
+    $message = '';
     if ($result) {
         $created_at = new DateTime($result['created_at']);
 
