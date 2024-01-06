@@ -177,52 +177,33 @@ class Order extends Model
 
     public function getAllOrderUser()
     {
+           if (!$this->connect) {
+            return [];
+        }
         try {
-            if (!$this->connect) {
-                return [];
-            }
-            $stmt = $this->connect->prepare("SELECT 
-                            orders.id AS orderId,
-                            orders.user_id AS userId,
-                            users.user_name AS user_name,
-                            users.phone AS phone,
-                            orders.date AS date,
-                            orders.total_price AS total_price,
-                            orders.payment_method AS payment,
-                            order_status.status_name AS status,
-                            orders.created_at AS created_at, 
-                            COUNT(orders.id) AS order_count
-                            FROM $this->table
-                            INNER JOIN users ON orders.user_id = users.id");
+          $stmt = $this->connect->prepare("SELECT 
+                        orders.id AS orderId,
+                        orders.user_id AS userId,
+                        users.user_name AS user_name,
+                        users.phone AS phone,
+                        orders.date AS date,
+                        orders.total_price AS total_price,
+                        orders.payment_method AS payment,
+                        order_status.status_name AS status,
+                        orders.created_at AS created_at, 
+                        COUNT(orders.id) AS order_count
+                        FROM $this->table 
+                        INNER JOIN users ON orders.user_id = users.id
+                        INNER JOIN order_status ON orders.order_status_id = order_status.id");
             $stmt->execute();
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $result;
         } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
+            error_log("Error in getAllOrderUser: " . $e->getMessage());
             return [];
         }
     }
-    public function findUserHasMaxOrder()
-    {
-        if (!$this->connect) {
-                return [];
-            }
-            try{
-        $stmt = $this->connect->prepare("SELECT users.id, users.user_name AS user_name,
-            COUNT(orders.id) AS total_orders
-            FROM $this->table 
-            JOIN orders ON orders.user_id = users.id
-            GROUP BY orders.user_id = users.id
-            ORDER BY total_orders DESC
-            LIMIT 1;");
-            $stmt->execute();
-         return $stmt->rowCount();
 
-        }catch(Exception $e){
-            return [];
-        }
-        $stmt=$this->closeConnection();
-    }
-        
+   
 }

@@ -28,7 +28,7 @@ class OrderItem extends Model
         }
         try {
             $stmt = $this->connect->prepare("INSERT INTO $this->table (order_id, product_id, quantity, unit_price, image_url)
-            VALUES (:order_id, :product_id, :quantity, :price, :image_url)");           
+            VALUES (:order_id, :product_id, :quantity, :price, :image_url)");
             $stmt->bindParam(':order_id', $order_id);
             $stmt->bindParam(':product_id', $product_id);
             $stmt->bindParam(':quantity', $quantity);
@@ -37,7 +37,7 @@ class OrderItem extends Model
             $stmt->execute();
             return $stmt->rowCount();
         } catch (Exception $e) {
-           
+
             return 0;
         }
     }
@@ -89,4 +89,27 @@ class OrderItem extends Model
             throw $e;
         }
     }
+
+    public function totalRevenue()
+    {
+        if (!$this->connect) {
+            return [];
+        }
+        try {
+            $stmt = $this->connect->prepare("SELECT SUM(p.price * oi.quantity) AS total_revenue,
+             p.product_name AS product_name , p.quantity AS quantity
+                                        FROM order_items as oi
+                                        JOIN products p ON p.id = oi.product_id");
+             $stmt->execute();
+             $result=$stmt->fetchAll();
+            return $result;
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            throw $e;
+        } finally {
+
+            $this->closeConnection();
+        }
+    }
+
 }

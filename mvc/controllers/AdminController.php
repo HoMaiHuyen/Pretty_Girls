@@ -2,6 +2,7 @@
 require_once dirname(__DIR__) . "/models/Product.php";
 require_once dirname(__DIR__) . "/models/User.php";
 require_once dirname(__DIR__) . '/core/functions.php';
+require_once dirname(__DIR__) . '/models/Order.php';
 require_once dirname(__DIR__) . '/models/OrderItem.php';
 
 class AdminController
@@ -155,10 +156,12 @@ class AdminController
         $orders = $orderModel->getAllOrderUser();
         view('admin/order/index', compact('orders'));
     }
-    public function searchUserHasMaxOrder(){
-        $orderModel = new Order();
-        $orders = $orderModel->getAllOrderUser();
-        $userHasOrder = $orderModel->findUserHasMaxOrder();
-        view('admin/order/revenue', compact('userHasOrder', 'orders'));
+
+    public function calcRevenue(){
+        $orderModel = new OrderItem();
+        $revenue= $orderModel->totalRevenue();
+       view("admin/order/revenue", compact('revenue'));
+      
     }
+
 }

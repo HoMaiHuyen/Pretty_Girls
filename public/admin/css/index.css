@@ -1,0 +1,12 @@
+body {  
+    background-color: #F5F7FA;
+}
+#layoutSidenav_content{
+    margin-top: 50px;
+    margin-left: 150px;
+
+}
+.card-content-admin{
+    text-decoration:none ;
+    list-style-type: none;
+}

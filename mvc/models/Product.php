@@ -91,26 +91,6 @@ class Product extends Model
         }
     }
     
-    function updateProductQ($product_id, $quantity)
-    {
-        if (!$this->connect) {
-            return [];
-        }
-        try {
-            $stmt = $this->connect->prepare("UPDATE $this->table SET quantity=:quantity WHERE id=:product_id ");
-            $stmt->bindParam(':product_id',$product_id );
-            $stmt->bindParam(':quantity', $quantity);
-            $stmt->execute();
-            $result=  $stmt->rowCount();
-
-            return $result;
-
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-            return [];
-        }
-    }
-
 
     function deleteProduct($id)
     {
