@@ -40,5 +40,10 @@ class ProductController
         }
         view('products/search', compact('searchResult', 'keyword','search_key','resultShop'));
     }
+    public function vidu(){
+         $product = new Product();
+        $products = $product->getAllProduct();
+        view('products/vidu', compact('products'));
+    }
    
 }
