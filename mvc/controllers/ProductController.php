@@ -10,7 +10,7 @@ class ProductController
         $products = $product->getAllProduct();
         $shopModel = new Shop();
         $resultShop = $shopModel->getShop();
-        view('products/index', compact('products', 'resultShop'));
+        view('products/vidu', compact('products', 'resultShop'));
     }
     public function show($params){
         $shopModel = new Shop();

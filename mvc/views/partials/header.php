@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/order-page.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/products.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/pageloading.css' ?>">
+    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/vidu.css' ?>">
+
 
    
     <title>Blue Cosmetic</title>
