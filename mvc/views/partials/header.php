@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/about-us.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/checkout-page.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/order-page.css' ?>">
+    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/products.css' ?>">
+    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/pageloading.css' ?>">
+    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/vidu.css' ?>">
+
+
    
     <title>Blue Cosmetic</title>
      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

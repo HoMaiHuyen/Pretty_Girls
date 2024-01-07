@@ -1,11 +1,18 @@
   <?php require_once dirname(__DIR__) . '/partials/header.php';  ?>
   <div id="layoutSidenav_content">
       <main>
-          <div class="container">
-              <div class="row">
-                  <div class="col-10 mx-auto p-4 border mb-5">
-                      <table class="table">
-                          <thead class="thead-dark">
+          <div class="container-fluid px-4">
+              <h1 class="mt-4">Users</h1>
+
+              <div class="card mb-4">
+                  <div class="card-header">
+                      <i class="fas fa-table me-1"></i>
+                      <th><a href="<?php echo ROOT_URL . '/admin/insertProduct' ?>"><button type="button" class="btn btn-light btn-light" style="background-color:blue">Add User</button></a></th>
+                  </div>
+                  <div class="card-body">
+
+                      <table id="datatablesSimple" class="table table-bordered">
+                          <thead>
                               <tr>
                                   <th scope="col">ID-User</th>
                                   <th scope="col">User Name</th>
@@ -19,6 +26,9 @@
                               <?php if (!empty($users)) : ?>
                                   <?php foreach ($users as $row) : ?>
                                       <tr>
+                                          <td>
+                                              <input type="checkbox" />
+                                          </td>
                                           <td><?php echo $row['id']; ?></td>
                                           <td><?php echo $row['user_name']; ?></td>
                                           <td><?php echo $row['phone']; ?></td>
@@ -40,5 +50,4 @@
                   </div>
               </div>
           </div>
-      </main>
-      <?php require_once dirname(__DIR__) . '/partials/footer.php' ?>
+          <?php require_once dirname(__DIR__) . '/partials/footer.php' ?>

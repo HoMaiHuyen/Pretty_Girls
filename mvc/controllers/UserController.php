@@ -101,8 +101,7 @@ class UserController
     }
 
     public function deleteItem()
-    {
-        if (isset($_GET['id']) && ($_GET['id'] >= 0)) {
+    {        if(isset($_GET['id']) && ($_GET['id'] >= 0)) {
             array_splice($_SESSION['cart'], $_GET['id'], 1);
             view('user-profile/shoppingcart');
         }
@@ -215,7 +214,7 @@ class UserController
     $order_id = $_GET['id'];
     $orrder = new Order();
     $result= $orrder->getOrderInfo($order_id);
- $message = '';
+    $message = '';
     if ($result) {
         $created_at = new DateTime($result['created_at']);
 

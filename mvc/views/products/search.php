@@ -1,4 +1,8 @@
-<?php require_once dirname(__DIR__) . "/partials/header.php"; ?>
+<?php require_once dirname(__DIR__) . "/partials/header.php"; 
+if(empty($keyword)){
+  
+}else{
+?>
 
 <section>
     <div class="container">
@@ -75,5 +79,5 @@
         </div>
     </div>
 </section>
-
+<?php }?>
 <?php require_once dirname(__DIR__) . "/partials/footer.php"; ?>

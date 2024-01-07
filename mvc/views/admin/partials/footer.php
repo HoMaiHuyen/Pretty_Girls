@@ -18,6 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="<?php echo ROOT_URL . '/public/admin/js/script.js' ?>"></script>
     <script src="<?php echo ROOT_URL . '/public/admin/js/databale.js' ?>"></script>
+    <script src="<?php echo ROOT_URL . '/public/admin/js/form.js' ?>"></script>
     </body>
 
     </html>

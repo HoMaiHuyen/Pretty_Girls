@@ -33,7 +33,7 @@ class CheckoutController
       $currentFormated = $current->format('Y-m-d');
 
       $order = new Order();
-      $order->createtOrder($user_id, $currentFormated,  $total_price, $payment, 'da nhan',);
+      $order->createOrder($user_id, $currentFormated,  $total_price, $payment, 'da nhan',);
       if ($order !== false) {
         header('Location:' . $_ENV['ROOT_URL'] . '/User/show?id=' . $user_id);
         exit();

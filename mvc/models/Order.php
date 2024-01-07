@@ -11,7 +11,7 @@ class Order extends Model
             return [];
         }
         try {
-            $query =  "SELECT orders.id as orderId, orders.user_id as userId ,  orders.date as Dates, orders.total_price as total_price,
+            $query =  "SELECT COUNT(orders.id) AS order_count, orders.user_id as userId ,  orders.date as Dates, orders.total_price as total_price,
           orders.payment_method as payment, order_status.status_name as status, orders.created_at AS created_at
           FROM $this->table
           INNER JOIN order_status ON orders.order_status_id = order_status.id
@@ -61,6 +61,7 @@ class Order extends Model
         }
         $this->closeConnection();
     }
+
     public function getAllOrder()
     {
         if (!$this->connect) {
@@ -77,6 +78,7 @@ class Order extends Model
         }
         $stmt = $this->closeConnection();
     }
+
     public function createOrder($user_id, $order_status_id, $date, $total_price, $payment_method)
     {
         if (!$this->connect) {
@@ -97,7 +99,7 @@ class Order extends Model
             $lastInsertId = $this->connect->lastInsertId();
             return $lastInsertId;
         } catch (PDOException $e) {
-           
+
             error_log("Error creating order: " . $e->getMessage());
             return false;
         } finally {
@@ -132,7 +134,6 @@ class Order extends Model
         if (!$this->connect) {
             return [];
         }
-
         try {
 
             $stmt = $this->connect->prepare("DELETE FROM $this->table WHERE id=:order_id");
@@ -149,6 +150,7 @@ class Order extends Model
             $this->closeConnection();
         }
     }
+
     public function updateOrder($user_id, $order_status_id, $date, $total_price, $payment_method)
     {
         if (!$this->connect) {
@@ -172,4 +174,31 @@ class Order extends Model
             $this->closeConnection();
         }
     }
+
+    public function getAllOrderUser()
+    {
+           if (!$this->connect) {
+            return [];
+        }
+        try {
+          $stmt = $this->connect->prepare("SELECT users.id AS userId, users.user_name AS user_name,
+                                                   users.phone AS phone, COUNT(orders.id) AS total_orders  ,
+                                                   orders.payment_method as payment , orders.created_at as date, 
+                                                   orders.id as orders_id, orders.total_price  as total_price
+                                                    FROM $this->table
+                                                    INNER JOIN users ON orders.user_id = users.id
+                                                    INNER JOIN order_status ON orders.order_status_id = order_status.id
+                                                    WHERE users.id = orders.user_id
+                                                    GROUP BY users.id");                                                                                               
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
+        } catch (Exception $e) {
+            error_log("Error in getAllOrderUser: " . $e->getMessage());
+            return [];
+        }
+    }
+
+   
 }

@@ -10,7 +10,7 @@ class ProductController
         $products = $product->getAllProduct();
         $shopModel = new Shop();
         $resultShop = $shopModel->getShop();
-        view('products/index', compact('products', 'resultShop'));
+        view('products/vidu', compact('products', 'resultShop'));
     }
     public function show($params){
         $shopModel = new Shop();
@@ -40,5 +40,10 @@ class ProductController
         }
         view('products/search', compact('searchResult', 'keyword','search_key','resultShop'));
     }
-   
+        function product(){
+           
+        $product = new Product();
+        $products = $product->getAllProduct();
+        view('products/product', compact('products'));
+        }
 }
