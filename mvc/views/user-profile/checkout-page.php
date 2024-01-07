@@ -90,7 +90,7 @@ if(!empty($message)) :
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-btn-outline-success">Place order</button>
+                        <button type="submit" style="width: 100%;" class="btn btn-outline-success">Place order</button>
                     </div>
                 </div>
             </div>
