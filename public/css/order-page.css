@@ -9,3 +9,17 @@
 #order-page table {
   border-radius: 50px;
 }
+@keyframes fadeInDown {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.animate-image {
+  animation: fadeInDown 1s ease-out; /* Chỉnh thời gian và hiệu ứng theo ý muốn */
+}

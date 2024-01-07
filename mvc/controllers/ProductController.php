@@ -27,17 +27,12 @@ class ProductController
         $searchResult = $productModel->search($keyword);
         if (!empty($keyword)) {
             if (empty($searchResult)) {
-                $search_key = "No results : " . htmlspecialchars($keyword)  ;
+               
             } else {
                 $search_key =  htmlspecialchars($keyword) ;
             }
         }
         view('products/search', compact('searchResult', 'keyword','search_key'));
-    }
-    public function vidu(){
-         $product = new Product();
-        $products = $product->getAllProduct();
-        view('products/vidu', compact('products'));
     }
    
 }

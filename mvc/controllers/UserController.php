@@ -39,9 +39,10 @@ class UserController
         }
     }
 
-    public function updateUser()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+   public function updateUser()
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST['buton-save'])) {
             $id = $_POST['id'];
             $name = isset($_POST['name']) ? $_POST['name'] : '';
             $nameClear = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
@@ -51,32 +52,36 @@ class UserController
 
             $address = isset($_POST['address']) ? $_POST['address'] : '';
             $addressClear = htmlspecialchars($address, ENT_QUOTES, 'UTF-8');
-
-            $password = isset($_POST['password']) ? $_POST['password'] : '';
-            $passwordClear = htmlspecialchars($password, ENT_QUOTES, 'UTF-8');
-
+            
             $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
             $phoneClear = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
+
             $user = new User();
-            $result = $user->updateUser($id, $nameClear, $phoneClear, $emailClear, $addressClear, $passwordClear);
+            $result = $user->updateUser($id, $nameClear, $phoneClear, $emailClear, $addressClear);
+
             if ($result !== false) {
-                header("Location:/project1/User/show/$id");
+                header("Location:" . $_ENV['ROOT_URL'] . "/User/show");
                 exit();
             }
         }
     }
-    
+}
+   
     public function shoppingCart()
     {
         if (isset($_POST['addcart']) && ($_POST['addcart'])) {
             $id = $_POST['PId'];
+            $count  = 0;
             $name = $_POST['PName'];
             $image = $_POST['Image'];
             $price = $_POST['PPrice'];
             if (isset($_POST['PQuantity']) && $_POST['PQuantity'] > 0) {
                 $qty = $_POST['PQuantity'];
+                $count=$qty;;
             } else {
                 $qty = 1;
+                $count=$qty;
+
             }
             $flag = 0;
 
@@ -85,18 +90,23 @@ class UserController
                     $newqty = $qty + $item['quantity'];
                     $_SESSION['cart'][$key]['quantity'] = $newqty;
                     $flag = 1;
+                    $count=$newqty;
+                  
                     break;
                 }
             }
+         
             if ($flag == 0) {
                 $item = array('product_id' => $id, 'product_name' => $name, 'image_url' => $image, 'price' => $price, 'quantity' => $qty);
                 $_SESSION['cart'][] = $item;
+               
             }
-            header('Location:' . $_ENV['ROOT_URL'] . '/Product/index');
+        
+            header('Location:' . $_ENV['ROOT_URL'] . '/Product/index&qty='.$count);
         }
         view('user-profile/shoppingcart');
     }
-
+ 
     public function deleteItem()
     {
         if (isset($_GET['id']) && ($_GET['id'] >= 0)) {
@@ -145,53 +155,46 @@ class UserController
 
             $current = new DateTime();
             $currentFormated = $current->format('Y-m-d');
+            $user_name_safe = htmlspecialchars($name, ENT_QUOTES);
+            $phone_safe = htmlspecialchars($phone, ENT_QUOTES);
+            $email_safe = htmlspecialchars($email, ENT_QUOTES);
+            $address_safe = htmlspecialchars($address, ENT_QUOTES);
 
             $_SESSION['user'] = array(
                 'user_id' => $user_id,
-                'user_name' => $name,
-                'phone' => $phone,
-                'email' => $email,
-                'address' => $address,
+                'user_name' => $user_name_safe,
+                'phone' => $phone_safe,
+                'email' =>  $email_safe,
+                'address' => $address_safe,
             );
             $order = new Order();
             $order_id = $order->createOrder($user_id, $order_status_id, $currentFormated, $total_price, $payment);
             $product = new Product();
             $productModel = $_SESSION['cart'];
-            $qtyUpdate=0;
-           foreach($productModel as $products){
+            foreach ($productModel as $products) {
 
-                $quantityP= $products['quantity'];
-                $product_id =$products['product_id'];
-                $kq=  $product->getOne($product_id);
-                $ql= $kq['quantity'];
-              
-                $qtyUpdate = $ql - $quantityP;
-                $product->updateProduct($product_id, $qtyUpdate  ); 
-
-           }
+                $quantityP = $products['quantity'];
+                $product_id = $products['product_id'];
+                $product->updateProductQ($product_id, $quantityP);
+            }
             if ($order_id) {
                 $order_item = new OrderItem();
-              
-
                 foreach ($productModel as $product) {
                     $product_id = $product['product_id'];
                     $product_image = $product['image_url'];
                     $unit_price = $product['price'];
                     $quantity = $product['quantity'];
-
                     $order_item->createOrderItem($order_id, $product_id, $quantity, $unit_price, $product_image);
-                    $message='success';
+                    $message = 'success';
                 }
-                
             }
-           unset($_SESSION['cart']);
-           if($message=='success'){
-           echo 
-           '<script>confirm("Your order was successful\nCustomer name: ' . $name . '\nAddress: ' . $address . '\nPhone number: ' . $phone . '\nTotal price: ' . $total_price . '\nDate: '.$currentFormated .'");
+            unset($_SESSION['cart']);
+            if ($message == 'success') {
+                echo
+                '<script>confirm("Your order was successful\nCustomer name: ' . $name . '\nAddress: ' . $address . '\nPhone number: ' . $phone . '\nTotal price: ' . $total_price . '\nDate: ' . $currentFormated . '");
         window.location.href = "' . $_ENV['ROOT_URL'] . '/user/viewOrder";
       </script>';
-
-           }
+            }
         }
     }
 
@@ -200,41 +203,53 @@ class UserController
 
         $user_id = $_SESSION['user']['user_id'];
 
-        $userInfor = $_SESSION['user'];
-        $user = new User();
-        $result = $user->getOneUser($user_id);
-        $orders = $user->getOrders($user_id);
+        $userModel = new User();
+        $userInfor = $userModel->getOneUser($user_id);
+        $orders = $userModel->getOrders($user_id);
 
         view('user-profile/order-page', compact('orders', 'userInfor'));
     }
-  public function deleteOrder($order_id)
-{
-    $order_id = $_GET['id'];
-    $orrder = new Order();
-    $result= $orrder->getOrderInfo($order_id);
- $message = '';
-    if ($result) {
-        $created_at = new DateTime($result['created_at']);
 
-        $currentDateTime = new DateTime();
 
-        $interval = $created_at->diff($currentDateTime);
-
-        $timeThreshold = new DateInterval('PT12H');
-   
-        if ($interval->format('%s') > $timeThreshold->format('%s')) {
-
+    public function deleteOrder($order_id)
+    {
+        $order_id = $_GET['id'];
+        $order_id = filter_var($order_id, FILTER_VALIDATE_INT);
+        $message = '';
+        if (!$order_id) {
             $message = 'failed';
-        } else {
-    
-            $orrder->delete($order_id);
-            $message = 'success';
-            view('user-profile/order-page', compact('message'));
+            header('Location: ' . $_ENV['ROOT_URL'] . '/user/viewOrder?message=' . $message);
         }
-       //  header('Location: ' . $_ENV['ROOT_URL'] . '/user/viewOrder?message='. $message);
-    }
-}
 
+        $order = new Order();
+        $result = $order->getOrderInfo($order_id);
+
+        if ($result) {
+            try {
+                $created_at = new DateTime($result['created_at']);
+                $currentDateTime = new DateTime();
+                $interval = $created_at->diff($currentDateTime);
+                $timeThreshold = new DateInterval('PT12H');
+                if ($interval->format('%s') > $timeThreshold->format('%s')) {
+                    $message = 'failed';
+                    header('Location: ' . $_ENV['ROOT_URL'] . '/user/viewOrder?message=' . $message);
+                    exit();
+                } else {
+                    $orde = $order->delete($order_id);
+                    if ($orde) {
+                        $message = 'success';
+
+                        header('Location: ' . $_ENV['ROOT_URL'] . '/user/viewOrder?message=' . $message);
+                        exit();
+                    }
+                }
+            } catch (Exception $e) {
+                die("Error: " . $e->getMessage());
+            }
+        } else {
+            die("Order not found");
+        }
+    }
 
     public function updateInforOrder()
     {
@@ -262,19 +277,17 @@ class UserController
             if ($interval > $timeThreshold) {
                 $message = 'failed';
             } else {
-            $_SESSION['user'] = array(
-                'user_id' => $user_id,
-                'user_name' => $name,
-                'phone' => $phone,
-                'email' => $email,
-                'address' => $address,
-            );
+                $_SESSION['user'] = array(
+                    'user_id' => $user_id,
+                    'user_name' => $name,
+                    'phone' => $phone,
+                    'email' => $email,
+                    'address' => $address,
+                );
 
                 $message = 'success';
-             
             }
-          
         }
-        header('Location: ' . $_ENV['ROOT_URL'] . '/user/viewOrder?message='.$message);
+        header('Location: ' . $_ENV['ROOT_URL'] . '/user/viewOrder?message=' . $message);
     }
 }

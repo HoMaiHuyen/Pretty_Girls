@@ -43,7 +43,7 @@ a
     top: 20px;
     text-transform: uppercase;
     font-size: 13px;
-    font-weight: 700;
+    /* font-weight: 700; */
     background: red;
     color: #fff;
     padding: 3px 10px;
@@ -54,40 +54,42 @@ a
     -webkit-box-orient: vertical;
     white-space: normal;
     overflow: hidden;
+    font-size: 20px;
 }
 .product-tumb {
     display: flex;
-    /* align-items: center;
-    justify-content: center; */
-    /* float: right;
+    align-items: center;
+    justify-content: center;
+    /* float: right; */
     overflow: hidden; 
-    height: 300px;
-    /* padding: 50px; */
+    height: auto;
+    padding: 50px; 
     background: #f0f0f0;
 }
 
 .product-tumb img {
-    width: 100%;
+    max-width: 100%;
     max-height: 100%;
+    height: auto;
 }
 
 .product-details {
-    padding: 30px;
+    padding: 15px;
 }
 
 .product-catagory {
     display: block;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 350;
     text-transform: uppercase;
     color: #ccc;
-    margin-bottom: 18px;
+    margin-bottom: 8px;
 }
 
 .product-details h4 a {
-    font-weight: 500;
+    font-weight: 400;
     display: block;
-    margin-bottom: 18px;
+    margin-bottom: 10px;
     text-transform: uppercase;
     color: #363636;
     text-decoration: none;
@@ -100,15 +102,15 @@ a
 
 .product-details p {
     font-size: 15px;
-    line-height: 22px;
-    margin-bottom: 18px;
+    line-height: 15px;
+    margin-bottom: 15px;
     color: #999;
 }
 
 .product-bottom-details {
     overflow: hidden;
     border-top: 1px solid #eee;
-    padding-top: 20px;
+    padding-top: 15px;
 }
 
 .product-bottom-details div {
@@ -117,17 +119,17 @@ a
 }
 
 .product-price {
-    font-size: 18px;
+    font-size: 16px;
     color: #fbb72c;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .product-price small {
-    font-size: 80%;
-    font-weight: 400;
+    font-size: 50%;
+    font-weight: 500;
     /* text-decoration: line-through; */
     display: inline-block;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .product-links {
@@ -145,3 +147,36 @@ a
 .product-links a:hover {
     color: #fbb72c;
 }
+
+
+.loading-page-wrapper {
+    display: table;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+  
+  .loading-page {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .spinner {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 8px solid #007CB7;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: rotate-spinner  .5s  infinite linear;
+  }
+  
+  @keyframes rotate-spinner {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
