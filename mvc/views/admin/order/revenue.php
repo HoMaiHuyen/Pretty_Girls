@@ -1,8 +1,4 @@
  <?php require_once dirname(__DIR__) . '/partials/header.php';
-    ?>
-
-      
-print_r($revenue);
 
 ?>
  <div id="layoutSidenav_content">
