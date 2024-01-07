@@ -10,13 +10,13 @@ class AuthAdminMiddleware
     public function check()
     {
 
-        if (empty($_SESSION['user_id'])) {
+        if (empty($_SESSION['user']['user_id'])) {
             header('Location:' . $_ENV['ROOT_URL'] . '/Home/admin');
             exit();
         }
         $userModel = new User();
-        $user = $userModel->getOneUser($_SESSION['user_id']);
-        if (empty($user)) {
+        $user = $userModel->getOneUser($_SESSION['user']['user_id']);
+        if (!empty($user)) {
             header('Location:' . $_ENV['ROOT_URL'] . '/Home/admin');
             exit();
         }
