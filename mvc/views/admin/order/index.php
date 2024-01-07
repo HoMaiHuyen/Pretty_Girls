@@ -31,12 +31,12 @@
                      <td>
                        <input type="checkbox" />
                      </td>
-                     <td><?php echo isset($order['orderId']) ? $order['orderId'] : '' ?></td>
-                     <td><?php echo isset($order['user_name']) ? $order['user_name']  : '' ?></td>
-                     <td><?php echo isset($order['phone']) ? $order['phone'] : '' ?></td>
-                     <td><?php echo isset($order['date']) ? $order['date'] : ''  ?></td>
-                     <td><?php echo isset($order['order_count']) ? $order['order_count'] : '' ?></td>
-                     <td><?php echo isset($order['total_price']) ? $order['total_price'] : '' ?></td>
+                     <td><?php echo htmlspecialchars($order['orders_id']) ?></td>
+                     <td><?php echo  htmlspecialchars(($order['user_name']) ) ?></td>
+                     <td><?php echo  htmlspecialchars($order['phone'])  ?></td>
+                     <td><?php echo  htmlspecialchars($order['date'])?></td>
+                     <td><?php echo  htmlspecialchars($order['total_orders']) ?></td>
+                     <td><?php echo  htmlspecialchars($order['total_price']) ?></td>
                      <?php $i++; ?>
                    </tr>
                  <?php endforeach; ?>

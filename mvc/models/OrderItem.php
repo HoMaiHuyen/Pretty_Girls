@@ -96,10 +96,12 @@ class OrderItem extends Model
             return [];
         }
         try {
-            $stmt = $this->connect->prepare("SELECT SUM(p.price * oi.quantity) AS total_revenue,
-             p.product_name AS product_name , p.quantity AS quantity
-                                        FROM order_items as oi
-                                        JOIN products p ON p.id = oi.product_id");
+            $stmt = $this->connect->prepare("SELECT SUM(p.price * oi.quantity)  AS total_revenue, avg(p.price * oi.quantity) as Average_price,
+                                            p.quantity AS quantity , count(oi.id) as total_order
+                                            FROM order_items as oi
+                                            JOIN products p ON p.id = oi.product_id    
+                                            JOIN orders od ON od.id = oi.order_id
+                                            GROUP BY oi.order_id");                          
              $stmt->execute();
              $result=$stmt->fetchAll();
             return $result;

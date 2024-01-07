@@ -181,20 +181,15 @@ class Order extends Model
             return [];
         }
         try {
-          $stmt = $this->connect->prepare("SELECT 
-                        orders.id AS orderId,
-                        orders.user_id AS userId,
-                        users.user_name AS user_name,
-                        users.phone AS phone,
-                        orders.date AS date,
-                        orders.total_price AS total_price,
-                        orders.payment_method AS payment,
-                        order_status.status_name AS status,
-                        orders.created_at AS created_at, 
-                        COUNT(orders.id) AS order_count
-                        FROM $this->table 
-                        INNER JOIN users ON orders.user_id = users.id
-                        INNER JOIN order_status ON orders.order_status_id = order_status.id");
+          $stmt = $this->connect->prepare("SELECT users.id AS userId, users.user_name AS user_name,
+                                                   users.phone AS phone, COUNT(orders.id) AS total_orders  ,
+                                                   orders.payment_method as payment , orders.created_at as date, 
+                                                   orders.id as orders_id, orders.total_price  as total_price
+                                                    FROM $this->table
+                                                    INNER JOIN users ON orders.user_id = users.id
+                                                    INNER JOIN order_status ON orders.order_status_id = order_status.id
+                                                    WHERE users.id = orders.user_id
+                                                    GROUP BY users.id");                                                                                               
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
