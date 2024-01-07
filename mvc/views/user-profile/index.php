@@ -23,7 +23,7 @@ require_once dirname(__DIR__) . "/partials/header.php";
                     <div class="card card-profile" style="height: 95%;">
                         <div class="card-body">
                             <form action="<?php echo ROOT_URL . '/User/updateUser' ?>" method="post">
-                                <input type="hidden" value="" name="id">
+                                <input type="hidden" value="<?php echo  $user['id']?>" name="id">
                                 <div class="form-group row">
                                     <label for="fullname" class="col-sm-3 col-form-label">User name :</label>
                                     <div class="col-sm-9">
@@ -50,7 +50,7 @@ require_once dirname(__DIR__) . "/partials/header.php";
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-9 offset-sm-3">
-                                        <button type="submit" class="btn button-item-save px-4">Save information</a></button>
+                                        <button type="submit" name="buton-save" class="btn button-item-save px-4">Save information</a></button>
                                         <button type="button" class="btn button-item-back px-4 ml-2"> Back</button>
                                     </div>
                                 </div>

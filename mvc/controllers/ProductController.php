@@ -33,7 +33,7 @@ class ProductController
         $searchResult = $productModel->search($keyword);
         if (!empty($keyword)) {
             if (empty($searchResult)) {
-                $search_key = "No results : " . htmlspecialchars($keyword)  ;
+               
             } else {
                 $search_key =  htmlspecialchars($keyword) ;
             }

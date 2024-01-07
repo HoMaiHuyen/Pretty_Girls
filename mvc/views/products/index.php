@@ -1,3 +1,3 @@
-<?php require_once dirname(__DIR__) . "/partials/header.php"; ?>
-<?php require_once dirname(__DIR__) . "/products/body.php"; ?>
-<?php require_once dirname(__DIR__) . "/partials/footer.php"; ?>
+<?php require_once dirname(__DIR__) . "/partials/header.php"; 
+require_once 'body-product.php';
+require_once dirname(__DIR__) . "/partials/footer.php"; ?>

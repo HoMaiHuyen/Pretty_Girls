@@ -4,6 +4,10 @@ require_once dirname(__DIR__) . "/models/User.php";
 require_once dirname(__DIR__) . '/core/functions.php';
 class AdminController
 {
+     public function __construct()
+    {
+        $authMiddleware = new AuthMiddleware();
+    }
     
     public function index()
     {

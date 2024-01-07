@@ -41,7 +41,7 @@ class Order extends Model
         }
         try {
             $query = "SELECT orders.id as orderId, orders.user_id as userId ,  orders.date as Dates, orders.total_price as total_price,
-                    orders.payment_method as payment, order_status.status_name as status, orders.created_at
+                    orders.payment_method as payment, order_status.status_name as status, orders.created_at AS created_at
                     FROM orders
                     INNER JOIN order_status ON orders.order_status_id = order_status.id
                     INNER JOIN users ON orders.user_id = users.id
@@ -128,27 +128,31 @@ class Order extends Model
 
 
     public function delete($order_id)
-    {
-        if (!$this->connect) {
-            return [];
-        }
-
-        try {
-
-            $stmt = $this->connect->prepare("DELETE FROM $this->table WHERE id=:order_id");
-            $result = $stmt->execute([
-                ':order_id' => $order_id
-            ]);
-
-            $result =   $stmt->rowCount();
-            return $result;
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-            return [];
-        } finally {
-            $this->closeConnection();
-        }
+{
+    if (!$this->connect) {
+        return false;
     }
+
+    try {
+        $stmt = $this->connect->prepare("DELETE FROM $this->table WHERE id=:order_id");
+        $result = $stmt->execute([
+            ':order_id' => $order_id
+        ]);
+
+        // Kiểm tra xem việc xóa có thành công hay không
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (PDOException $e) {
+        echo "Lỗi: " . $e->getMessage();
+        return false;
+    } finally {
+        $this->closeConnection();
+    }
+}
+
     public function updateOrder($user_id, $order_status_id, $date, $total_price, $payment_method)
     {
         if (!$this->connect) {

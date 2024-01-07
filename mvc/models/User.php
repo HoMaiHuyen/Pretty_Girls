@@ -45,27 +45,30 @@ class User extends Model
         }
     }
 
-    public function updateUser($id, $user_name, $phone, $email, $address)
-    {
-        if (!$this->connect) {
-            return false; // Consistent return type
-        }
-        try {
-            $stmt = $this->connect->prepare("UPDATE $this->table SET user_name=:user_name, phone=:phone, email=:email, address=:address WHERE id=:id");
-
-            $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':user_name', $user_name);
-            $stmt->bindParam(':phone', $phone);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':address', $address);
-            $stmt->execute();
-            $result = $stmt->rowCount();
-            return $result;
-        } catch (PDOException $e) {
-            error_log("Error updating user: " . $e->getMessage());
-            return false;
-        }
+   public function updateUser($id, $user_name, $phone, $email, $address)
+{
+    if (!$this->connect) {
+        return false;
     }
+
+    try {
+        $stmt = $this->connect->prepare("UPDATE $this->table SET user_name=:user_name, phone=:phone, email=:email, address=:address WHERE id=:id");
+
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':user_name', $user_name);
+        $stmt->bindParam(':phone', $phone);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':address', $address);
+        
+        $stmt->execute();
+    
+        return true;
+    } catch (PDOException $e) {
+        error_log("Lỗi khi cập nhật người dùng: " . $e->getMessage());
+        return false;
+    }
+}
+
 
     public function getOneUser($id)
     {
