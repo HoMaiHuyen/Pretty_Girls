@@ -210,6 +210,7 @@
 .active-menu {
   border-bottom: 2px solid #ED4D2D;
   color: #ED4D2D;
+  color: rgb(189, 189, 31);
 }
 
 /* ===================BANNER==================== */
@@ -301,7 +302,7 @@
     animation-name: text-animation  700ms infinite; 
 }   
 
-@media screen and (min-width: 768px) and (max-width: 1000px) {
+@media screen and (min-width: 768px) and (max-width: 968px) {
   .card-body-padding{
     margin-left: 20px;
     padding-left: 0px;
@@ -322,7 +323,7 @@
 }
 
 .card-item-trial{
-  width: 1540px;
+  width: 1000px;
   height:300px;
   margin-left: 70px;
   padding:20px 0px 20px 30px;  

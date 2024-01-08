@@ -11,8 +11,8 @@ class Order extends Model
             return [];
         }
         try {
-            $query =  "SELECT COUNT(orders.id) AS order_count, orders.user_id as userId ,  orders.date as Dates, orders.total_price as total_price,
-          orders.payment_method as payment, order_status.status_name as status, orders.created_at AS created_at
+            $query =  "SELECT  orders.user_id as userId ,  orders.date as Dates, orders.total_price as total_price,
+          orders.payment_method as payment, order_status.status_name as status, orders.created_at AS created_at, orders.id as order_id
           FROM $this->table
           INNER JOIN order_status ON orders.order_status_id = order_status.id
           INNER JOIN users ON orders.user_id = users.id
@@ -158,7 +158,9 @@ class Order extends Model
         }
         try {
             $stmt = $this->connect->prepare("UPDATE $this->table SET user_id=:user_id, 
-        order_status_id=:order_status_id, date:=date, total_price=:total_price, payment_method=:payment_method,NOW() ");
+                                            order_status_id=:order_status_id, date:=date,
+                                            total_price=:total_price, 
+                                            payment_method=:payment_method,NOW() ");
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':order_status_id', $order_status_id);
             $stmt->bindParam(':date', $date);

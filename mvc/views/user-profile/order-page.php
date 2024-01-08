@@ -22,26 +22,23 @@ if ($orders) {
               <tbody class="table-group-divider table-divider-color">
                 <?php foreach ($orders as $order) : ?>
                   <tr>
-                    <th scope="row"><?php echo htmlspecialchars($order['orderId']) ?></th>
-
+                    <th scope="row"><?php echo htmlspecialchars($order['order_id']) ?></th>
                     <td><?php echo htmlspecialchars($order['Dates']) ?></td>
                     <td><?php echo  htmlspecialchars($order['total_price']) ?></td>
-                    <td><?php echo  htmlspecialchars($order['status']) ?>
-                    
-                    </td>
+                    <td><span style="font-size: 10px;" class="btn btn-success"><?php echo htmlspecialchars($order['status']) ?></span></td>
                     <td>
-                      <button type="button" class="btn  <?php $order['orderId'] ?>  btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      <button type="button" class="btn  <?php $order['order_id'] ?>  btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                         <i class="fa-solid fa-pencil"></i>
                       </button>
                   
-                        <button type="button" class="btn btn-outline-success" <?php $order['orderId'] ?> data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-toggle="modal" data-bs-target="#exampleModal1" data-order-id="<?php echo $order['orderId']; ?>">
+                        <button type="button" class="btn btn-outline-success" <?php $order['order_id'] ?> data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-toggle="modal" data-bs-target="#exampleModal1" data-order-id="<?php echo $order['order_id']; ?>">
                           <i class="fa-solid fa-trash"></i>
                         </button>
                     </td>
 
                     <td>
                       <button type="button" class="btn btn-outline-secondary">
-                        <a href="<?php echo ROOT_URL . '/user/viewOrderItem&id=' . $order['orderId'] ?>">Detail</a>
+                        <a href="<?php echo ROOT_URL . '/user/viewOrderItem&id=' . $order['order_id'] ?>">Detail</a>
                       </button>
                     </td>
                   </tr>
@@ -63,12 +60,12 @@ if ($orders) {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <h5>Do you want delete your order <?php echo $order['orderId'] ?> </h5>
+          <h5>Do you want delete your order </h5>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Cancel</button>
           <button type="button" class="btn btn-outline-danger">
-            <a class="ml-3" href="<?php echo ROOT_URL . '/user/deleteOrder&id=' . $order['orderId'] ?>">Yes</a>
+            <a class="ml-3" href="<?php echo ROOT_URL . '/user/deleteOrder&id=' . $order['order_id'] ?>">Yes</a>
           </button>
         </div>
       </div>
