@@ -40,36 +40,37 @@ class UserController
         }
     }
 
-   public function updateUser()
-{
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (isset($_POST['buton-save'])) {
-            $id = $_POST['id'];
-            $name = isset($_POST['name']) ? $_POST['name'] : '';
-            $nameClear = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+    public function updateUser()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['buton-save'])) {
+                $id = $_POST['id'];
+                $name = isset($_POST['name']) ? $_POST['name'] : '';
+                $nameClear = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
 
-            $email = isset($_POST['email']) ? $_POST['email'] : '';
-            $emailClear = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
+                $email = isset($_POST['email']) ? $_POST['email'] : '';
+                $emailClear = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
 
-            $address = isset($_POST['address']) ? $_POST['address'] : '';
-            $addressClear = htmlspecialchars($address, ENT_QUOTES, 'UTF-8');
-            
-            $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
-            $phoneClear = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
+                $address = isset($_POST['address']) ? $_POST['address'] : '';
+                $addressClear = htmlspecialchars($address, ENT_QUOTES, 'UTF-8');
 
-            $user = new User();
-            $result = $user->updateUser($id, $nameClear, $phoneClear, $emailClear, $addressClear);
+                $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
+                $phoneClear = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
 
-            if ($result !== false) {
-                header("Location:" . $_ENV['ROOT_URL'] . "/User/show");
-                exit();
+                $user = new User();
+                $result = $user->updateUser($id, $nameClear, $phoneClear, $emailClear, $addressClear);
+
+                if ($result !== false) {
+                    header("Location:" . $_ENV['ROOT_URL'] . "/User/show");
+                    exit();
+                }
             }
         }
     }
-}
-   
+
     public function shoppingCart()
     {
+
         $shopModel = new Shop();
         $resultShop = $shopModel->getShop();
         if (isset($_POST['addcart']) && ($_POST['addcart'])) {
@@ -78,13 +79,14 @@ class UserController
             $name = $_POST['PName'];
             $image = $_POST['Image'];
             $price = $_POST['PPrice'];
-            if (isset($_POST['PQuantity']) && $_POST['PQuantity'] > 0) {
+            if (isset($_SESSION['cart']['product_id'])) {
+                $_SESSION['cart']['product_id']['quantity']++;
+            } elseif (isset($_POST['PQuantity']) && $_POST['PQuantity'] > 0) {
                 $qty = $_POST['PQuantity'];
-                $count=$qty;;
+                $count = $qty;;
             } else {
                 $qty = 1;
-                $count=$qty;
-
+                $count = $qty;
             }
             $flag = 0;
 
@@ -93,23 +95,23 @@ class UserController
                     $newqty = $qty + $item['quantity'];
                     $_SESSION['cart'][$key]['quantity'] = $newqty;
                     $flag = 1;
-                    $count=$newqty;
-                  
+
+
                     break;
                 }
             }
-         
+
             if ($flag == 0) {
                 $item = array('product_id' => $id, 'product_name' => $name, 'image_url' => $image, 'price' => $price, 'quantity' => $qty);
                 $_SESSION['cart'][] = $item;
-               
-            }
-        
-            header('Location:' . $_ENV['ROOT_URL'] . '/Product/index&qty='.$count);
+                
+            } 
+            header('Location:' . $_ENV['ROOT_URL'] . '/Product/index');
+            setcookie("success", "Added order successful!", time() + 1, "/", "", 0);
         }
-        view('user-profile/shoppingcart',compact('resultShop'));
+        view('user-profile/shoppingcart', compact('resultShop'));
     }
- 
+
     public function deleteItem()
     {
         if (isset($_GET['id']) && ($_GET['id'] >= 0)) {
@@ -208,7 +210,9 @@ class UserController
 
         $userModel = new User();
         $userInfor = $userModel->getOneUser($user_id);
-        $orders = $userModel->getOrders($user_id);
+        $orderModel = new Order();
+
+        $orders = $orderModel->getOrdersByUserId($user_id);
 
         view('user-profile/order-page', compact('orders', 'userInfor'));
     }

@@ -78,13 +78,15 @@
   align-items: center;
 
 } */
-
+.bbbb{
+  padding: 20px;
+}
 
 .my-links{
-  text-align: center;
-  margin: 10px;
-  border: 1px solid #ccc;
-  max-width: 300px;
+  width: 200px;
+  height: auto;
+  /* border: 1px solid #ccc; */
+  /* border-radius: 15px; */
 }
 #profile{
     margin-top: 20px;
