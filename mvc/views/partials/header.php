@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/order-page.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/products.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/pageloading.css' ?>">
-    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/vidu.css' ?>">
 
 
    
@@ -50,11 +49,11 @@
         <div class="icon-nav">
             <div class="item1">
              
-                <a href="<?php echo ROOT_URL .'/user/shoppingCart'?>"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="<?php echo ROOT_URL .'/user/shoppingCart'?>"><i class="fa-solid fa-cart-shopping" style="font: size 40px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i></a>
             </div>
 
             <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php isset($_SESSION['user_id']) ?>
+                <?php isset($_SESSION['user']['user_id']) ?>
                 <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-solid fa-circle-user fa-xl" style="color: gray; margin-right: 50px;font-size: 25px;"></i>
                 </a>
