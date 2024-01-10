@@ -31,7 +31,7 @@
                                           <td><?php echo $row['message']; ?></td>
                                           <td><?php echo $row['comment_time']; ?></td>
                                           <td>
-                                              <form action="<?php echo ROOT_URL . '/admin/Comment/deleteComment' ?>" method="POST">
+                                              <form action="<?php echo ROOT_URL . '/Comment/deleteComment' ?>" method="POST">
                                                   <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
                                                   <button type="submit" class="link-dark" style="border: none; background: none; padding: 0;">
                                                       <i class="fa-solid fa-trash fs-5"></i>
