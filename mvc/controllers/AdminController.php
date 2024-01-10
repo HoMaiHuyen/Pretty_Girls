@@ -2,13 +2,11 @@
 require_once dirname(__DIR__) . "/models/Product.php";
 require_once dirname(__DIR__) . "/models/User.php";
 require_once dirname(__DIR__) . '/core/functions.php';
-require_once dirname(__DIR__) . '/models/Order.php';
-require_once dirname(__DIR__) . '/models/OrderItem.php';
-
+require_once dirname(__DIR__) . "/models/Comment.php";
 class AdminController
 {
 
-    public function index()
+    public function show()
     {
         $user = new User();
         $users = $user->getAll();
@@ -17,8 +15,6 @@ class AdminController
 
     public function delete()
     {
-        // $data = [];
-
         if (isset($_POST['id'])) {
             $id = $_POST['id'];
             $userModel = new User();
@@ -95,7 +91,7 @@ class AdminController
                 echo "Please choose an image.";
                 return;
             }
-            $updateProduct = $productModel->updateProduct($id, $name, $description, $categories, $image_name, $image_url, $qty, $price);
+            $updateProduct = $productModel->updateProductQ($id, $name, $description, $categories, $image_name, $image_url, $qty, $price);
             if ($updateProduct == true) {
                 header('location: showProduct');
                 exit();
@@ -150,18 +146,24 @@ class AdminController
         }
     }
 
-    public function viewOrder()
+    public function showComments()
     {
-        $orderModel = new Order();
-        $orders = $orderModel->getAllOrderUser();
-        view('admin/order/index', compact('orders'));
+        $comment = new Comment();
+        $comments = $comment->getAllComments();
+        view('admin/comment/index', compact('comments'));
     }
 
-    public function calcRevenue(){
-        $orderModel = new OrderItem();
-        $revenue= $orderModel->totalRevenue();
-       view("admin/order/revenue", compact('revenue'));
-      
+    function deleteComment()
+    {
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
+            $commentModel = new Comment();
+            $comment = $commentModel->getCommentById($id);
+            if ($comment) {
+                $result = $commentModel->deleteCommentById($id);
+            }
+        }
+        $comments = $commentModel->getAllComments();
+        view('admin/comment/index', compact('comments'));
     }
-
 }

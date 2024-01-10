@@ -1,8 +1,8 @@
 <?php
-require_once dirname(__DIR__) . "/models/Product.php";
-require_once dirname(__DIR__) . "/models/User.php";
-require_once dirname(__DIR__) . '/core/functions.php';
-require_once dirname(__DIR__) . "/models/Comment.php";
+require_once dirname(dirname(__DIR__)) . "/models/Product.php";
+require_once dirname(dirname(__DIR__)) . "/models/User.php";
+require_once dirname(dirname(__DIR__)) . '/core/functions.php';
+require_once dirname(dirname(__DIR__)) . "/models/Comment.php";
 class CommentController
 {
     public function showComments()
