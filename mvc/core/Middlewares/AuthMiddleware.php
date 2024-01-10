@@ -6,7 +6,6 @@ class AuthMiddleware{
             $this->check();
       }  
       public function check(){
-           
             if(empty($_SESSION['user']['user_id'])){
                 header('Location:' .$_ENV['ROOT_URL'].'/Home/index');
                 exit();
@@ -17,9 +16,6 @@ class AuthMiddleware{
                 header('Location:' .$_ENV['ROOT_URL'].'/Home/index');
                 exit();
             }
-            
-            
-
       }
 }
 

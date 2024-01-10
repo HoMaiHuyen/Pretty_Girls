@@ -1,15 +1,12 @@
 <?php
-
 require_once dirname(__DIR__) . "/models/User.php";
 require_once dirname(__DIR__) . "/core/Services/Mail/WelcomeMailService.php";
 class AuthController
 {
-
     public function register()
     {
         view("form/register");
     }
-
     public function postRegister()
     {
         $name = "";
@@ -18,14 +15,12 @@ class AuthController
         $address = "";
         $password = "";
         $confirm = "";
-
         $name_error = "";
         $email_error = "";
         $phone_error = "";
         $address_error = "";
         $password_error = "";
         $confirm_error = "";
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = isset($_POST['name']) ? ($_POST['name']) : "";
             if (empty($name)) {
@@ -33,35 +28,30 @@ class AuthController
             } elseif (validate_username($name) == false) {
                 $name_error = "The name contains only letters and numbers";
             }
-
             $email = isset($_POST['email']) ? $_POST['email'] : "";
             if (empty($email)) {
                 $email_error = "Please enter an email";
             } elseif (validate_email($email) == false) {
                 $email_error = "Invalid email format";
             }
-
             $phone = isset($_POST['phone']) ? $_POST['phone'] : "";
             if (empty($phone)) {
                 $phone_error = "Please enter a phone phone";
             } elseif (!validate_phone($phone)) {
                 $phone_error = "Invalid phone phone format";
             }
-
             $address = isset($_POST['address']) ? $_POST['address'] : "";
             if (empty($address)) {
                 $address_error = "Please enter an address";
             } elseif (validate_address($address) == false) {
                 $address_error = "Address is invalid";
             }
-
             $password = isset($_POST['password']) ? $_POST['password'] : "";
             if (empty($password)) {
                 $password_error = "Please enter a password";
             } elseif (validate_password($password) == false) {
                 $password_error = "Password is not valid";
             }
-
             $confirm = isset($_POST['confirm']) ? $_POST['confirm'] : "";
             if (empty($confirm)) {
                 $confirm_error = "Please confirm your password";
@@ -73,7 +63,6 @@ class AuthController
             //Insert vao database
             $user = new User();
             $user->createUser($name, $phone, $password, $email, $address, $confirm);
-
             $mailService = new WelcomeMailService();
             $sendEmail = [
                 'email' => $email,
@@ -86,8 +75,6 @@ class AuthController
             view("form/register", compact('name_error', 'email_error', 'phone_error', 'address_error', 'password_error', 'confirm_error'));
         }
     }
-
-
     public function login()
     {
         view("form/login");
@@ -97,24 +84,20 @@ class AuthController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'] ?? "";
             $password = $_POST['password'] ?? "";
-
             if (!empty($email) && !empty($password)) {
                 $user = new User();
                 $data = $user->getOne($email);
-
                 if ($data) {
-
                     $hashedPassword = $data['password'];
                     if (password_verify($password, $hashedPassword)) {
-
-
                         $_SESSION['user']['user_id'] = $data['id'];
                         if ($data['role'] == 'admin') {
                             $_SESSION['user']['user_id'] = $data['id'];
-                            header("Location: " . $_ENV['ROOT_URL'] . "/Home/admin");
+                             header("Location: " . $_ENV['ROOT_URL'] . "/Home/admin");
                             exit();
                         } else {
                             $_SESSION['user']['user_id'] = $data['id'];
+                            $kt_comment=false;
                             header("Location: " . $_ENV['ROOT_URL'] . "/Home/index");
                             exit();
                         }

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  
+
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/home.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/footer.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/product-detail.css' ?>">
@@ -23,7 +23,7 @@
 
    
     <title>Blue Cosmetic</title>
-     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 </head>
 
@@ -36,7 +36,7 @@
             <a href="<?php echo ROOT_URL . '/Home/index' ?>">Home</a>
             <a href="<?php echo ROOT_URL . '/Product/index' ?>">Product</a>
             <a href="<?php echo ROOT_URL . '/Home/AboutUs' ?>">About Us</a>
-            <a href="#">Contact Us</a>
+            <a href="./footer.php">Contact Us</a>
         </nav>
         <div class="search-container">
             <form action="<?php echo ROOT_URL . '/product/search' ?>" method="post">
@@ -67,4 +67,4 @@
         </div>
 
     </header>
-<main  style="min-height: 540px;">
+    <main style="min-height: 540px;">

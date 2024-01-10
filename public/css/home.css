@@ -335,3 +335,9 @@
 
 }
 
+/*  hiệu ứng active */
+.main-menu a.active {
+  border-bottom: 2px solid red;
+  color: red;
+}
+

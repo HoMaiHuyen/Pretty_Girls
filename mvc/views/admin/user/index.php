@@ -19,7 +19,7 @@
                                   <th scope="col">Phone</th>
                                   <th scope="col">Address</th>
                                   <th scope="col">Email</th>
-                                  <th scope="col" colspan="2">Action</th>
+                                  <th scope="col">Action</th>
                               </tr>
                           </thead>
                           <tbody>
