@@ -35,3 +35,15 @@ function handleMenuClick(event) {
 // Attach click event listeners to each menu item
 var menuItems = document.querySelectorAll('.main-menu a');
 menuItems.forEach(item => item.addEventListener('click', handleMenuClick));
+
+
+document.addEventListener('DOMContentLoaded', function () {
+        var currentLocation = window.location.href;
+        var menuItems = document.querySelectorAll('.main-menu a');
+
+        menuItems.forEach(function (item) {
+            if (item.href === currentLocation) {
+                item.classList.add('active');
+            }
+        });
+});

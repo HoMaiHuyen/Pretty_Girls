@@ -1,4 +1,6 @@
-<?php require_once dirname(__DIR__) . "/partials/header.php";  ?>
+<?php require_once dirname(__DIR__) . "/partials/header.php";
+
+?>
 <section class="product-detail">
     <form action="<?php echo ROOT_URL . '/user/shoppingCart' ?>" method="post">
         <div class="card mb-2 " style="min-width:70%; border: none" id="product">
@@ -32,6 +34,70 @@
         </div>
     </form>
 </section>
+
+<div class="container">
+    <div class="card mt-4 w-75 mx-auto">
+        <div class="card-body">
+            <h5 class="card-title">Comments</h5>
+            <?php if (isset($comments)) : ?>
+                <?php foreach ($comments as $comment) { ?>
+                    <div class="comment">
+                        <p><?php echo $comment['message']; ?></p>
+                        <p class="text-muted small"><?php echo $comment['comment_time']; ?></p>
+                        <div class="d-flex align-items-center">
+                            <form action="<?php echo ROOT_URL . '/Comment/deleteComment&id=' . $comment['id'] . '&user_id=' . $comment['user_id'] . '&product_id=' . $comment['product_id'] ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete?')">
+                                <input type="hidden" name="id" value="<?php echo $comment['id']; ?>">
+                                <input type="hidden" name="user_id" value="<?php echo $comment['user_id']; ?>">
+                                <input type="hidden" name="product_id" value="<?php echo $comment['product_id']; ?>">
+                                <button type="submit" class="btn btn-link me-2" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $comment['id']; ?>">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $comment['id']; ?>">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                        </div>
+                        <div class="modal fade" id="editModal<?php echo $comment['id']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editModalLabel<?php echo $comment['id']; ?>" aria-hidden="true">
+                            <form action="<?php echo ROOT_URL . '/Comment/updateComment&id=' . $comment['id'] . '&user_id=' . $comment['user_id'] . '&product_id=' . $comment['product_id'] ?>" method="POST">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editModalLabel<?php echo $comment['id']; ?>">Update comment</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group mb-3">
+                                                <textarea class="form-control" name="message"><?php echo $comment['message']; ?></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-outline">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <hr>
+                    </div>
+                <?php } ?>
+            <?php endif; ?>
+        </div>
+        <div class="card mt-2 w-75 mb-3 mx-auto">
+            <div class="card-body">
+                <h5 class="card-title">Write Comment</h5>
+                <form action="<?php echo ROOT_URL . '/Comment/comment' ?>" method="post">
+                    <input type="hidden" name="PId" value="<?php echo $product['id'] ?>">
+                    <div class="mb-3">
+                        <textarea class="form-control" name="comment" placeholder="Your comment" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section>
     <div class="container">
         <div class="row">
@@ -132,4 +198,5 @@
 </section>
 
 <?php
+
 require_once dirname(__DIR__) . "/partials/footer.php"; ?>

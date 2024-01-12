@@ -25,8 +25,6 @@ class UserController
     {
 
         $user_id = $_SESSION['user']['user_id'];
-
-
         $user = new User();
         $user = $user->getOneUser($user_id);
 

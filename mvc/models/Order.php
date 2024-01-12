@@ -128,7 +128,6 @@ class Order extends Model
         $stmt = $this->closeConnection();
     }
 
-
     public function delete($order_id)
     {
         if (!$this->connect) {
