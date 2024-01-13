@@ -29,7 +29,5 @@ abstract class MailService
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }
-   abstract public function setBodyEmail();
-
-   
+   abstract public function setBodyEmail();   
 }

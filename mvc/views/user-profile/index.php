@@ -6,18 +6,22 @@ require_once dirname(__DIR__) . "/partials/header.php";
     <div id="profile" class="tabcontent">
         <div class="row">
             <div class="col-md-3 mb-3 main-profile">
-                <div class="d-flex flex-column align-items-center text-center" id="image-profile">
-                    <img src="<?php echo isset($user['image_url']) ? $user['image_url'] : '' ?>" alt="<?php echo isset($user['image_name']) ? $user['image_name'] : '' ?>" id="output" class="rounded-circle">
-                    <div class="mt-3">
-                        <h4><?php echo $user['user_name'] ?></h4>
-                        <div class="mb-3">
-                            <input type="file" id="image" accept="image*/" name="image" class=" d-none">
-                            <label for="image" class="btn btn-outline-secondary pt-2 " id="button-upload-image">
-                                <i class="fas fa-upload"></i> Avatar
-                            </label>
+                <form action="<?php echo ROOT_URL . '/User/updateImage' ?>">
+                    <div class="d-flex flex-column align-items-center text-center" id="image-profile">
+                        <img src="<?php echo isset($user['image_url']) ? $user['image_url'] : '' ?>" alt="<?php echo isset($user['image_name']) ? $user['image_name'] : '' ?>" id="output" class="rounded-circle">
+                        <div class="mt-3">
+                            <h4><?php echo $user['user_name'] ?></h4>
+                            <div class="mb-3">
+                                <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
+                                <input type="file" id="image" accept="image*/" name="image" class=" d-none">
+                                <input type="file" class="form-control" id="PImage_url" name="image">
+                                <label for="PImage_url" class="btn btn-outline-secondary pt-2 " id="button-upload-image">
+                                    <i class="fas fa-upload"></i> Avatar
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="col-md-7">
                 <div class="card card-profile" style="height: 95%;">

@@ -30,10 +30,10 @@ if ($orders) {
                       <button type="button" class="btn  <?php $order['order_id'] ?>  btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                         <i class="fa-solid fa-pencil"></i>
                       </button>
-                  
-                        <button type="button" class="btn btn-outline-success" <?php $order['order_id'] ?> data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-toggle="modal" data-bs-target="#exampleModal1" data-order-id="<?php echo $order['order_id']; ?>">
-                          <i class="fa-solid fa-trash"></i>
-                        </button>
+
+                      <button type="button" class="btn btn-outline-success" <?php $order['order_id'] ?> data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-toggle="modal" data-bs-target="#exampleModal1" data-order-id="<?php echo $order['order_id']; ?>">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
                     </td>
 
                     <td>
@@ -56,7 +56,7 @@ if ($orders) {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -77,17 +77,17 @@ if ($orders) {
       <div class="modal-content">
         <form method="POST" action="<?php echo ROOT_URL . '/User/updateInforOrder' ?>">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel1">Update information order</h5>
+            <h5 class="modal-title" id="exampleModalLabel1">information for order</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-        
+
           <div class="modal-body" id="body-modal">
             <div class="col mb-3">
 
               <input type="text" class="form-control" name="user_name" placeholder="First name" value="<?php echo htmlspecialchars($userInfor['user_name']); ?>" aria-label="First name">
             </div>
             <div class="col mb-3">
-              <input type="text" class="form-control" name="phone" placeholder="Last name" value="<?php echo htmlspecialchars($userInfor['phone'])?>" aria-label="Last name">
+              <input type="text" class="form-control" name="phone" placeholder="Last name" value="<?php echo htmlspecialchars($userInfor['phone']) ?>" aria-label="Last name">
             </div>
             <div class="col mb-3">
               <input type="text" class="form-control" name="email" value="<?php echo htmlspecialchars($userInfor['email']) ?>" placeholder="Email" aria-label="Email">
@@ -103,7 +103,7 @@ if ($orders) {
             <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-outline-danger">Save</button>
           </div>
-        
+
         </form>
       </div>
     </div>
@@ -113,31 +113,29 @@ if ($orders) {
 
   </div>
 <?php  } else { ?>
- <div class="container-fluid">
+  <div class="container-fluid">
     <div class="row d-flex align-items-center justify-content-center">
-        <div class="col-md-8 text-center">
-            <div>
-                <img class="animate__animated animate__fadeInDown" src="https://vitatree.com.vn/tp/T0269/img/tmp/shopping-cart.svg" style="width: 280px; height: 260px;" alt="">
-            </div>
-            <h4 class="hover-effect">Currently your shopping cart is empty, please click the button to continue shopping</h4>
-            <button type="button" class="btn btn-outline-success mt-4"><a href="<?php echo ROOT_URL . '/Product/index' ?>">Shopping</a></button>
+      <div class="col-md-8 text-center">
+        <div>
+          <img class="animate__animated animate__fadeInDown" src="https://vitatree.com.vn/tp/T0269/img/tmp/shopping-cart.svg" style="width: 280px; height: 260px;" alt="">
         </div>
+        <h4 class="hover-effect">Currently your shopping cart is empty, please click the button to continue shopping</h4>
+        <button type="button" class="btn btn-outline-success mt-4"><a href="<?php echo ROOT_URL . '/Product/index' ?>">Shopping</a></button>
+      </div>
     </div>
-</div>
+  </div>
 
 
 <?php } ?>
 <script>
- 
-  $('#exampleModal1').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget); 
-  var orderId = button.data('order-id'); 
+  $('#exampleModal1').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget);
+    var orderId = button.data('order-id');
 
-  console.log('Order ID:', orderId);
- 
-  var form = $(this).find('form');
-  form.attr('action', '<?php echo ROOT_URL . '/User/updateInforOrder' ?>/' + orderId);
-});
+    console.log('Order ID:', orderId);
 
+    var form = $(this).find('form');
+    form.attr('action', '<?php echo ROOT_URL . '/User/updateInforOrder' ?>/' + orderId);
+  });
 </script>
 <?php require_once dirname(__DIR__) . "/partials/footer.php"; ?>

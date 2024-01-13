@@ -30,7 +30,8 @@ class Comment extends Model
             return false;
         }
         try {
-            $stmt = $this->connect->prepare("INSERT INTO $this->table (user_id, product_id, message, comment_time) VALUES (:user_id, :product_id, :message, :comment_time)");
+            $stmt = $this->connect->prepare("INSERT INTO $this->table (user_id, product_id, message, comment_time) 
+            VALUES (:user_id, :product_id, :message, :comment_time)");
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':product_id', $product_id);
             $stmt->bindParam(':message', $comment);

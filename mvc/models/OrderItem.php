@@ -69,7 +69,6 @@ class OrderItem extends Model
         if (!$this->connect) {
             return [];
         }
-
         try {
             $sql = ("SELECT order_items.id AS id, order_items.order_id AS order_id, order_items.quantity AS quantity, orders.date AS date,
                 products.price  AS unit_price, products.id AS product_id,
@@ -89,30 +88,30 @@ class OrderItem extends Model
             throw $e;
         }
     }
-
     public function totalRevenue()
     {
         if (!$this->connect) {
             return [];
         }
         try {
-            $stmt = $this->connect->prepare("SELECT SUM(p.price * oi.quantity)  AS total_revenue, 
-                                            avg(p.price * oi.quantity) as Average_price,
-                                            p.quantity AS quantity , count(oi.id) as total_order
-                                            FROM order_items as oi
-                                            JOIN products p ON p.id = oi.product_id    
-                                            JOIN orders od ON od.id = oi.order_id
-                                            GROUP BY oi.order_id");                          
-             $stmt->execute();
-             $result=$stmt->fetchAll();
-            return $result;
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            throw $e;
-        } finally {
+            $stmt = $this->connect->prepare(
+                                            "SELECT oi.order_id,SUM(p.price * oi.quantity) AS total_revenue,                                               
+                                                AVG(p.price * oi.quantity) AS average_price,
+                                                SUM(p.quantity) AS total_quantity,
+                                                COUNT(oi.id) AS total_order
+                                                FROM  order_items AS oi                                                  
+                                                JOIN products p ON p.id = oi.product_id                                                   
+                                                JOIN orders od ON od.id = oi.order_id
+                                                GROUP BY oi.order_id; ");                                               
+                                                $stmt->execute();
+                                                $result = $stmt->fetchAll();
+                                                return $result;
+                                            } catch (Exception $e) {
+                                                error_log($e->getMessage());
+                                                throw $e;
+                                            } finally {
 
-            $this->closeConnection();
-        }
-    }
-
+                                                $this->closeConnection();
+                                            }
+                                        }
 }

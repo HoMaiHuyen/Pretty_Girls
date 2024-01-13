@@ -99,7 +99,9 @@ class Product extends Model
         }
 
         try {
+
             $stmt = $this->connect->prepare("DELETE FROM $this->table WHERE id = :id");
+
             $stmt->execute(
                 [
                     ":id" => $id
@@ -169,7 +171,8 @@ function insertProduct($name, $description, $categories, $image_name, $image_url
         return [];
     }
     try {
-        $stmt = $this->connect->prepare("INSERT INTO $this->table (product_name,description,categories,image_name,image_url, quantity, price) VALUES (:product_name, :description, :categories, :image_name, :image_url, :quantity, :price)");
+        $stmt = $this->connect->prepare("INSERT INTO $this->table (product_name,description,categories,image_name,image_url, quantity, price) 
+        VALUES (:product_name, :description, :categories, :image_name, :image_url, :quantity, :price)");
         $stmt->bindParam(':product_name', $name);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':categories', $categories);

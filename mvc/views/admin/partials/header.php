@@ -18,14 +18,13 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/admin/css/admin.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/admin/css/index.css' ?>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
 
-<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
 </head>
 
 <body class="sb-nav-fixed">
 
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark " style="background-color: #0dcaf0;">
         <a class="navbar-brand ps-3" href="<?php echo ROOT_URL . '/Home/admin'  ?>">Admin page</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -43,7 +42,7 @@
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li><a class="dropdown-item" href="<?php echo ROOT_URL . '/Auth/logout'  ?>">Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -54,17 +53,17 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="<?php echo ROOT_URL . '/Admin/showProduct'; ?>">
+                        <a class="nav-link" href="<?php echo ROOT_URL . '/ProductAdmin/showProduct'; ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Products
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="<?php echo ROOT_URL . '/Admin/viewOrder' ?>" >
+                        <a class="nav-link collapsed" href="<?php echo ROOT_URL . '/Admin/viewOrder' ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Orders
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <a class="nav-link collapsed" href="<?php echo ROOT_URL . '/Admin/index' ?>" aria-controls="collapsePages">
+                        <a class="nav-link collapsed" href="<?php echo ROOT_URL . '/Admin/show' ?>" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Users
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>

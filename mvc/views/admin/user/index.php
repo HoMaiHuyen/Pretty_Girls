@@ -14,6 +14,7 @@
                       <table id="datatablesSimple" class="table table-bordered">
                           <thead>
                               <tr>
+                                  <th></th>
                                   <th scope="col">ID-User</th>
                                   <th scope="col">User Name</th>
                                   <th scope="col">Phone</th>
@@ -37,8 +38,8 @@
                                           <td>
                                               <form action="<?php echo ROOT_URL . '/Admin/delete' ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete?')">
                                                   <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                                  <button type="submit" class="link-dark" style="border: none; background: none; padding: 0;">
-                                                      <i class="fa-solid fa-trash fs-5"></i>
+                                                  <button type="submit" class="btn btn-outline-danger" style="border: none; background: none; padding: 0;">
+                                                      <i class="fa-solid fa-trash fs-5">Delete</i>
                                                   </button>
                                               </form>
                                           </td>
