@@ -21,6 +21,18 @@ require_once dirname(__DIR__) . "/partials/header.php";
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewImage() {
+        var input = document.getElementById('image');
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(input.files[0]);
+    }
+</script>
+
             <div class="col-md-7">
                 <div class="card card-profile" style="height: 95%;">
                     <div class="card-body">

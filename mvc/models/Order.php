@@ -11,15 +11,15 @@ class Order extends Model
             return [];
         }
         try {
-            $query =  "SELECT  orders.user_id as userId ,  orders.date as Dates, orders.total_price as total_price,
-          orders.payment_method as payment, order_status.status_name as status, orders.created_at AS created_at, orders.id as order_id
-          FROM $this->table
-          INNER JOIN order_status ON orders.order_status_id = order_status.id
-          INNER JOIN users ON orders.user_id = users.id
-          WHERE orders.user_id = :user_id";
-
+            $query =  "SELECT  orders.user_id as userId ,  orders.date as Dates,
+                        orders.total_price as total_price,
+                        orders.payment_method as payment, order_status.status_name as status,
+                        orders.created_at AS created_at, orders.id as order_id
+                        FROM $this->table
+                        INNER JOIN order_status ON orders.order_status_id = order_status.id
+                        INNER JOIN users ON orders.user_id = users.id
+                        WHERE orders.user_id = :user_id";
             $stmt = $this->connect->prepare($query);
-
             $stmt->execute([
                 ':user_id' => $userId,
 
@@ -40,8 +40,10 @@ class Order extends Model
             return [];
         }
         try {
-            $query = "SELECT orders.id as orderId, orders.user_id as userId ,  orders.date as Dates, orders.total_price as total_price,
-                    orders.payment_method as payment, order_status.status_name as status, orders.created_at
+            $query = "SELECT orders.id as orderId, orders.user_id as userId , 
+                    orders.date as Dates, orders.total_price as total_price,
+                    orders.payment_method as payment, order_status.status_name as status,
+                    orders.created_at
                     FROM orders
                     INNER JOIN order_status ON orders.order_status_id = order_status.id
                     INNER JOIN users ON orders.user_id = users.id
@@ -79,34 +81,33 @@ class Order extends Model
         $stmt = $this->closeConnection();
     }
 
-    public function createOrder($user_id, $order_status_id, $date, $total_price, $payment_method)
-    {
-        if (!$this->connect) {
-            return false;
-        }
-
-        try {
-            $stmt = $this->connect->prepare("INSERT INTO $this->table (user_id, order_status_id, date, total_price, payment_method, created_at) 
-            VALUES (:user_id, :order_status_id, :date, :total_price, :payment_method, NOW())");
-
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->bindParam(':order_status_id', $order_status_id);
-            $stmt->bindParam(':date', $date);
-            $stmt->bindParam(':total_price', $total_price);
-            $stmt->bindParam(':payment_method', $payment_method);
-
-            $stmt->execute();
-            $lastInsertId = $this->connect->lastInsertId();
-            return $lastInsertId;
-        } catch (PDOException $e) {
-
-            error_log("Error creating order: " . $e->getMessage());
-            return false;
-        } finally {
-            $this->closeConnection();
-        }
+   public function createOrder($user_id, $order_status_id, $date, $total_price, $payment_method)
+{
+    if (!$this->connect) {
+        return false;
     }
 
+    try {
+        $stmt = $this->connect->prepare("INSERT INTO $this->table (user_id, order_status_id, 
+            date, total_price, payment_method, created_at) 
+            VALUES (:user_id, :order_status_id, :date, :total_price, :payment_method, NOW())");
+
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':order_status_id', $order_status_id);
+        $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':total_price', $total_price);
+        $stmt->bindParam(':payment_method', $payment_method);
+
+        $stmt->execute();
+         $lastInsertId = $this->connect->lastInsertId();
+         echo $lastInsertId;
+        return $lastInsertId;
+    } catch (PDOException $e) {
+        error_log("Error creating order: " . $e->getMessage());
+    } finally {
+        $this->closeConnection();
+    }
+}
 
     public function findOrder($order_id)
     {

@@ -1,15 +1,15 @@
 <?php
 require_once dirname(__DIR__) . "/partials/header.php";
-$carts = $_SESSION['cart'];
+
 $total_price = 0;
 $product = [];
-if (isset($carts)) :
+if (isset($_SESSION['cart'])) :
     if (!empty($message)) :
 
 ?>
         <section>
             <div class="container-fluid">
-                <form action="<?php echo ROOT_URL . '/user/checkouted' ?>" method="post">
+                <form onsubmit="return confirm('Xác nhận đặt hàng ')" action="<?php echo ROOT_URL . '/Checkout/index' ?>" method="post">
                     <div class="row mt-5 checkout-page">
                         <div class="col-md-7" id="checkout-infor-user">
                             <h2 class="checkout-infor-user-title">Billing Information</h2>
@@ -48,57 +48,51 @@ if (isset($carts)) :
                                     <tbody>
                                         <?php foreach ($_SESSION['cart'] as $key => $item) : ?>
                                             <tr>
-                                                <th scope="row"><?php echo  $item['product_name']; ?></th>
+                                                <th scope="row"><?php echo  $item['product_name'];; ?></th>
                                                 <td><?php echo $item['quantity']; ?></td>
-                                                <td><?php echo $item['price']?></td>
-                                                 <?php
-                                                    $total_price += $item['price']*$item['quantity'];   
-                                                    $product=array('product_id'=>$item['product_id'],'quantity'=>$item['quantity'] );                                                   
-                                    ?>
-                                        <input type="hidden" name="product_name" value="<?php echo  $item['product_name']; ; ?>">
-                                        <input type="hidden" name="product_name" value="<?php echo $item['quantity']; ?>">
-                                        <input type="hidden" name="product_name" value="<?php echo  $item['product_name']; ; ?>">
-                                        <input type="hidden" name="product_name" value="<?php echo  $item['product_name']; ; ?>">
-                                        </tr>   
+                                                <td><?php echo $item['price'] ?></td>
+                                                <?php
+                                                $total_price += $item['price'] * $item['quantity'];
+                                                $product = array('product_id' => $item['product_id'], 'quantity' => $item['quantity']);
 
-                                <?php endforeach ;
-                                ?>
-                                
-                                <tr>
-                                    <th colspan="2">Tổng cộng</th>
-                                    <td><?php echo  $total_price ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="form-group">
-                           
-                            <input type="hidden" name="total_price" value="<?=  $total_price  ?>">
-                            <input type="hidden" name="order_status_id"  value="1">
+                                                ?>
+                                                <input type="hidden" name="product_name" value="<?php echo  $item['product_name'];; ?>">
+                                                <input type="hidden" name="product_name" value="<?php echo $item['quantity']; ?>">
+                                                <input type="hidden" name="product_name" value="<?php echo  $item['product_name'];; ?>">
+                                                <input type="hidden" name="product_name" value="<?php echo  $item['product_name'];; ?>">
+                                            </tr>
+
+                                        <?php endforeach;
+                                        ?>
+
+                                        <tr>
+                                            <th colspan="2">Tổng cộng</th>
+                                            <td><?php echo  $total_price ?></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="form-group">
+
+                                    <input type="hidden" name="total_price" value="<?= $total_price  ?>">
+                                    <input type="hidden" name="order_status_id" value="1">
+                                </div>
+                            </div>
+                            <div class="payment-options pl-4">
+                                <label for="payment">Payment by : </label>
+                                   
+                                    <label class="form-check-label" for="card">
+                                        Momo
+                                    </label>
+                                  
+                            </div>
+                            <div class="text-center mt-4">
+                                <button type="submit" name="payUrl" on style="width: 100%;" class="btn btn-outline-success">Place order</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="payment-options pl-4">
-                        <label for="payment">Payment</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="cash" name="payment" id="cash">
-                            <label class="form-check-label" for="cash">
-                                Card on delivery
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment" value="card" id="card" checked>
-                            <label class="form-check-label" for="card">
-                                Credit card
-                            </label>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-btn-outline-success">Place order</button>
-                    </div>
-                </div>
+                </form>
             </div>
-        </form>
-    </div>
-</section>
+        </section>
 
 <?php endif;
 endif ?>

@@ -1,5 +1,6 @@
 <?php require_once dirname(__DIR__) . "/partials/header.php";
-if ($orders) {
+if (isset($orders) ){
+  
 ?>
   <div class="d-flex justify-content-center ">
   </div>
