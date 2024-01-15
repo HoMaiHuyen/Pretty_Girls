@@ -70,8 +70,8 @@ class Order extends Model
         try {
             $stmt = $this->connect->prepare("SELECT * FROM $this->table ");
             $stmt->execute();
-            $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $stmt;
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return [];
@@ -178,11 +178,11 @@ class Order extends Model
 
     public function getAllOrderUser()
     {
-           if (!$this->connect) {
+        if (!$this->connect) {
             return [];
         }
         try {
-          $stmt = $this->connect->prepare("SELECT users.id AS userId, users.user_name AS user_name,
+            $stmt = $this->connect->prepare("SELECT users.id AS userId, users.user_name AS user_name,
                                                    users.phone AS phone, COUNT(orders.id) AS total_orders  ,
                                                    orders.payment_method as payment , orders.created_at as date, 
                                                    orders.id as orders_id, orders.total_price  as total_price
@@ -190,7 +190,7 @@ class Order extends Model
                                                     INNER JOIN users ON orders.user_id = users.id
                                                     INNER JOIN order_status ON orders.order_status_id = order_status.id
                                                     WHERE users.id = orders.user_id
-                                                    GROUP BY users.id");                                                                                               
+                                                    GROUP BY users.id");
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -200,6 +200,4 @@ class Order extends Model
             return [];
         }
     }
-
-   
 }

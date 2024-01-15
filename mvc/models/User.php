@@ -28,7 +28,8 @@ class User extends Model
             return [];
         }
         try {
-            $stmt = $this->connect->prepare("INSERT INTO users (user_name, phone, password, email, role, address, image_url) VALUES (:user_name, :phone, :password, :email, null, :address, null)");
+            $stmt = $this->connect->prepare("INSERT INTO users (user_name, phone, password, email, role, address, image_url) 
+            VALUES (:user_name, :phone, :password, :email, null, :address, null)");
 
             $stmt->bindParam(':user_name', $user_name);
             $stmt->bindParam(':phone', $phone);
@@ -37,11 +38,27 @@ class User extends Model
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':address', $address);
             $stmt->execute();
-
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             return [];
+        }
+    }
+
+    public function deleteUser($id)
+    {
+        if (!$this->connect) {
+            return [];
+        }
+        try {
+            $stmt = $this->connect->prepare("DELETE FROM users WHERE id = :id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $rowCount = $stmt->rowCount();
+            return $rowCount;
+        } catch (PDOException $e) {
+            error_log("Error deleting user: " . $e->getMessage());
+            return false;
         }
     }
 
@@ -63,6 +80,28 @@ class User extends Model
             return $result;
         } catch (PDOException $e) {
             error_log("Error updating user: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    function UpdateImage($id, $fileimage)
+    {
+        if (!$this->connect) {
+            return false; // Return false instead of an empty array when there's no connection
+        }
+
+        try {
+            if ($fileimage !== "") {
+                $stmt = $this->connect->prepare("UPDATE $this->table SET   id=:id,image_url = :fileimage WHERE id = :id");
+                $stmt->bindParam(':fileimage', $fileimage);
+                $stmt->bindParam(':id', $id);
+            }
+
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
             return false;
         }
     }
@@ -112,20 +151,5 @@ class User extends Model
         }
     }
 
-    public function deleteUser($id)
-    {
-        if (!$this->connect) {
-            return [];
-        }
-        try {
-            $stmt = $this->connect->prepare("DELETE FROM users WHERE id = :id");
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $stmt->execute();
-            $rowCount = $stmt->rowCount();
-            return $rowCount;
-        } catch (PDOException $e) {
-            error_log("Error deleting user: " . $e->getMessage());
-            return false;
-        }
-    }
+    
 }

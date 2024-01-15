@@ -18,7 +18,6 @@ class ProductController
     {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            // $id = $params[0];
             $productModel = new Product();
             $products = $productModel->getAllProduct();
             $product = $productModel->getOne($id);
@@ -35,17 +34,22 @@ class ProductController
         $searchResult = $productModel->search($keyword);
         if (!empty($keyword)) {
             if (empty($searchResult)) {
+                $search_key = "No results ";
                 $search_key = "No results : " . htmlspecialchars($keyword);
+
+                view('error/error', compact('search_key'));
             } else {
                 $search_key =  htmlspecialchars($keyword);
             }
         }
-        view('products/search', compact('searchResult', 'keyword','search_key','resultShop'));
+        view('products/search', compact('searchResult', 'keyword', 'search_key', 'resultShop'));
     }
-        function product(){
-           
+    
+    function product()
+    {
+
         $product = new Product();
         $products = $product->getAllProduct();
         view('products/product', compact('products'));
-        }
+    }
 }

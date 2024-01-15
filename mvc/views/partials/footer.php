@@ -74,7 +74,7 @@
                 </div>
             </div>
         </section>
-        <div class="text-center" id="footer-copyright">
+        <div class="text-center w3-black" id="footer-copyright">
             <a class="text-white" href="!#"> © 2023 Copyright: | Copyright belongs to Cosmetics Technology Investment
                 Company Limited</a>
         </div>

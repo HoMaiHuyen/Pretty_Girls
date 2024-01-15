@@ -1,33 +1,9 @@
 <?php
 require_once dirname(__DIR__) . "/models/Product.php";
-require_once dirname(__DIR__) . "/models/User.php";
-require_once dirname(__DIR__) . '/core/functions.php';
-require_once dirname(__DIR__) . "/models/Comment.php";
-class AdminController
-{
-
-    public function show()
-    {
-        $user = new User();
-        $users = $user->getAll();
-        view('admin/user/index', compact('users'));
-    }
-
-    public function delete()
-    {
-        if (isset($_POST['id'])) {
-            $id = $_POST['id'];
-            $userModel = new User();
-            $user = $userModel->getOneUser($id);
-            if ($user) {
-                $result = $userModel->deleteUser($id);
-            }
-        }
-        $users = $userModel->getAll();
-        view('admin/user/index', compact('users'));
-    }
 
 
+
+class AdminProductController{
     function showProduct()
     {
         $productModel = new Product();
@@ -145,40 +121,6 @@ class AdminController
             }
         }
     }
-    
-    public function viewOrder()
-    {
-        $orderModel = new Order();
-        $orders = $orderModel->getAllOrderUser();
-        view('admin/order/index', compact('orders'));
-    }
-
-    public function calcRevenue()
-    {
-        $orderModel = new OrderItem();
-        $revenue = $orderModel->totalRevenue();
-        view("admin/order/revenue", compact('revenue'));
-    }
-
-
-    public function showComments()
-    {
-        $comment = new Comment();
-        $comments = $comment->getAllComments();
-        view('admin/comment/index', compact('comments'));
-    }
-
-    function deleteComment()
-    {
-        if (isset($_POST['id'])) {
-            $id = $_POST['id'];
-            $commentModel = new Comment();
-            $comment = $commentModel->getCommentById($id);
-            if ($comment) {
-                $result = $commentModel->deleteCommentById($id);
-            }
-        }
-        $comments = $commentModel->getAllComments();
-        view('admin/comment/index', compact('comments'));
-    }
 }
+
+?>

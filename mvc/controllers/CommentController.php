@@ -34,11 +34,8 @@ class CommentController
         }
         header('Location:' . $_ENV['ROOT_URL'] . '/Product/show&id=' . $product_id);
     }
-
-    // User delete
     public function deleteComment()
     {
-        // $commentModel = new Comment();
         $id = $_GET['id'];
         $user_id = $_GET['user_id'];
         $product_id = $_GET['product_id'];

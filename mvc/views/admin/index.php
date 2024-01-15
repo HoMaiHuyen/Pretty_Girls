@@ -34,7 +34,7 @@ require_once  __DIR__.'/partials/header.php';
                 </div>
                 <div class="media-body text-right">
                   <h3>156</h3>
-                  <span>New Comments</span>
+                  <span>Comments</span>
                 </div>
               </div>
             </div>

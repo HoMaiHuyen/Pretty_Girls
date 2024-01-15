@@ -65,7 +65,31 @@ class UserController
             }
         }
     }
+    public function updateImage(){
+        $user = new User();
+        $image_url = $_ENV['ROOT_URL'] . '/public/image/' . basename($_FILES["image"]["name"]);
+        $id = $_POST['id'];
+        if (isset($_FILES["image"]["tmp_name"]) && !empty($_FILES["image"]["tmp_name"])) {
 
+            $imageFileType = strtolower(pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION));
+
+            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+
+                echo "Only JPG, JPEG, PNG, and GIF files are allowed.";
+                return;
+            }
+            $target_dir = dirname(dirname(__DIR__)) . '/public/image/';
+            $target_file = $target_dir . basename($_FILES["PImage_url"]["name"]);
+
+            move_uploaded_file($_FILES["PImage_url"]["tmp_name"], $target_file);
+        } else {
+
+            echo "Please choose an image.";
+            return;
+        }
+        $updateProduct = $user->UpdateImage($id, $image_url);
+
+    }
     public function shoppingCart()
     {
 
@@ -144,7 +168,6 @@ class UserController
 
     public function checkouted()
     {
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = $_POST['name'] ?? '';
             $phone = $_POST['phone'] ?? '';

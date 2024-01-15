@@ -8,7 +8,7 @@
              <div class="card mb-4">
                  <div class="card-header">
                      <i class="fas fa-table me-1"></i>
-                     <th><a href="<?php echo ROOT_URL . '/admin/insertProduct' ?>"><button type="button" class="btn btn-light btn-light" style="background-color:blue">Add Product</button></a></th>
+                     <th><a href="<?php echo ROOT_URL . '/admin/ProductAdmin/insertProduct' ?>"><button type="button" class="btn btn-light btn-light" style="background-color:blue">Add Product</button></a></th>
                  </div>
                  <div class="card-body">
 
@@ -33,8 +33,8 @@
                                      <td><img src='<?php  echo  $product['image_url'] ?>' alt='<?php echo $product['image_name'] ?>' style="width:50px;height:40px;"></td>
                                      <td><?php echo $product['quantity'] ?></td>
                                      <td><?php echo $product['price'] ?></td>
-                                     <th><a class="btn btn-outline-danger" href="<?php echo ROOT_URL . '/admin/deleteProduct&id=' . $product['id'] ?>"><i class='fa-solid fa-trash'></i>Delete</a></th>
-                                     <th><a class="btn btn-outline-success" href="<?php echo ROOT_URL . '/admin/updateProduct&id=' . $product['id'] ?>"><i class="fa fa-pencil-square" aria-hidden="true" name=""></i>Update</a></th>
+                                     <th><a class="btn btn-outline-danger" href="<?php echo ROOT_URL . '/admin/Product/deleteProduct&id=' . $product['id'] ?>"><i class='fa-solid fa-trash'></i>Delete</a></th>
+                                     <th><a class="btn btn-outline-success" href="<?php echo ROOT_URL . '/admin/Product/updateProduct&id=' . $product['id'] ?>"><i class="fa fa-pencil-square" aria-hidden="true" name=""></i>Update</a></th>
                                  </tr>
 
                              <?php } ?>
