@@ -1,11 +1,14 @@
 <?php
-require_once dirname(dirname(__DIR__)) . "/models/OrderItem.php";
+require_once dirname(__DIR__) . "/models/OrderItem.php";
+require_once dirname(__DIR__) . "/models/Order.php";
 
-class OrderAdmin{
+
+class AdminOrderController
+{
     public function viewOrder()
     {
         $orderModel = new Order();
-        $orders = $orderModel->getAllOrderUser();
+        $orders = $orderModel->getAllOrder();
         view('admin/order/index', compact('orders'));
     }
 
@@ -16,5 +19,3 @@ class OrderAdmin{
         view("admin/order/revenue", compact('revenue'));
     }
 }
-
-?>

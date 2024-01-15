@@ -1,7 +1,7 @@
 <?php
-require_once dirname(dirname(__DIR__)) . "/models/User.php";
+require_once dirname(__DIR__) . "/models/User.php";
 
-class UserAdmin{
+class AdminUserController{
     public function showUser()
     {
         $user = new User();

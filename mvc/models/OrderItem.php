@@ -1,4 +1,5 @@
 <?php
+require_once "Model.php";
 class OrderItem extends Model
 {
     protected $table = "order_items";
@@ -95,23 +96,24 @@ class OrderItem extends Model
         }
         try {
             $stmt = $this->connect->prepare(
-                                            "SELECT oi.order_id,SUM(p.price * oi.quantity) AS total_revenue,                                               
+                "SELECT oi.order_id,SUM(p.price * oi.quantity) AS total_revenue,                                               
                                                 AVG(p.price * oi.quantity) AS average_price,
                                                 SUM(p.quantity) AS total_quantity,
                                                 COUNT(oi.id) AS total_order
                                                 FROM  order_items AS oi                                                  
                                                 JOIN products p ON p.id = oi.product_id                                                   
                                                 JOIN orders od ON od.id = oi.order_id
-                                                GROUP BY oi.order_id; ");                                               
-                                                $stmt->execute();
-                                                $result = $stmt->fetchAll();
-                                                return $result;
-                                            } catch (Exception $e) {
-                                                error_log($e->getMessage());
-                                                throw $e;
-                                            } finally {
+                                                GROUP BY oi.order_id; "
+            );
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            throw $e;
+        } finally {
 
-                                                $this->closeConnection();
-                                            }
-                                        }
+            $this->closeConnection();
+        }
+    }
 }

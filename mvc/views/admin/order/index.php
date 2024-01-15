@@ -31,11 +31,11 @@
                      <td>
                        <input type="checkbox" />
                      </td>
-                     <td><?php echo htmlspecialchars($order['orders_id']) ?></td>
-                     <td><?php echo  htmlspecialchars(($order['user_name']) ) ?></td>
-                     <td><?php echo  htmlspecialchars($order['phone'])  ?></td>
-                     <td><?php echo  htmlspecialchars($order['date'])?></td>
-                     <td><?php echo  htmlspecialchars($order['total_orders']) ?></td>
+                     <td><?php echo htmlspecialchars($order['id']) ?></td>
+                     <td><?php echo  htmlspecialchars(($order['created_at'])) ?></td>
+                     <td><?php echo  htmlspecialchars($order['total_price'])  ?></td>
+                     <td><?php echo  htmlspecialchars($order['date']) ?></td>
+                      <td></td>
                      <td><?php echo  htmlspecialchars($order['total_price']) ?></td>
                      <?php $i++; ?>
                    </tr>

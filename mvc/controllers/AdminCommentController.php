@@ -1,7 +1,7 @@
 <?php
-require_once dirname(dirname(__DIR__)) . "/models/Comment.php";
+require_once dirname(__DIR__) . "/models/Comment.php";
 
-class CommentAdmin{
+class AdminCommentController{
     public function showComments()
     {
         $comment = new Comment();
