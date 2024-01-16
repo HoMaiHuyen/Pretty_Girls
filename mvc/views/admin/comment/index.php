@@ -13,6 +13,7 @@
                       <table id="datatablesSimple" class="table table-bordered">
                           <thead>
                               <tr>
+                                  <th> </th>
                                   <th scope="col">ID</th>
                                   <th scope="col">User_ID</th>
                                   <th scope="col">Product_ID</th>
@@ -25,6 +26,9 @@
                               <?php if (!empty($comments)) : ?>
                                   <?php foreach ($comments as $row) : ?>
                                       <tr>
+                                          <td>
+                                              <input type="checkbox" />
+                                          </td>
                                           <td><?php echo $row['id']; ?></td>
                                           <td><?php echo $row['user_id']; ?></td>
                                           <td><?php echo $row['product_id']; ?></td>

@@ -53,19 +53,24 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="<?php echo ROOT_URL . '/ProductAdmin/showProduct'; ?>">
+                        <a class="nav-link" href="<?php echo ROOT_URL . '/AdminProduct/showProduct'; ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Products
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="<?php echo ROOT_URL . '/Admin/viewOrder' ?>">
+                        <a class="nav-link collapsed" href="<?php echo ROOT_URL . '/AdminOrder/viewOrder' ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Orders
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <a class="nav-link collapsed" href="<?php echo ROOT_URL . '/Admin/show' ?>" aria-controls="collapsePages">
+                        <a class="nav-link collapsed" href="<?php echo ROOT_URL . '/AdminUser/showUser' ?>" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Users
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <a class="nav-link collapsed" href="<?php echo ROOT_URL . '/AdminComment/showComments' ?>" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Comments
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
 

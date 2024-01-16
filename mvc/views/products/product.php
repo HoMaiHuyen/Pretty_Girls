@@ -33,7 +33,6 @@ if (isset($products)) { ?>
 				foreach ($products as $product) :
 					if ($product['categories'] == 'face') :
 				?>
-
 						<div class="col-lg-4 col-md-4 col-sm-12 mb-5">
 							<form action="<?php echo ROOT_URL . '/user/shoppingCart' ?>" method="post">
 								<div class="product-card">
