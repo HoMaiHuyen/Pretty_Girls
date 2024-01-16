@@ -21,5 +21,4 @@
     <script src="<?php echo ROOT_URL . '/public/admin/js/databale.js' ?>"></script>
     <script src="<?php echo ROOT_URL . '/public/admin/js/form.js' ?>"></script>
     </body>
-
     </html>

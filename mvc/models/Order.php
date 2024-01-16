@@ -43,7 +43,7 @@ class Order extends Model
             $query = "SELECT orders.id as orderId, orders.user_id as userId , 
                     orders.date as Dates, orders.total_price as total_price,
                     orders.payment_method as payment, order_status.status_name as status,
-                    orders.created_at
+                    orders.created_at, users.user_name as user_name, users.email as email 
                     FROM orders
                     INNER JOIN order_status ON orders.order_status_id = order_status.id
                     INNER JOIN users ON orders.user_id = users.id
@@ -81,33 +81,33 @@ class Order extends Model
         $stmt = $this->closeConnection();
     }
 
-   public function createOrder($user_id, $order_status_id, $date, $total_price, $payment_method)
-{
-    if (!$this->connect) {
-        return false;
-    }
+    public function createOrder($user_id, $order_status_id, $date, $total_price, $payment_method)
+    {
+        if (!$this->connect) {
+            return false;
+        }
 
-    try {
-        $stmt = $this->connect->prepare("INSERT INTO $this->table (user_id, order_status_id, 
+        try {
+            $stmt = $this->connect->prepare("INSERT INTO $this->table (user_id, order_status_id, 
             date, total_price, payment_method, created_at) 
             VALUES (:user_id, :order_status_id, :date, :total_price, :payment_method, NOW())");
 
-        $stmt->bindParam(':user_id', $user_id);
-        $stmt->bindParam(':order_status_id', $order_status_id);
-        $stmt->bindParam(':date', $date);
-        $stmt->bindParam(':total_price', $total_price);
-        $stmt->bindParam(':payment_method', $payment_method);
+            $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':order_status_id', $order_status_id);
+            $stmt->bindParam(':date', $date);
+            $stmt->bindParam(':total_price', $total_price);
+            $stmt->bindParam(':payment_method', $payment_method);
 
-        $stmt->execute();
-         $lastInsertId = $this->connect->lastInsertId();
-         echo $lastInsertId;
-        return $lastInsertId;
-    } catch (PDOException $e) {
-        error_log("Error creating order: " . $e->getMessage());
-    } finally {
-        $this->closeConnection();
+            $stmt->execute();
+            $lastInsertId = $this->connect->lastInsertId();
+            echo $lastInsertId;
+            return $lastInsertId;
+        } catch (PDOException $e) {
+            error_log("Error creating order: " . $e->getMessage());
+        } finally {
+            $this->closeConnection();
+        }
     }
-}
 
     public function findOrder($order_id)
     {
@@ -201,13 +201,14 @@ class Order extends Model
             return [];
         }
     }
+
     public function getOrdersWithCountByUserId()
-{
-    if (!$this->connect) {
-        return [];
-    }
-    try {
-        $query =  "SELECT  users.id as userId, COUNT(orders.id) as orderCount,
+    {
+        if (!$this->connect) {
+            return [];
+        }
+        try {
+            $query =  "SELECT  users.id as userId,
                     orders.id as orderId, orders.date as Dates,
                     orders.total_price as total_price,
                     orders.payment_method as payment, order_status.status_name as status,
@@ -215,37 +216,44 @@ class Order extends Model
                     FROM $this->table
                     INNER JOIN users ON users.id = orders.user_id
                     INNER JOIN order_status ON orders.order_status_id = order_status.id
-                    GROUP BY users.id";
-        $stmt = $this->connect->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return false;
-    } finally {
-        $this->closeConnection();
+                   ";
+            $stmt = $this->connect->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        } finally {
+            $this->closeConnection();
+        }
     }
-}
-public function updateStatusOrder($order_id, $order_status_id){
-         if (!$this->connect) {
-        return [];
-    }
-    try{
-        $sql = "UPDATE $this->table SET order_status_id =: $order_status_id  WHERE order_id =: $order_id";
-        $stmt = $this->connect->prepare($sql);
-        $stmt->bindParam(':order_status_id', $order_status_id);
-        $stmt->execute ();
-        $stmt->execute();
-        $lastInsertId = $this->connect->lastInsertId();
-        echo $lastInsertId;
-        return $lastInsertId;
 
-    }catch(PDOException $e){
-         return false;
-    } finally {
-        $this->closeConnection();
-    }
-}
+    public function updateStatusOrder($order_id, $order_status_id)
+    {
+        if (!$this->connect) {
+            return false;
+        }
 
+        try {
+            $sql = "UPDATE $this->table SET order_status_id = :order_status_id WHERE id = :order_id";
+            $stmt = $this->connect->prepare($sql);
+            $stmt->bindParam(':order_status_id', $order_status_id, PDO::PARAM_INT);
+            $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $result = $stmt->rowCount();
+
+            if ($result > 0) {
+                return $result;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage() . " in " . $e->getFile() . " on line " . $e->getLine();
+            return false;
+        } finally {
+            $this->closeConnection();
+        }
+    }
 }
