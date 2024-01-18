@@ -104,7 +104,7 @@ class AuthController
                     $hashedPassword = $data['password'];
 
                     if (password_verify($password, $hashedPassword)) {
-                        $_SESSION['user']['user_id'] = $data['id'];
+                        $_SESSION['user']= $data;
 
                         if ($data['role'] == 'admin') {
                             header("Location: " . htmlspecialchars($_ENV['ROOT_URL'] . "/Home/admin", ENT_QUOTES, 'UTF-8'));
@@ -131,7 +131,7 @@ class AuthController
     public function logout()
     {
         $message = "success";
-        unset($_SESSION['user']['user_id']);
+        unset($_SESSION['user']['id']);
         $redirectUrl = htmlspecialchars($_ENV['ROOT_URL'] . "/auth/login&message=" . $message, ENT_QUOTES, 'UTF-8');
         header("Location: " . $redirectUrl);
     }

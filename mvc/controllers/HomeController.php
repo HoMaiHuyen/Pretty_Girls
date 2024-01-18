@@ -8,12 +8,15 @@ class HomeController
 {
     function index()
     {
+        $user_id = $_SESSION['user']['id'];
+            $user = new User();
+            $user = $user->getOneUser($user_id);
         $productModel = new Product();
         $productModel->popular();
         $resultPopular =  $productModel->popular();
         $shopModel = new Shop();
         $resultShop = $shopModel->getShop();
-        view("home/index", compact('resultPopular', 'resultShop'));
+        view("home/index", compact('resultPopular', 'resultShop','user'));
     }
 
     function AboutUs($page)

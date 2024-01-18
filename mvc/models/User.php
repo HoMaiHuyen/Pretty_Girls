@@ -84,19 +84,16 @@ class User extends Model
         }
     }
 
-    function UpdateImage($id, $fileimage)
+    function UpdateImage($id, $image_url)
     {
         if (!$this->connect) {
             return false; // Return false instead of an empty array when there's no connection
         }
 
         try {
-            if ($fileimage !== "") {
-                $stmt = $this->connect->prepare("UPDATE $this->table SET   id=:id,image_url = :fileimage WHERE id = :id");
-                $stmt->bindParam(':fileimage', $fileimage);
-                $stmt->bindParam(':id', $id);
-            }
-
+            $stmt = $this->connect->prepare("UPDATE $this->table SET image_url = :image_url WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':image_url', $image_url);
             $stmt->execute();
 
             return true;
@@ -150,6 +147,4 @@ class User extends Model
             return [];
         }
     }
-
-    
 }
