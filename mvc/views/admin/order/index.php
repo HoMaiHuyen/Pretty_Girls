@@ -1,5 +1,15 @@
  <?php require_once dirname(__DIR__) . '/partials/header.php';
  $orderTemp=[];
+ if(isset($_GET['message'])){
+  if($_GET['message']=='success'){
+  ?>
+    <script>
+    alert("Cập nhật thành công")
+    </script>
+   <?php  
+ }
+ }
+
   if (isset($orderss)) {
   ?>
    <div id="layoutSidenav_content">

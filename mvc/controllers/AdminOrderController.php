@@ -63,12 +63,15 @@ class AdminOrderController
 
             $sendmail->setBodyEmail();
             $sendmail->sendMail($sendEmail);
-            header('Location: ' . $_ENV['ROOT_URL'] . '/AdminOrder/viewOrder?message=' . $status_name);
+            $message='success';
+            header('Location: ' . $_ENV['ROOT_URL'] . '/AdminOrder/viewOrder&message=' . $message);
             } else {
-                echo "Failed to update order status.";
+                $message='failed';
+                header('Location: ' . $_ENV['ROOT_URL'] . '/AdminOrder/viewOrder&message=' . $message);
             }
         } else {
-            echo "Incomplete form data.";
+            $message='failed';
+            header('Location: ' . $_ENV['ROOT_URL'] . '/AdminOrder/viewOrder&message=' . $message);
         }
     }
 }
