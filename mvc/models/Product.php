@@ -114,16 +114,16 @@ class Product extends Model
         }
     }
 
-    function updateProduct($id, $name, $description, $categories, $image_name, $fileimage, $qty, $price)
+    function updateProduct($id, $name, $description, $categories, $image_name, $image_url, $qty, $price)
 {
     if (!$this->connect) {
         return false; // Return false instead of an empty array when there's no connection
     }
 
     try {
-        if ($fileimage !== "") {
-            $stmt = $this->connect->prepare("UPDATE $this->table SET product_name = :product_name, description = :description, categories = :categories, image_name = :image_name, image_url = :fileimage, quantity = :quantity, price = :price WHERE id = :id");
-            $stmt->bindParam(':fileimage', $fileimage); 
+        if ($image_url !== "") {
+            $stmt = $this->connect->prepare("UPDATE $this->table SET product_name = :product_name, description = :description, categories = :categories, image_name = :image_name, image_url = :image_url, quantity = :quantity, price = :price WHERE id = :id");
+            $stmt->bindParam(':image_url', $image_url); 
         } else {
             $stmt = $this->connect->prepare("UPDATE $this->table SET product_name = :product_name, description = :description, categories = :categories, image_name = :image_name, quantity = :quantity, price = :price WHERE id = :id");
         }

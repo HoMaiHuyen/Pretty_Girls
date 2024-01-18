@@ -3,7 +3,7 @@
  <div id="layoutSidenav_content">
      <main>
          <div class="container">
-             <form action="<?php echo ROOT_URL . '/admin/deleteProduct1' ?>" method="post">
+             <form action="<?php echo ROOT_URL . '/AdminProduct/deleteProduct1' ?>" method="post">
                  <div class="container" style="width:500px;height:400px; background-color:aqua;">
                      <div>
                          <div class="float-start">Product</div>
@@ -14,8 +14,8 @@
                      <p>Are you want to Delete ?</p>
                      <hr>
                      <input type="hidden" class="form-control" id="id"  name="id" value="<?php echo $productOne['id']?>">
-                     <button ><a href="<?php echo ROOT_URL . '/admin/showProduct' ?>"></a>No</button>
-                     <button> <a href="<?php echo ROOT_URL . '/admin/deleteProduct1' ?>"></a>Yes</button>
+                     <button ><a href="<?php echo ROOT_URL . '/AdminProduct/showProduct' ?>"></a>No</button>
+                     <button> <a href="<?php echo ROOT_URL . '/AdminProduct/deleteProduct1' ?>"></a>Yes</button>
                  </div>
                  <div>
                     

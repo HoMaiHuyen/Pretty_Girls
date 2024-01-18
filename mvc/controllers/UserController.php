@@ -24,7 +24,7 @@ class UserController
     public function show()
     {
 
-        $user_id = $_SESSION['user']['user_id'];
+        $user_id = $_SESSION['user']['id'];
         $user = new User();
         $user = $user->getOneUser($user_id);
 
@@ -65,31 +65,44 @@ class UserController
             }
         }
     }
-    public function updateImage(){
-        $user = new User();
-        $image_url = $_ENV['ROOT_URL'] . '/public/image/' . basename($_FILES["image"]["name"]);
-        $id = $_POST['id'];
-        if (isset($_FILES["image"]["tmp_name"]) && !empty($_FILES["image"]["tmp_name"])) {
-
-            $imageFileType = strtolower(pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION));
-
-            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-
-                echo "Only JPG, JPEG, PNG, and GIF files are allowed.";
-                return;
+    public function updateImage()
+    {
+        $image_url = "";
+        $image_url_error = "";
+        if (isset($_POST['updateProfile'])) {
+            $image_url = isset($_POST['PImage_url']) ? htmlspecialchars($_POST['PImage_url']) : "";
+            $id = $_POST['id'];
+            if (isset($_FILES["PImage_url"]["tmp_name"]) && !empty($_FILES["PImage_url"]["tmp_name"])) {
+                $imageFileType = strtolower(pathinfo($_FILES["PImage_url"]["name"], PATHINFO_EXTENSION));
+                if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+                    $image_url_error = "Invalid photo";
+                } else {
+                    $target_dir = dirname(dirname(__DIR__)) . '/public/image/';
+                    $target_file = $target_dir . basename($_FILES["PImage_url"]["name"]);
+                    move_uploaded_file($_FILES["PImage_url"]["tmp_name"], $target_file);
+                    if (!file_exists($target_file)) {
+                        move_uploaded_file($_FILES["PImage_url"]["tmp_name"], $target_file);
+                    }
+                    $image_url = $_ENV['ROOT_URL'] . '/public/image/' . basename($_FILES["PImage_url"]["name"]);
+                }
             }
-            $target_dir = dirname(dirname(__DIR__)) . '/public/image/';
-            $target_file = $target_dir . basename($_FILES["PImage_url"]["name"]);
-
-            move_uploaded_file($_FILES["PImage_url"]["tmp_name"], $target_file);
-        } else {
-
-            echo "Please choose an image.";
-            return;
         }
-        $updateProduct = $user->UpdateImage($id, $image_url);
-
+        if (empty($image_url_error)) {
+            $user = new User();
+            $updateProfile = $user->UpdateImage($id, $image_url);
+            if ($updateProfile == true) {
+                header("Location:" . $_ENV['ROOT_URL'] . "/User/show");
+                exit();
+            }
+        } else {
+            $user_id = $_SESSION['user']['id'];
+            $user = new User();
+            $user = $user->getOneUser($user_id);
+            view("user-profile/index", compact('image_url_error','user'));
+            // header("Location:" . $_ENV['ROOT_URL'] . "/User/show");
+        }
     }
+
     public function shoppingCart()
     {
 
@@ -117,8 +130,6 @@ class UserController
                     $newqty = $qty + $item['quantity'];
                     $_SESSION['cart'][$key]['quantity'] = $newqty;
                     $flag = 1;
-
-
                     break;
                 }
             }
@@ -126,8 +137,7 @@ class UserController
             if ($flag == 0) {
                 $item = array('product_id' => $id, 'product_name' => $name, 'image_url' => $image, 'price' => $price, 'quantity' => $qty);
                 $_SESSION['cart'][] = $item;
-                
-            } 
+            }
             header('Location:' . $_ENV['ROOT_URL'] . '/Product/index');
             setcookie("success", "Added order successful!", time() + 1, "/", "", 0);
         }
@@ -155,7 +165,7 @@ class UserController
     public function checkout()
     {
         $_SESSION['cart'];
-        $user_id = $_SESSION['user']['user_id'];
+        $user_id = $_SESSION['user']['id'];
         $userModel = new User();
         $user = $userModel->getOneUser($user_id);
         $message = 'success';
@@ -175,7 +185,7 @@ class UserController
             $address = $_POST['address'] ?? '';
             $message = '';
             $order_status_id = $_POST['order_status_id'] ?? '';
-            $user_id = $_SESSION['user']['user_id'] ?? '';
+            $user_id = $_SESSION['user']['id'] ?? '';
             $payment = $_POST['payment'] ?? '';
             $total_price = $_POST['total_price'] ?? '';
 
@@ -187,7 +197,7 @@ class UserController
             $address_safe = htmlspecialchars($address, ENT_QUOTES);
 
             $_SESSION['user'] = array(
-                'user_id' => $user_id,
+                'id' => $user_id,
                 'user_name' => $user_name_safe,
                 'phone' => $phone_safe,
                 'email' =>  $email_safe,
@@ -227,7 +237,7 @@ class UserController
     public function viewOrder($user_id)
     {
 
-        $user_id = $_SESSION['user']['user_id'];
+        $user_id = $_SESSION['user']['id'];
 
         $userModel = new User();
         $userInfor = $userModel->getOneUser($user_id);
@@ -286,7 +296,7 @@ class UserController
         $phone = $_POST['phone'];
         $email = $_POST['email'];
         $address = $_POST['address'];
-        $user_id = $_SESSION['user']['user_id'];
+        $user_id = $_SESSION['user']['id'];
         $order = new Order();
         $orderDetails = $order->getOrdersByUserId($user_id);
         print_r($orderDetails);
@@ -306,7 +316,7 @@ class UserController
                 $message = 'failed';
             } else {
                 $_SESSION['user'] = array(
-                    'user_id' => $user_id,
+                    'id' => $user_id,
                     'user_name' => $name,
                     'phone' => $phone,
                     'email' => $email,

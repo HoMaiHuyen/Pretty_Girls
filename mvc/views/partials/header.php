@@ -54,9 +54,17 @@
             </div>
 
             <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php isset($_SESSION['user']['user_id']) ?>
+                <?php isset($_SESSION['user']['id']) ?>
                 <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-circle-user fa-xl" style="color: gray; margin-right: 50px;font-size: 25px;"></i>
+                    <?php
+                    if (!empty($_SESSION['user']['image_url'])) {
+                    ?>
+                        <img src='<?php echo  $_SESSION['user']['image_url'] ?>' alt="" id="output" class="rounded-circle" style="width:28px;height:28px;margin-right: 50px;margin-top:0px">
+                    <?php } else {
+                    ?>
+                        <i class="fa-solid fa-circle-user fa-xl" style="color: gray; margin-right: 50px;font-size: 25px;"></i>
+                    <?php }
+                    ?>
                 </a>
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

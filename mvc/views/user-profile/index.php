@@ -6,18 +6,16 @@ require_once dirname(__DIR__) . "/partials/header.php";
     <div id="profile" class="tabcontent">
         <div class="row">
             <div class="col-md-3 mb-3 main-profile">
-                <form action="<?php echo ROOT_URL . '/User/updateImage' ?>">
+                <form action="<?php echo ROOT_URL . '/User/updateImage' ?>" method="post" enctype="multipart/form-data">
                     <div class="d-flex flex-column align-items-center text-center" id="image-profile">
-                        <img src="<?php echo isset($user['image_url']) ? $user['image_url'] : '' ?>" alt="<?php echo isset($user['image_name']) ? $user['image_name'] : '' ?>" id="output" class="rounded-circle">
+                        <img src='<?php echo  $user['image_url'] ?>' alt="" id="output" class="rounded-circle">
                         <div class="mt-3">
                             <h4><?php echo $user['user_name'] ?></h4>
                             <div class="mb-3">
                                 <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
-                                <input type="file" id="image" accept="image*/" name="image" class=" d-none">
-                                <input type="file" class="form-control" id="PImage_url" name="image">
-                                <label for="PImage_url" class="btn btn-outline-secondary pt-2 " id="button-upload-image">
-                                    <i class="fas fa-upload"></i> Avatar
-                                </label>
+                                <input type="file" class="form-control" id="PImage_url" name="PImage_url" value="<?php echo $user['image_url'] ?>">
+                                <p style="color: red;"><?php echo empty($image_url_error)? "" : $image_url_error ?></p>
+                                <button type="submit" class="btn btn-primary" name="updateProfile" >Update</button>
                             </div>
                         </div>
                     </div>

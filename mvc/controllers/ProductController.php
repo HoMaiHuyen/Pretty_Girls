@@ -27,7 +27,9 @@ class ProductController
         }
     }
     public  function search($keyword)
-    {
+    {   
+        $shopModel = new Shop();
+        $resultShop = $shopModel->getShop();
         $search_key = "";
         $keyword = isset($_POST['key']) ? htmlspecialchars($_POST['key']) : '';
         $productModel = new Product();
