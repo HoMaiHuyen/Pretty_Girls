@@ -68,6 +68,11 @@
                             Users
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
+                        <a class="nav-link collapsed" href="<?php echo ROOT_URL . '/AdminComment/showComments' ?>" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Comments
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
 
                         <div class="sb-sidenav-menu-heading">Addons</div>
                         <a class="nav-link" href="!#">
