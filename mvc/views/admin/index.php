@@ -24,7 +24,7 @@ require_once  __DIR__.'/partials/header.php';
         </a>
       </div>
       <div class="col-xl-3 col-sm-6 col-12">
-       <a href="#!"  class="card-content-admin">
+       <a href="<?php echo ROOT_URL . '/AdminComment/showComments' ?>"  class="card-content-admin">
         <div class="card">
           <div class="card-content">
             <div class="card-body">
@@ -43,7 +43,7 @@ require_once  __DIR__.'/partials/header.php';
        </a> 
       </div>
       <div class="col-xl-3 col-sm-6 col-12">
-       <a href="<?php echo ROOT_URL . '/Admin/calcRevenue' ?>"  class="card-content-admin">
+       <a href="<?php echo ROOT_URL . '/AdminOrder/calcRevenue' ?>"  class="card-content-admin">
         <div class="card">
           <div class="card-content">
             <div class="card-body">

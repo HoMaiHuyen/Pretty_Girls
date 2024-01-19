@@ -39,24 +39,24 @@ class UserController
     }
 
     public function updateUser()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST['buton-save'])) {
-                $id = $_POST['id'];
-                $name = isset($_POST['name']) ? $_POST['name'] : '';
-                $nameClear = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST['buton-save'])) {
+            $id = $_POST['id'];
+            $name = isset($_POST['name']) ? $_POST['name'] : '';
+            $nameClear = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
 
-                $email = isset($_POST['email']) ? $_POST['email'] : '';
-                $emailClear = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
+            $email = isset($_POST['email']) ? $_POST['email'] : '';
+            $emailClear = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
 
-                $address = isset($_POST['address']) ? $_POST['address'] : '';
-                $addressClear = htmlspecialchars($address, ENT_QUOTES, 'UTF-8');
+            $address = isset($_POST['address']) ? $_POST['address'] : '';
+            $addressClear = htmlspecialchars($address, ENT_QUOTES, 'UTF-8');
 
-                $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
-                $phoneClear = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
+            $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
+            $phoneClear = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
 
-                $user = new User();
-                $result = $user->updateUser($id, $nameClear, $phoneClear, $emailClear, $addressClear);
+            $user = new User();
+            $result = $user->updateUser($id, $nameClear, $phoneClear, $emailClear, $addressClear);
 
                 if ($result !== false) {
                     header("Location:" . $_ENV['ROOT_URL'] . "/User/show");
@@ -65,6 +65,7 @@ class UserController
             }
         }
     }
+      
     public function updateImage()
     {
         $image_url = "";
@@ -176,14 +177,14 @@ class UserController
         view('user-profile/checkout-page', compact('user', 'message'));
     }
 
-    public function checkouted()
+   public function checkouted()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = $_POST['name'] ?? '';
             $phone = $_POST['phone'] ?? '';
             $email = $_POST['email'] ?? '';
             $address = $_POST['address'] ?? '';
-            $message = '';
+            $message = 'failed';
             $order_status_id = $_POST['order_status_id'] ?? '';
             $user_id = $_SESSION['user']['id'] ?? '';
             $payment = $_POST['payment'] ?? '';

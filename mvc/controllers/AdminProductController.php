@@ -223,7 +223,6 @@ class AdminProductController
                 $search_key = "No results ";
                 $search_key = "No results : " . htmlspecialchars($keyword);
 
-                view('error/error', compact('search_key'));
             } else {
                 $search_key =  htmlspecialchars($keyword);
             }
