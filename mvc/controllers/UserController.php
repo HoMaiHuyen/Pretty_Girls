@@ -119,7 +119,7 @@ class UserController
                 $_SESSION['cart']['product_id']['quantity']++;
             } elseif (isset($_POST['PQuantity']) && $_POST['PQuantity'] > 0) {
                 $qty = $_POST['PQuantity'];
-                $count = $qty;;
+                $count = $qty;
             } else {
                 $qty = 1;
                 $count = $qty;

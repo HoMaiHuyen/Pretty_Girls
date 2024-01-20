@@ -43,7 +43,7 @@ class CheckoutController
             $payment = $_POST['payment'] ?? '';
             $total_price = $_POST['total_price'] ?? '';
 
-            // Chuẩn bị dữ liệu cho đơn hàng và cập nhật số lượng sản phẩm
+          
             $current = new DateTime();
             $currentFormated = $current->format('Y-m-d');
             $user_name_safe = htmlspecialchars($name, ENT_QUOTES);
@@ -80,7 +80,7 @@ class CheckoutController
             }
 
          
-            $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+            $endpoint = "";
             $partnerCode = 'MOMOBKUN20180529';
             $accessKey = 'klm05TvNBzhg7h7j';
             $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
@@ -122,8 +122,7 @@ class CheckoutController
             if (isset($jsonResult['payUrl'])) {
                 $payUrl = $jsonResult['payUrl'];
                 header('Location: ' . $payUrl);
-            } else {
-                
+            } else {                
                 echo "Lỗi: Khóa 'payUrl' ";
             }
         }
