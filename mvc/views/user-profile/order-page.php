@@ -56,6 +56,7 @@ if (isset($orders) ){
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
+      <form action="" method="post">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -65,11 +66,12 @@ if (isset($orders) ){
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-outline-danger">
-            <a class="ml-3" href="<?php echo ROOT_URL . '/user/deleteOrder&id=' . $order['order_id'] ?>">Yes</a>
+          <button type="submit" name="btmm" class="btn btn-outline-danger">
+            Yes
           </button>
         </div>
       </div>
+      </form>
     </div>
   </div>
 
@@ -136,7 +138,7 @@ if (isset($orders) ){
     console.log('Order ID:', orderId);
 
     var form = $(this).find('form');
-    form.attr('action', '<?php echo ROOT_URL . '/User/updateInforOrder' ?>/' + orderId);
+    form.attr('action', '<?php echo ROOT_URL . '/User/updateInforOrder' ?>/' + 20);
   });
 </script>
 <?php require_once dirname(__DIR__) . "/partials/footer.php"; ?>

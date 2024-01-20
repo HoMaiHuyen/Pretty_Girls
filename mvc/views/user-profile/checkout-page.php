@@ -9,7 +9,7 @@ if (isset($carts)) :
 ?>
         <section>
             <div class="container-fluid">
-                <form  onsubmit="return confirm('Xác nhận đặt hàng ')" action="<?php echo ROOT_URL . '/Checkout2/checkoutOnline' ?>" method="post">
+                <form onsubmit="return ("Are you want to order")" action="<?php echo ROOT_URL . '/Checkout/checkoutOnline' ?>" method="post">
                     <div class="row mt-5 checkout-page">
                         <div class="col-md-7" id="checkout-infor-user">
                             <h2 class="checkout-infor-user-title">Billing Information</h2>
@@ -92,7 +92,7 @@ if (isset($carts)) :
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="submit"  name="redirect" class="btn btn-outline-success">Place order</button>
+                        <button type="submit" name="redirect" class="btn btn-outline-success">Place order</button>
                     </div>
                 </div>
             </div>

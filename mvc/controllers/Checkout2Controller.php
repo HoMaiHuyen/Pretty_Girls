@@ -101,6 +101,7 @@ class Checkout2Controller
         if (isset($urlComponents['query'])) {
 
             parse_str($urlComponents['query'], $queryParams);
+
             $user_id = $_SESSION['user']['id'];
 
             $current = new DateTime();
@@ -110,10 +111,11 @@ class Checkout2Controller
                 "order_status_id" => 1,
                 "date" => $currentFormated,
                 "total_price" => $queryParams['vnp_Amount'],
-                "payment_method" => $queryParams['vnp_BankCode']
+                "payment_method" => $queryParams['vnp_BankCode'],
+                "vnp_TransactionNo"=>  $queryParams['vnp_TransactionNo']
             ];
         }
-        if ($data != 0) {
+        if ($data != []) {
             $orderModel = new Order();
             $order_id = $orderModel->createOrder($data['user_id'], $data['order_status_id'], $data['date'], $data['total_price'], $data['payment_method']);
             if ($order_id > 0) {
@@ -133,9 +135,10 @@ class Checkout2Controller
                     $quantity = $product['quantity'];
                     $order_item->createOrderItem($order_id, $product_id, $quantity, $unit_price, $product_image);
                 }
-                unset($_SESSION['cart']);
+              
             }
+            view('user-profile/thanks', compact('data')); 
         }
-        view('user-profile/thanks', compact('data'));       
+            
     }
 }

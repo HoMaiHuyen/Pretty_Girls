@@ -4,7 +4,7 @@
   if($_GET['message']=='success'){
   ?>
     <script>
-    alert("Cập nhật thành công")
+    alert("The order changed successful")
     </script>
    <?php  
  }
