@@ -26,6 +26,13 @@ class CheckoutController
         view('user-profile/checkout-page', compact('user', 'message'));
     }
 
+    public function buyNow(){
+        if(isset($_GET['product_id']) && !empty($_GET['product_id'])){
+            $product_id= $_GET['product_id'];
+            $productModel= new Product();
+            $productModel->getOne($product_id);
+        }
+    }
      public function shoppingCart()
     {
 

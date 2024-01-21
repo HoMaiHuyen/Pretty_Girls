@@ -4,12 +4,17 @@ require_once dirname(__DIR__) . "/models/Product.php";
 require_once dirname(__DIR__) . "/models/User.php";
 class CommentController
 {
+    
+    public function __construct()
+    {
+        $authMiddleware = new AuthMiddleware();
+    }
     public function comment()
     {
         $commentModel = new Comment();
         $product_id = $_POST['PId'];
-        if (isset($_SESSION['user']['user_id'])) {
-            $userid = $_SESSION['user']['user_id'];
+        if (isset($_SESSION['user']['id'])) {
+            $userid = $_SESSION['user']['id'];
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -32,8 +37,9 @@ class CommentController
                 }
             } 
         }
-        header('Location:' . $_ENV['ROOT_URL'] . '/Product/show&id=' . $product_id);
+        header('Location:' . $_ENV['ROOT_URL'] . '/Product/details&id=' . $product_id);
     }
+
     public function deleteComment()
     {
         $id = $_GET['id'];

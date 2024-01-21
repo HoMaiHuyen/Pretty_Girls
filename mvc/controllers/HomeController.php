@@ -8,7 +8,7 @@ class HomeController
 {
     function index()
     {
-        if (isset($_SESSION['user'])) {
+        if (isset($_SESSION['user']['id'])) {
             $user_id = $_SESSION['user']['id'];
             $user = new User();
             $user = $user->getOneUser($user_id);

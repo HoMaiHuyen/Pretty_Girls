@@ -10,16 +10,16 @@
 
 
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/footer.css' ?>">
-    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/product-detail.css' ?>">
+   
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/form.css' ?>">
-    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/product.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/user-profile.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/about-us.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/checkout-page.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/order-page.css' ?>">
-    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/products.css' ?>">
+    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/product.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/pageloading.css' ?>">
     <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/homepage.css' ?>">
+    <link rel="stylesheet" href="<?php echo ROOT_URL . '/public/css/detail.css' ?>">
     <link rel="stylesheet" href=" https://www.w3schools.com/w3css/4/w3.css">
 
 

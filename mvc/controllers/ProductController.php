@@ -2,8 +2,6 @@
 require_once dirname(__DIR__) . "/models/Product.php";
 require_once dirname(__DIR__) . "/models/Shop.php";
 require_once dirname(__DIR__) . "/models/Comment.php";
-
-
 class ProductController
 {
     public function index()
@@ -23,7 +21,7 @@ class ProductController
             $product = $productModel->getOne($id);
             $comment = new Comment();
             $comments = $comment->getComments($id);
-            view('products/show', compact('product', 'products', 'comments'));
+            view('products/product-detail', compact('product', 'products', 'comments'));
         }
     }
     public  function search($keyword)
@@ -54,4 +52,17 @@ class ProductController
         $products = $product->getAllProduct();
         view('products/product', compact('products'));
     }
+
+     function details()
+    {
+          if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $productModel = new Product();
+            $products = $productModel->getAllProduct();
+            $product = $productModel->getOne($id);
+            $comment = new Comment();
+            $comments = $comment->getComments($id);
+            view('products/product-detail', compact('product', 'products', 'comments'));
+    }
+}
 }

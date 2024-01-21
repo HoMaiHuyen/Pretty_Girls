@@ -1,7 +1,12 @@
 <?php
 require_once dirname(__DIR__) . "/models/User.php";
-
+require_once  dirname(__DIR__) . "/core/Middlewares/AuthMiddleware.php";
 class AdminUserController{
+    
+    public function __construct()
+    {
+        $authMiddleware = new AuthMiddleware();
+    }
     public function showUser()
     {
         $user = new User();
