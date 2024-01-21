@@ -4,7 +4,7 @@ require_once dirname(__DIR__) . "/models/Order.php";
 require_once dirname(__DIR__) . "/models/User.php";
 require_once dirname(__DIR__) . "/models/OrderItem.php";
 require_once dirname(__DIR__) . "/models/Product.php";
-
+require_once dirname(__DIR__) . "/models/Shop.php";
 class CheckoutController
 {
     public function index()
@@ -20,6 +20,7 @@ class CheckoutController
         }
         view('user-profile/checkout-page', compact('user', 'message'));
     }
+
      public function shoppingCart()
     {
 
@@ -186,7 +187,7 @@ class CheckoutController
                     $product_id = $products['product_id'];
                     $product->updateProductQ($product_id, $quantityP);
                 }
-
+                unset($_SESSION['cart']);
                 $order_item = new OrderItem();
                 foreach ($productModel as $product) {
                     $product_id = $product['product_id'];
@@ -198,7 +199,6 @@ class CheckoutController
                
               
             }
-             $_SESSION['cart']=[];
             view('user-profile/thanks', compact('data')); 
         }
             

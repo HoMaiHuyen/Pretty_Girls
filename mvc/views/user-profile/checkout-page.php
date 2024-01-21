@@ -77,7 +77,7 @@ if (isset($carts)) :
                         </div>
                     </div>
                     <div class="payment-options pl-4">
-                        <label for="payment">Payment</label>
+                        <label for="payment">Payment :</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" value="VNPAY" name="payment" id="cash">
                             <label class="form-check-label" for="cash">
@@ -92,7 +92,7 @@ if (isset($carts)) :
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="submit" name="redirect" class="btn btn-outline-success">Place order</button>
+                        <button type="submit" style="width: 100%;" name="redirect" class="btn btn-outline-success mt-1">Place order</button>
                     </div>
                 </div>
             </div>

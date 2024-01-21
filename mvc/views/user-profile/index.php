@@ -21,9 +21,7 @@ require_once dirname(__DIR__) . "/partials/header.php";
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
-</div>
+       
 
 <script>
     function previewImage() {

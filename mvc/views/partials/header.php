@@ -50,7 +50,7 @@
         <div class="icon-nav">
             <div class="item1">
 
-                <a href="<?php echo ROOT_URL . '/user/shoppingCart' ?>"><i class="fa-solid fa-cart-shopping" style="font: size 40px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i></a>
+                <a href="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>"><i class="fa-solid fa-cart-shopping" style="font: size 40px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i></a>
             </div>
 
             <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

@@ -1,6 +1,12 @@
 <?php require_once dirname(__DIR__) . "/partials/header.php";
 if (isset($orders) ){
-  
+  if (isset($_COOKIE['success'])) {
+?>
+	<script>
+		alert("Deleted order successful");
+	</script>
+<?php
+}
 ?>
   <div class="d-flex justify-content-center ">
   </div>
@@ -28,11 +34,11 @@ if (isset($orders) ){
                     <td><?php echo  htmlspecialchars($order['total_price']) ?></td>
                     <td><span style="font-size: 10px;" class="btn btn-success"><?php echo htmlspecialchars($order['status']) ?></span></td>
                     <td>
-                      <button type="button" class="btn  <?php $order['order_id'] ?>  btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      <button type="button" class="btn  <?php $order['order_id'] ?>  btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal1" data-order-id="<?php echo $order['order_id']; ?>">
                         <i class="fa-solid fa-pencil"></i>
                       </button>
 
-                      <button type="button" class="btn btn-outline-success" <?php $order['order_id'] ?> data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-toggle="modal" data-bs-target="#exampleModal1" data-order-id="<?php echo $order['order_id']; ?>">
+                      <button type="button" class="btn btn-outline-success" <?php $order['order_id'] ?> data-bs-toggle="modal" data-bs-target="#exampleModal"  data-order-id="<?php echo $order['order_id']; ?>">
                         <i class="fa-solid fa-trash"></i>
                       </button>
                     </td>
@@ -56,7 +62,7 @@ if (isset($orders) ){
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-      <form action="" method="post">
+      <form  method="post">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -78,7 +84,7 @@ if (isset($orders) ){
   <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form method="POST" action="<?php echo ROOT_URL . '/User/updateInforOrder' ?>">
+        <form method="POST">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel1">information for order</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -131,14 +137,26 @@ if (isset($orders) ){
 
 <?php } ?>
 <script>
-  $('#exampleModal1').on('show.bs.modal', function(event) {
+  $('#exampleModal').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget);
     var orderId = button.data('order-id');
 
     console.log('Order ID:', orderId);
 
     var form = $(this).find('form');
-    form.attr('action', '<?php echo ROOT_URL . '/User/updateInforOrder' ?>/' + 20);
+    form.attr('action', '<?php echo ROOT_URL . '/User/deleteOrder&id=' ?>' + orderId);
+  });
+  
+</script>
+<script> 
+$('#exampleModal1').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget);
+    var orderId = button.data('order-id');
+
+    console.log('Order ID:', orderId);
+
+    var form = $(this).find('form');
+    form.attr('action', '<?php echo ROOT_URL . '/User/updateInforOrder&id=' ?>' + orderId);
   });
 </script>
 <?php require_once dirname(__DIR__) . "/partials/footer.php"; ?>

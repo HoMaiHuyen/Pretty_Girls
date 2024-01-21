@@ -258,6 +258,7 @@ class UserController
         if (!$order_id) {
             $message = 'failed';
             header('Location: ' . $_ENV['ROOT_URL'] . '/user/viewOrder?message=' . $message);
+            exit();
         }
 
         $order = new Order();
@@ -279,6 +280,7 @@ class UserController
                         $message = 'success';
 
                         header('Location: ' . $_ENV['ROOT_URL'] . '/user/viewOrder?message=' . $message);
+                        setcookie("success", "Added order successful!", time() + 1, "/", "", 0);
                         exit();
                     }
                 }
