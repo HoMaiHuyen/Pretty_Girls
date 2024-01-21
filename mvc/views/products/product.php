@@ -26,108 +26,44 @@ if (isset($products)) { ?>
 		</div>
 	</div>
 	<section>
-		<div class="container">
-			<div class="row mt-5">
-				<?php
-				$count = 0;
-				foreach ($products as $product) :
-					if ($product['categories'] == 'face') :
-				?>
-						<div class="col-lg-4 col-md-4 col-sm-12 mb-5">
-							<form action="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>" method="post">
-								<div class="product-card">
-									<a href="<?php echo ROOT_URL . '/Product/show&id=' . $product['id'] ?>">
-										<div class="product-tumb">
-											<img src="<?php echo $product['image_url'] ?>" class="img-fluid" alt="" <?php echo $product['image_name'] ?>">
-										</div>
-									</a>
-									<div class="product-details">
-										<span class="product-catagory product-price"><?php echo $product['price'] ?><small> VNĐ</small></span>
-										<h4><a href="#!"><?php echo $product['product_name'] ?></a></h4>
-										<p class="text-truncate--2"><?php echo $product['description'] ?></p>
-										<div class="product-bottom-details">
-											<div class="product-price"><button type="submit" class="btn btn-outline-success" name="addcart">Add cart</button></div>
-											<div class="product-links">
-												<a href="#!"><i class="fa fa-heart"></i></a>
-												<a href="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>"><i class="fa fa-shopping-cart"></i></a>
-											</div>
-										</div>
-									</div>
+<div class="container">
+   
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <?php
+            $i = 0;
+            foreach ($products as $product) {
+                if ($product['categories'] == 'face') {
+            ?>
+                    <div class="col-md-4">
+                     <form action="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>" method="post">
+                        <div class="card">
+                        
+                            <a class="text-decoration-none" href="<?php echo ROOT_URL . '/Product/details&id=' . $product['id'] ?>">
+                                <img src="<?php echo htmlspecialchars($product['image_url']) ?>" class="card-img-top" alt="...">                   
+                                 </a>
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $product['product_name']; ?></h5>
+                                    <p class="card-text text-truncate--2"><?php echo $product['price']; ?></p>
+                                    <div>
+                                        <button type="submit" name="addcart" class="btn btn-success">Add to cart</button>
+                                        <a href="<?php echo ROOT_URL . '/Checkout/buyNow&product_id=' . $product['id'] ?>"><button type="submit" class="btn btn-success">Buy now</button></a>
+                                        <input type="hidden" name="PId" value="<?php echo $product['id'] ?>">
+                                        <input type='hidden' name='PName' value="<?php echo $product['product_name'] ?>">
+                                        <input type='hidden' name='Image' value="<?php echo $product['image_url'] ?>">
+                                        <input type='hidden' name='PPrice' value="<?php echo $product['price'] ?>">
+                                        <input type='hidden' name='addcart' value="order">
+                                    </div>
+                                </div>
+                        </div>
+                     </form>
+                    </div>
 
-									<div>
-										<input type="hidden" name="PId" value="<?php echo  $product['id'] ?>">
-										<input type='hidden' name='PName' value="<?php echo $product['product_name'] ?>">
-										<input type='hidden' name='Image' value=" <?php echo $product['image_url'] ?>">
-										<input type='hidden' name='PPrice' value=" <?php echo $product['price'] ?>">
-										<input type='hidden' name='addcart' value="order">
-									</div>
-								</div>
-							</form>
-						</div>
-				<?php
-						$count++;
-						if ($count % 3 == 0) {
-							echo '</div><div class="row">';
-						}
-					endif;
-				endforeach;
-				?>
-			</div>
-			<div class="row mt-5">
-				<?php
-				$count = 0;
-				foreach ($products as $product) :
-					if ($product['categories'] == 'hair') :
-				?>
-
-						<div class="col-lg-4 col-md-4 col-sm-12 mb-5">
-							<form action="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>" method="post">
-								<div class="product-card">
-									<a href="<?php echo ROOT_URL . '/Product/show&id=' . $product['id'] ?>">
-										<div class="product-tumb">
-											<img src="<?php echo $product['image_url'] ?>" class="img-fluid" alt="" <?php echo $product['image_name'] ?>">
-										</div>
-									</a>
-									<div class="product-details">
-										<span class="product-catagory product-price"><?php echo $product['price'] ?><small> VNĐ</small></span>
-										<h4><a href="#!"><?php echo $product['product_name'] ?></a></h4>
-										<p class="text-truncate--2"><?php echo $product['description'] ?></p>
-										<div class="product-bottom-details">
-											<div class="product-price"><button type="submit" class="btn btn-outline-success" name="addcart">Add cart</button></div>
-											<div class="product-links">
-												<a href="#!"><i class="fa fa-heart"></i></a>
-												<a href="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>"><i class="fa fa-shopping-cart"></i></a>
-											</div>
-										</div>
-									</div>
-
-									<div>
-										<input type="hidden" name="PId" value="<?php echo  $product['id'] ?>">
-										<input type='hidden' name='PName' value="<?php echo $product['product_name'] ?>">
-										<input type='hidden' name='Image' value=" <?php echo $product['image_url'] ?>">
-										<input type='hidden' name='PPrice' value=" <?php echo $product['price'] ?>">
-										<input type='hidden' name='addcart' value="order">
-									</div>
-								</div>
-							</form>
-						</div>
-				<?php
-						$count++;
-						if ($count % 3 == 0) {
-							echo '</div><div class="row">';
-						}
-					endif;
-				endforeach;
-				?>
-			</div>
-		</div>
-	</section>
-<?php    } else {
-?>
-	<div class="loading-page-wrapper">
-		<div class="loading-page">
-			<div class="spinner"></div>
-		</div>
-	</div>
-<?php
-}
+                    <?php
+                    $i++;
+                    if ($i % 3 == 0) {
+                        echo '<div class="clearfix d-md-none"></div>';
+                    }
+                }  } ?>
+        </div>
+</div>
+<?php }?>
