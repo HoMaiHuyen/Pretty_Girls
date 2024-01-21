@@ -10,7 +10,7 @@
     <div class="row ">
         <?php foreach ($orderid as $order) : ?>
             <div class="col-md-20">
-                <form action="<?php echo ROOT_URL.'/AdminOrder/index'?>" method="post">
+                <form onsubmit="return ("Are sure that you want to change")" action="<?php echo ROOT_URL.'/AdminOrder/index'?>" method="post">
                     <div class="card-body">
                         <div class="mb-3 row">
                             <label for="UserName" class="col-sm-2 col-form-label">Customer name</label>

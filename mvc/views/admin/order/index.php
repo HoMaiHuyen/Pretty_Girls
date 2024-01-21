@@ -4,7 +4,7 @@
   if($_GET['message']=='success'){
   ?>
     <script>
-    alert("Cập nhật thành công")
+    alert("The order changed successful")
     </script>
    <?php  
  }
@@ -23,7 +23,7 @@
            </div>
            <div class="card-body">
 
-             <table id="datatablesSimple" class="table table-bordered">
+             <table id="datatablesSimple" class="table table-bordered text-center">
                <thead>
                  <tr>
                    <th></th>
@@ -52,7 +52,7 @@
                        <a href="<?php echo ROOT_URL.'/AdminOrder/viewToUpdate&order_id='.$order['orderId']  ?>"><?php if ($order['status'] == 'Ordered') {
                             echo '<span  class="badge rounded-pill bg-warning text-dark">' . htmlspecialchars($order['status']) . '</span>';
                           } elseif ($order['status'] == 'Delivery') {
-                            echo '<span class="badge rounded-pill bg-light text-dark">' . htmlspecialchars($order['status']) . '</span>';
+                            echo '<span class="badge rounded-pill bg-info text-dark">' . htmlspecialchars($order['status']) . '</span>';
                           } elseif ($order['status'] == 'Received') {
                             echo '<span  class="badge rounded-pill bg-success text-dark">' . htmlspecialchars($order['status']) . '</span>';
                           } else {

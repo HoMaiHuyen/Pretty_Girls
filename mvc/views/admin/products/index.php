@@ -19,8 +19,8 @@
                  </div>
                  <div class="card-body">
 
-                     <table id="datatablesSimple" class="table table-bordered">
-                         <thead>
+                     <table id="datatablesSimple" class="table table-bordered text-center">
+                         <thead class="text-center">
                              <tr>
                                  <th>ID Produt</th>
                                  <th>Product Name</th>
@@ -40,8 +40,8 @@
                                      <td><img src='<?php echo  $product['image_url'] ?>' alt='<?php echo $product['image_name'] ?>' style="width:50px;height:40px;"></td>
                                      <td><?php echo $product['quantity'] ?></td>
                                      <td><?php echo $product['price'] ?></td>
-                                     <th><a class="btn btn-outline-danger" href="<?php echo ROOT_URL . '/AdminProduct/deleteProduct&id=' . $product['id'] ?>"><i class='fa-solid fa-trash'></i>Delete</a></th>
-                                     <th><a class="btn btn-outline-success" href="<?php echo ROOT_URL . '/AdminProduct/updateProduct&id=' . $product['id'] ?>"><i class="fa fa-pencil-square" aria-hidden="true" name=""></i>Update</a></th>
+                                     <th><a  href="<?php echo ROOT_URL . '/AdminProduct/deleteProduct&id=' . $product['id'] ?>"><span class="badge rounded-pill  bg-danger text-dark">Delete</span></a></th>
+                                     <th><a href="<?php echo ROOT_URL . '/AdminProduct/updateProduct&id=' . $product['id'] ?>"><span class="badge rounded-pill bg-success text-text-success">Update</span></a></th>
                                  </tr>
 
                              <?php } ?>

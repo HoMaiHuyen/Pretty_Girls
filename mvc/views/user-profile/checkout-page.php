@@ -9,7 +9,7 @@ if (isset($carts)) :
 ?>
         <section>
             <div class="container-fluid">
-                <form action="<?php echo ROOT_URL . '/user/checkouted' ?>" method="post">
+                <form onsubmit="return ("Are you want to order")" action="<?php echo ROOT_URL . '/Checkout/checkoutOnline' ?>" method="post">
                     <div class="row mt-5 checkout-page">
                         <div class="col-md-7" id="checkout-infor-user">
                             <h2 class="checkout-infor-user-title">Billing Information</h2>
@@ -71,28 +71,28 @@ if (isset($carts)) :
                             </tbody>
                         </table>
                         <div class="form-group">
-                           
+                           <input type="hidden" name="redirect" value="">
                             <input type="hidden" name="total_price" value="<?=  $total_price  ?>">
                             <input type="hidden" name="order_status_id"  value="1">
                         </div>
                     </div>
                     <div class="payment-options pl-4">
-                        <label for="payment">Payment</label>
+                        <label for="payment">Payment :</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" value="cash" name="payment" id="cash">
+                            <input class="form-check-input" type="radio" value="VNPAY" name="payment" id="cash">
                             <label class="form-check-label" for="cash">
                                 Card on delivery
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment" value="card" id="card" checked>
+                            <input class="form-check-input" type="radio" name="payment" value="VNPAY" id="card" checked>
                             <label class="form-check-label" for="card">
                                 Credit card
                             </label>
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-btn-outline-success">Place order</button>
+                        <button type="submit" style="width: 100%;" name="redirect" class="btn btn-outline-success mt-1">Place order</button>
                     </div>
                 </div>
             </div>

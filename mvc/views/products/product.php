@@ -34,7 +34,7 @@ if (isset($products)) { ?>
 					if ($product['categories'] == 'face') :
 				?>
 						<div class="col-lg-4 col-md-4 col-sm-12 mb-5">
-							<form action="<?php echo ROOT_URL . '/user/shoppingCart' ?>" method="post">
+							<form action="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>" method="post">
 								<div class="product-card">
 									<a href="<?php echo ROOT_URL . '/Product/show&id=' . $product['id'] ?>">
 										<div class="product-tumb">
@@ -49,7 +49,7 @@ if (isset($products)) { ?>
 											<div class="product-price"><button type="submit" class="btn btn-outline-success" name="addcart">Add cart</button></div>
 											<div class="product-links">
 												<a href="#!"><i class="fa fa-heart"></i></a>
-												<a href="<?php echo ROOT_URL . '/user/shoppingCart' ?>"><i class="fa fa-shopping-cart"></i></a>
+												<a href="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>"><i class="fa fa-shopping-cart"></i></a>
 											</div>
 										</div>
 									</div>
@@ -81,7 +81,7 @@ if (isset($products)) { ?>
 				?>
 
 						<div class="col-lg-4 col-md-4 col-sm-12 mb-5">
-							<form action="<?php echo ROOT_URL . '/user/shoppingCart' ?>" method="post">
+							<form action="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>" method="post">
 								<div class="product-card">
 									<a href="<?php echo ROOT_URL . '/Product/show&id=' . $product['id'] ?>">
 										<div class="product-tumb">
@@ -96,7 +96,7 @@ if (isset($products)) { ?>
 											<div class="product-price"><button type="submit" class="btn btn-outline-success" name="addcart">Add cart</button></div>
 											<div class="product-links">
 												<a href="#!"><i class="fa fa-heart"></i></a>
-												<a href="<?php echo ROOT_URL . '/user/shoppingCart' ?>"><i class="fa fa-shopping-cart"></i></a>
+												<a href="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>"><i class="fa fa-shopping-cart"></i></a>
 											</div>
 										</div>
 									</div>

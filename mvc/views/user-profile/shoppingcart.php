@@ -1,6 +1,6 @@
 <?php require_once dirname(__DIR__) . "/partials/header.php"; ?>
  <?php if(isset($_SESSION['cart'])){
-        if (!$_SESSION['cart']==[]) { ?>
+       ?>
 <section class="shoppingcart-page">
     <form action="" method=" ">
        
@@ -33,7 +33,7 @@
                                 <td><?php echo $item['quantity'] ?></td>
                                 <td><?php echo $item['price'] ?></td>
                                 <td><?php echo $total ?></td>
-                                <td><a href="<?php echo ROOT_URL . '/user/deleteItem&id=' . $stt ?>"><i class='fa-solid fa-trash'></i></a></td>
+                                <td><a href="<?php echo ROOT_URL . '/Checkout/deleteItem&id=' . $stt ?>"><i class='fa-solid fa-trash'></i></a></td>
                             </tr>
                             <?php $stt++;     ?>
                         <?php
@@ -53,14 +53,13 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <a class="btn btn-primary" href="<?php echo ROOT_URL . '/User/checkout' ?>" style="width: 100px;">Checkout</a>
+                    <a class="btn btn-primary" href="<?php echo ROOT_URL . '/Checkout/index' ?>" style="width: 100px;">Checkout</a>
                 </div>
             </div>
     
     </form>
 </section>
-     <?php      } }
-      else { ?>
+     <?php      }else { ?>
 
             <div class="container-fluid">
                 <div class="row d-flex align-items-center justify-content-center">
@@ -78,4 +77,6 @@
         }  ?>
     
  <?php 
+      
+      
  require_once dirname(__DIR__) . "/partials/footer.php"; ?>

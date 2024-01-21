@@ -87,7 +87,7 @@ class User extends Model
     function UpdateImage($id, $image_url)
     {
         if (!$this->connect) {
-            return false; // Return false instead of an empty array when there's no connection
+            return false; 
         }
 
         try {

@@ -30,6 +30,17 @@
 </head>
 
 <body>
+<?php 
+if(isset($_COOKIE['unlogin'])) {
+    if(!empty($_COOKIE['unlogin'])){
+        ?>
+        <script>
+            alert("You have to register or login into system");
+        </script>
+        <?php 
+    }
+}
+ ?>
     <header class="head" id="myTopnav">
         <div class="logo-container">
             <img src="<?php loadImage('Logo (1).png') ?>" style="width: 80px; height: 80px;">
@@ -50,7 +61,7 @@
         <div class="icon-nav">
             <div class="item1">
 
-                <a href="<?php echo ROOT_URL . '/user/shoppingCart' ?>"><i class="fa-solid fa-cart-shopping" style="font: size 40px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i></a>
+                <a href="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>"><i class="fa-solid fa-cart-shopping" style="font: size 40px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i></a>
             </div>
 
             <a class="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

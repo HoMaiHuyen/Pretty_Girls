@@ -2,11 +2,15 @@
 require_once dirname(__DIR__) . "/models/OrderItem.php";
 require_once dirname(__DIR__) . "/models/Order.php";
 require_once dirname(__DIR__) . "/models/OrderStatus.php";
+require_once  dirname(__DIR__) . "/core/Middlewares/AuthMiddleware.php";
 require_once dirname(__DIR__) . "/core/Services/Mail/ChangStatusMail.php";
 
 
 class AdminOrderController
-{
+{   public function __construct()
+    {
+        $authMiddleware = new AuthMiddleware();
+    }
    
     public function viewOrder()
     {
@@ -74,7 +78,10 @@ class AdminOrderController
             header('Location: ' . $_ENV['ROOT_URL'] . '/AdminOrder/viewOrder&message=' . $message);
         }
     }
-}
+}   
+    public function charts(){
+        view('admin/charts/chart');
+    }
    
 }
 
