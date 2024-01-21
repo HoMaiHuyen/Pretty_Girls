@@ -11,7 +11,7 @@
                   </div>
                   <div class="card-body">
 
-                      <table id="datatablesSimple" class="table table-bordered">
+                      <table id="datatablesSimple" class="table table-bordered text-center">
                           <thead>
                               <tr>
                                   <th></th>
@@ -38,8 +38,8 @@
                                           <td>
                                               <form action="<?php echo ROOT_URL . '/AdminUser/deleteUser' ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete?')">
                                                   <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                                  <button type="submit" class="btn btn-outline-danger" style="border: none; background: none; padding: 0;">
-                                                      <i class="fa-solid fa-trash fs-5">Delete</i>
+                                                  <button type="submit" class="btn btn-light" style="border: none; background: none; padding: 0;">
+                                                      <span class="badge rounded-pill badge bg-danger">Delete</span>
                                                   </button>
                                               </form>
                                           </td>

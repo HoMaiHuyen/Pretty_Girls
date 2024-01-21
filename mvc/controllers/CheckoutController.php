@@ -5,8 +5,13 @@ require_once dirname(__DIR__) . "/models/User.php";
 require_once dirname(__DIR__) . "/models/OrderItem.php";
 require_once dirname(__DIR__) . "/models/Product.php";
 require_once dirname(__DIR__) . "/models/Shop.php";
+require_once  dirname(__DIR__) . "/core/Middlewares/AuthMiddleware.php";
 class CheckoutController
 {
+    public function __construct()
+    {
+        $authMiddleware = new AuthMiddleware();
+    }
     public function index()
     {
         $_SESSION['cart'];
@@ -80,7 +85,7 @@ class CheckoutController
 
                 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
                 $vnp_Returnurl = "http://localhost/php_project/Checkout2/checkoutSuccess";
-                $vnp_TmnCode = "X1WL3I2L"; //Mã website tại VNPAY 
+                $vnp_TmnCode = getenv('VNP_TMNCODE'); 
                 $vnp_HashSecret = "SFBDIRUMYOSNUZGWWYKVLQSKEDOSOXWY";
 
                 $vnp_TxnRef = rand(00, 9999);

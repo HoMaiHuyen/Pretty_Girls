@@ -1,6 +1,6 @@
 <?php require_once dirname(__DIR__) . "/partials/header.php"; ?>
  <?php if(isset($_SESSION['cart'])){
-        if ($_SESSION['cart']!=[]) { ?>
+       ?>
 <section class="shoppingcart-page">
     <form action="" method=" ">
        
@@ -77,6 +77,6 @@
         }  ?>
     
  <?php 
-      }
+      
       
  require_once dirname(__DIR__) . "/partials/footer.php"; ?>

@@ -30,6 +30,17 @@
 </head>
 
 <body>
+<?php 
+if(isset($_COOKIE['unlogin'])) {
+    if(!empty($_COOKIE['unlogin'])){
+        ?>
+        <script>
+            alert("You have to register or login into system");
+        </script>
+        <?php 
+    }
+}
+ ?>
     <header class="head" id="myTopnav">
         <div class="logo-container">
             <img src="<?php loadImage('Logo (1).png') ?>" style="width: 80px; height: 80px;">

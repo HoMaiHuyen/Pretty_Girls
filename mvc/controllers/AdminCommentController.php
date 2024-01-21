@@ -1,7 +1,9 @@
 <?php
+require_once  dirname(__DIR__) . "/core/Middlewares/AuthMiddleware.php";
 require_once dirname(__DIR__) . "/models/Comment.php";
 
 class AdminCommentController{
+
     public function showComments()
     {
         $comment = new Comment();

@@ -1,10 +1,12 @@
 <?php
+require_once  dirname(__DIR__) . "/core/Middlewares/AuthMiddleware.php";
 require_once dirname(__DIR__) . "/models/Product.php";
-
-
-
 class AdminProductController
 {
+    public function __construct()
+    {
+        $authMiddleware = new AuthMiddleware();
+    }
     function showProduct()
     {
         $productModel = new Product();

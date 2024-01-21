@@ -89,6 +89,7 @@ class OrderItem extends Model
             throw $e;
         }
     }
+    
     public function totalRevenue()
     {
         if (!$this->connect) {
@@ -98,7 +99,7 @@ class OrderItem extends Model
             $stmt = $this->connect->prepare(
                 "SELECT oi.order_id,SUM(p.price * oi.quantity) AS total_revenue,                                               
                                                 AVG(p.price * oi.quantity) AS average_price,
-                                                SUM(p.quantity) AS total_quantity,
+                                                SUM(oi.quantity) AS total_quantity,
                                                 COUNT(oi.id) AS total_order
                                                 FROM  order_items AS oi                                                  
                                                 JOIN products p ON p.id = oi.product_id                                                   

@@ -10,7 +10,7 @@
     <meta name="author" content="" />
     <title>Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+
 
     <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
     <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
@@ -75,7 +75,7 @@
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="!#">
+                        <a class="nav-link" href="<?php echo ROOT_URL . '/AdminOrder/charts' ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Charts
                         </a>
