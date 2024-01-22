@@ -91,7 +91,7 @@ class CheckoutController
                 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
                 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-                $vnp_Returnurl = "http://localhost/php_project/Checkout2/checkoutSuccess";
+                $vnp_Returnurl = "http://localhost/php_project/Checkout/checkoutSuccess";
                 $vnp_TmnCode = getenv('VNP_TMNCODE'); 
                 $vnp_HashSecret = "SFBDIRUMYOSNUZGWWYKVLQSKEDOSOXWY";
 

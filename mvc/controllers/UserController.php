@@ -187,19 +187,7 @@ class UserController
         print_r($orderDetails);
 
         if ($orderDetails) {
-            $created_at = new DateTime($orderDetails['created_at']);
-
-
-            $currentDateTime = new DateTime();
-
-            $interval = $created_at->diff($currentDateTime);
-
-            $timeThreshold = new DateInterval('PT12H');
-
-
-            if ($interval > $timeThreshold) {
-                $message = 'failed';
-            } else {
+           
                 $_SESSION['user'] = array(
                     'id' => $user_id,
                     'user_name' => $name,
@@ -209,8 +197,13 @@ class UserController
                 );
 
                 $message = 'success';
+                header('Location: ' . $_ENV['ROOT_URL'] . '/user/viewOrder?message=' . $message);
+            }else{
+                header('Location: ' . $_ENV['ROOT_URL'] . '/user/viewOrder?message=' . $message);
+                
             }
-        }
-        header('Location: ' . $_ENV['ROOT_URL'] . '/user/viewOrder?message=' . $message);
+           
+        } 
+        
     }
-}
+

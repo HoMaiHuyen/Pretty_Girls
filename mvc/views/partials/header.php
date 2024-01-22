@@ -35,7 +35,7 @@ if(isset($_COOKIE['unlogin'])) {
     if(!empty($_COOKIE['unlogin'])){
         ?>
         <script>
-            alert("You have to register or login into system");
+            alert("You unlogin so you have to register or login into system");
         </script>
         <?php 
     }

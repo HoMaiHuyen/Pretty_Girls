@@ -13,8 +13,8 @@
                 <p><?php echo htmlspecialchars($product['description']) ?> <br><span style="font-size: 25px;   color: #ED4D2D;"> <?php echo htmlspecialchars($product['price']) ?></span></p>
             </div>
             <div class="product-price-btn d-flex">
-                <button type="button" name="addcart" style="width: 200px;">add to cart</button>
-                <button type="button">buy now</button>
+                <button type="submit" name="addcart" style="width: 200px;">add to cart</button>
+                <button type="submit">buy now</button>
             </div>
         </div>
     </div>
@@ -90,7 +90,7 @@
 
 <div class="container">
    
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-6" style="margin-top: 5%;">
             <?php
             $i = 0;
             foreach ($products as $product) {
@@ -125,9 +125,9 @@
                     if ($i % 3 == 0) {
                         echo '<div class="clearfix d-md-none"></div>';
                     }
-                } else {
+                } elseif($product['categories'] =='hair') {
                     ?>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mt-6" style="margin-top: 5%;">
                      <form action="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>" method="post">
                         <div class="card">
                             <a class="text-decoration-none" href="<?php echo ROOT_URL . '/Product/details&id=' . $product['id'] ?>">

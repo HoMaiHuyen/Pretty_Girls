@@ -26,13 +26,12 @@ if (isset($products)) { ?>
 		</div>
 	</div>
 	<section>
-<div class="container">
+<div class="container mt-6" style="margin-top: 5%;">
    
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-6">
             <?php
             $i = 0;
             foreach ($products as $product) {
-                if ($product['categories'] == 'face') {
             ?>
                     <div class="col-md-4">
                      <form action="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>" method="post">
@@ -66,4 +65,3 @@ if (isset($products)) { ?>
                 }  } ?>
         </div>
 </div>
-<?php }?>
