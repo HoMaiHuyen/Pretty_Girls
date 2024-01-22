@@ -79,8 +79,11 @@ class AdminOrderController
         }
     }
 }   
-    public function charts(){
-        view('admin/charts/chart');
+    public function findUserWithMostOrders(){
+        $orderModel = new Order();
+        $result = $orderModel->getUserWithMostOrders();
+        
+        view('admin/order/index', compact('result'));
     }
    
 }

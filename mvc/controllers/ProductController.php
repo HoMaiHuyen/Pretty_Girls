@@ -42,7 +42,7 @@ class ProductController
                 $search_key =  htmlspecialchars($keyword);
             }
         }
-        view('products/search', compact('searchResult', 'keyword', 'search_key', 'resultShop'));
+        view('products/search-product', compact('searchResult', 'keyword', 'search_key', 'resultShop'));
     }
     
     function product()

@@ -34,6 +34,33 @@ class Order extends Model
         $stmt = $this->closeConnection();
     }
 
+    public function getUserWithMostOrders()
+{
+    if (!$this->connect) {
+        return [];
+    }
+    try {
+        $query =  "SELECT users.id as userId, users.user_name as name
+                          COUNT(orders.id) as totalOrders
+                   FROM $this->table
+                   INNER JOIN users ON orders.user_id = users.id
+                   GROUP BY users.id
+                   ORDER BY totalOrders DESC
+                   LIMIT 1";
+
+        $stmt = $this->connect->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [];
+    } finally {
+        $this->closeConnection();
+    }
+}
+
     public function getOrderInfo($orderId)
     {
         if (!$this->connect) {
