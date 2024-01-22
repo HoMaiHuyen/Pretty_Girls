@@ -49,7 +49,6 @@ class Comment extends Model
         if (!$this->connect) {
             return [];
         }
-
         try {
             $stmt = $this->connect->prepare("SELECT * FROM $this->table WHERE product_id = :product_id");
             $stmt->bindParam(':product_id', $product_id);
