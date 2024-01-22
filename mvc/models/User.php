@@ -119,7 +119,7 @@ class User extends Model
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
-            return [];
+            return false;
         }
         $stmt = $this->closeConnection();
     }

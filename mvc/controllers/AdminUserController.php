@@ -20,8 +20,10 @@ class AdminUserController{
             $id = $_POST['id'];
             $userModel = new User();
             $user = $userModel->getOneUser($id);
+            echo 3;
             if ($user) {
                 $result = $userModel->deleteUser($id);
+                echo 1;
             }
         }
         $users = $userModel->getAll();
