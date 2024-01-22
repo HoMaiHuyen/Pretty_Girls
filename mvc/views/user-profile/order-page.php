@@ -32,7 +32,16 @@ if (isset($orders) ){
                     <th scope="row"><?php echo htmlspecialchars($order['order_id']) ?></th>
                     <td><?php echo htmlspecialchars($order['Dates']) ?></td>
                     <td><?php echo  htmlspecialchars($order['total_price']) ?></td>
-                    <td><span style="font-size: 10px;" class="btn btn-success"><?php echo htmlspecialchars($order['status']) ?></span></td>
+                    <td class="text-center"><?php if ($order['status'] == 'Ordered') {
+                            echo '<span  class="badge rounded-pill bg-warning text-dark">' . htmlspecialchars($order['status']) . '</span>';
+                          } elseif ($order['status'] == 'Delivery') {
+                            echo '<span class="badge rounded-pill bg-info text-dark">' . htmlspecialchars($order['status']) . '</span>';
+                          } elseif ($order['status'] == 'Received') {
+                            echo '<span  class="badge rounded-pill bg-success text-dark">' . htmlspecialchars($order['status']) . '</span>';
+                          } else {
+                            echo '<span  class="badge rounded-pill  bg-danger text-dark">' . htmlspecialchars($order['status']) . '</span>';
+                          }
+                          ?></td>
                     <td>
                       <button type="button" class="btn  <?php $order['order_id'] ?>  btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal1" data-order-id="<?php echo $order['order_id']; ?>">
                         <i class="fa-solid fa-pencil"></i>

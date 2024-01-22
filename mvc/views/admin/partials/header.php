@@ -90,3 +90,9 @@
                 </div>
             </nav>
         </div>
+<?php if(isset($_COOKIE['unlogin'])) {?>
+    <script>
+    alert('You have to login into system');
+    </script>
+    <?php
+}?>
