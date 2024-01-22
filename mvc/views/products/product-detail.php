@@ -1,16 +1,25 @@
 <?php require_once dirname(__DIR__) . "/partials/header.php";
+if(isset($_COOKIE['unlogin'])) {
+    if(!empty($_COOKIE['unlogin'])){
+        ?>
+        <script>
+            alert("You unlogin so you have to register or login into system");
+        </script>
+        <?php 
+    }
+}
 ?>
 
 <form action="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>" method="post">
     <div class="wrapper-product">
         <div class="product-img-detail">
-            <img src="<?php echo htmlspecialchars($product['image_url']) ?>" height="420" width="327">
+            <img src="<?php echo htmlspecialchars($productOne['image_url']) ?>" height="420" width="327">
         </div>
         <div class="product-info">
             <div class="product-text">
-                <h1><?php echo $product['product_name'] ?></h1>
+                <h1><?php echo $productOne['product_name'] ?></h1>
                 <h2>by studio and friends</h2>
-                <p><?php echo htmlspecialchars($product['description']) ?> <br><span style="font-size: 25px;   color: #ED4D2D;"> <?php echo htmlspecialchars($product['price']) ?></span></p>
+                <p><?php echo htmlspecialchars($productOne['description']) ?> <br><span style="font-size: 25px;   color: #ED4D2D;"> <?php echo htmlspecialchars($productOne['price']) ?></span></p>
             </div>
             <div class="product-price-btn d-flex">
                 <button type="submit" name="addcart" style="width: 200px;">add to cart</button>
@@ -19,10 +28,10 @@
         </div>
     </div>
 
-    <input type="hidden" name="PId" value="<?php echo  $product['id'] ?>">
-    <input type='hidden' name='PName' value="<?php echo $product['product_name'] ?>">
-    <input type='hidden' name='Image' value=" <?php echo $product['image_url'] ?>">
-    <input type='hidden' name='PPrice' value=" <?php echo $product['price'] ?>">
+    <input type="hidden" name="PId" value="<?php echo  $productOne['id'] ?>">
+    <input type='hidden' name='PName' value="<?php echo $productOne['product_name'] ?>">
+    <input type='hidden' name='Image' value=" <?php echo $productOne['image_url'] ?>">
+    <input type='hidden' name='PPrice' value=" <?php echo $productOne['price'] ?>">
     <input type='hidden' name='addcart' value="order">
 
 </form>
@@ -76,8 +85,8 @@
         <div class="card mt-2 w-75 mb-3 mx-auto">
             <div class="card-body">
                 <h5 class="card-title">Write Comment</h5>
-                <form action="<?php echo ROOT_URL . '/Comment/comment&id=' . $product['id'] ?>" method="post">
-                    <input type="hidden" name="PId" value="<?php echo $product['id'] ?>">
+                <form action="<?php echo ROOT_URL . '/Comment/comment&id=' . $productOne['id'] ?>" method="post">
+                    <input type="hidden" name="PId" value="<?php echo $productOne['id'] ?>">
                     <div class="mb-3">
                         <textarea class="form-control" name="comment" placeholder="Your comment" required></textarea>
                     </div>
@@ -87,6 +96,9 @@
         </div>
     </div>
 </div>
+<?php  
+if($productOne['categories']=='hair'){
+?>
 
 <div class="container">
    
@@ -125,20 +137,34 @@
                     if ($i % 3 == 0) {
                         echo '<div class="clearfix d-md-none"></div>';
                     }
-                } elseif($product['categories'] =='hair') {
-                    ?>
-                    <div class="col-md-4 mt-6" style="margin-top: 5%;">
+                
+                } }
+            ?>
+        </div>
+</div>
+<?php }elseif($productOne['categories']=='face') {
+    ?>
+    <div class="container">
+   
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-6" style="margin-top: 5%;">
+            <?php
+            $i = 0;
+            foreach ($products as $product) {
+                if ($product['categories'] == 'face') {
+            ?>
+                    <div class="col-md-4">
                      <form action="<?php echo ROOT_URL . '/Checkout/shoppingCart' ?>" method="post">
                         <div class="card">
+                        
                             <a class="text-decoration-none" href="<?php echo ROOT_URL . '/Product/details&id=' . $product['id'] ?>">
-                                <img src="<?php echo htmlspecialchars($product['image_url']) ?>" class="card-img-top" alt="...">
-                                  </a>
+                                <img src="<?php echo htmlspecialchars($product['image_url']) ?>" class="card-img-top" alt="...">                   
+                                 </a>
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $product['product_name']; ?></h5>
                                     <p class="card-text text-truncate--2"><?php echo $product['price']; ?></p>
                                     <div>
-                                        <button type="submit" name="addcart" class="btn btn-success">Add to cart</button>
-                                        <button type="submit" class="btn btn-success">Buy now</button>
+                                        <button type="button" class="btn btn-success">Add to cart</button>
+                                        <a href="<?php echo ROOT_URL . '/Checkout/buyNow&product_id=' . $product['id'] ?>"><button type="button" class="btn btn-success">Buy now</button></a>
                                         <input type="hidden" name="PId" value="<?php echo $product['id'] ?>">
                                         <input type='hidden' name='PName' value="<?php echo $product['product_name'] ?>">
                                         <input type='hidden' name='Image' value="<?php echo $product['image_url'] ?>">
@@ -146,21 +172,23 @@
                                         <input type='hidden' name='addcart' value="order">
                                     </div>
                                 </div>
-                         
                         </div>
                      </form>
                     </div>
 
-            <?php
+                    <?php
                     $i++;
                     if ($i % 3 == 0) {
                         echo '<div class="clearfix d-md-none"></div>';
                     }
-                }
-            }
+                
+                } }
             ?>
         </div>
 </div>
+<?php 
+}
+    ?>
 
 
 <?php require_once dirname(__DIR__) . "/partials/footer.php"; ?>

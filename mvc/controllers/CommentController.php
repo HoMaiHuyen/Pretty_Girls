@@ -5,11 +5,11 @@ require_once  dirname(__DIR__) . "/core/Middlewares/AuthMiddleware.php";
 require_once dirname(__DIR__) . "/models/User.php";
 class CommentController
 {
-    
-    public function __construct()
+     public function __construct()
     {
         $authMiddleware = new AuthMiddleware();
     }
+
     public function comment()
     {
         $commentModel = new Comment();
@@ -31,14 +31,20 @@ class CommentController
                 $allComments = $commentModel->getComments($product_id);
 
                 if ($allComments) {
-                    header('Location:' . $_ENV['ROOT_URL'] . '/Product/show&id=' . $product_id);
+                    header('Location:' . $_ENV['ROOT_URL'] . '/Product/details&id=' . $product_id);
+                    setcookie("success", "Added order successful!", time() + 1, "/", "", 0);
                     exit();
                 } else {
-                    header('Location:' . $_ENV['ROOT_URL'] . '/Product/show&id=' . $product_id);
+                    header('Location:' . $_ENV['ROOT_URL'] . '/Product/details&id=' . $product_id);
+                      setcookie("failed", "Added order successful!", time() + 1, "/", "", 0);
                 }
             } 
         }
-        header('Location:' . $_ENV['ROOT_URL'] . '/Product/details&id=' . $product_id);
+        else{
+         header('Location:' . $_ENV['ROOT_URL'] . '/Product/details&id=' . $product_id);
+        setcookie("unlogin", "Added order successful!", time() + 1, "/", "", 0);
+        }
+       
     }
 
     public function deleteComment()
@@ -51,11 +57,11 @@ class CommentController
             $deleteResult = $commentModel->deleteComment($id, $user_id, $product_id);
             if ($deleteResult) {
 
-                header('Location:' .  $_ENV['ROOT_URL'] . '/Product/show&id=' . $product_id);
+                header('Location:' .  $_ENV['ROOT_URL'] . '/Product/details&id=' . $product_id);
                 exit();
             }
         }
-        header('Location: /Product/show&id=' . $id);
+        header('Location: /Product/details&id=' . $id);
         exit();
     }
 

@@ -18,10 +18,10 @@ class ProductController
             $id = $_GET['id'];
             $productModel = new Product();
             $products = $productModel->getAllProduct();
-            $product = $productModel->getOne($id);
+            $productOne = $productModel->getOne($id);
             $comment = new Comment();
             $comments = $comment->getComments($id);
-            view('products/product-detail', compact('product', 'products', 'comments'));
+            view('products/product-detail', compact('productOne', 'products', 'comments'));
         }
     }
     public  function search($keyword)
@@ -59,10 +59,10 @@ class ProductController
             $id = $_GET['id'];
             $productModel = new Product();
             $products = $productModel->getAllProduct();
-            $product = $productModel->getOne($id);
+            $productOne = $productModel->getOne($id);
             $comment = new Comment();
             $comments = $comment->getComments($id);
-            view('products/product-detail', compact('product', 'products', 'comments'));
+            view('products/product-detail', compact('productOne', 'products', 'comments'));
     }
 }
 }
