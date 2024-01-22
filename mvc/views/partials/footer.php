@@ -1,5 +1,6 @@
-<div class="container-fluid mb-0">
-    <footer class="text-center text-lg-start text-white" style="background-color: #1c2331" id="main-footer">
+</main>
+<div class="container-fluid mb-0  mt-4" style="padding: 0;" id="footer">
+    <footer class="text-center text-lg-start text-white" style="background-color: #000;   box-shadow: 0px -5px 15px 0px rgba(0, 0, 0, 0.75);" id="main-footer">
         <section class="p-md-2">
             <div class="container text-center text-md-start mt-5">
 
@@ -8,7 +9,7 @@
                         <h6 class="text-uppercase fw-bold">Company name</h6>
                         <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
                         <p>
-                            <img class="footer-qr-code" src="/public/image/QR_code_shop.png" alt="">
+                            <img class="footer-qr-code" src="<?php echo ROOT_URL . '/public/image/QR_code_shop.png' ?>" alt="">
                         </p>
                         <div>
                             <i class="fa-brands fa-facebook icon-item"></i>
@@ -62,27 +63,30 @@
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <h6 class="text-uppercase fw-bold">CONTACT</h6>
                         <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
-                        <p><i class="fas fa-home mr-3"></i> Da Nang, Viet Nam</p>
-                        <p><i class="fas fa-envelope mr-3"></i> prettygirls@gmail.com</p>
-                        <!-- <p><i class="fa fa-instagram" aria-hidden="true"></i> + 01 234 567 89</p> -->
-                        <p><i class="fa fa-phone" aria-hidden="true"></i>
-                            0385 740 373</p>
+                        <?php if (isset($resultShop) && !empty($resultShop)) : ?>
+                            <p><i class="fas fa-home mr-3"></i><?php echo $resultShop[0]['address']; ?></p>
+                            <p><i class="fas fa-envelope mr-3"></i><?php echo $resultShop[0]['email']; ?></p>
+                            <p><i class="fa fa-phone" aria-hidden="true"></i><?php echo $resultShop[0]['phone']; ?></p>
+                        <?php else : ?>
+                            <p>No shop contact information available.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
         </section>
-        <div class="text-center" id="footer-copyright">
-            <a class="text-white" href="!#"> © 2023 Copyright: | Copyright belongs to Cosmetics Technology Investment Company Limited</a>
+        <div class="text-center w3-black" id="footer-copyright">
+            <a class="text-white" href="!#"> © 2023 Copyright: | Copyright belongs to Cosmetics Technology Investment
+                Company Limited</a>
         </div>
-        
+
     </footer>
-    
+
 </div>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> -->
-<script src="../../../public/js/home.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+<script src="<?php echo ROOT_URL . '/public/js/home.js' ?>"></script>
+
 </body>
 
 </html>

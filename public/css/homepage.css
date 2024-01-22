@@ -1,0 +1,427 @@
+:root {
+    --blue-color: #6E95B8;
+    --background-main-color: #F4FAFD;
+    --background-button-color: linear-gradient(#9FCBF4, #EAD8FC);
+    --white-color: white;
+    --black-color: black;
+    --lightgray: #cbc4c4;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: EB Garamond;
+    font-size: 18px;
+}
+
+/* ---------------- header ------------------ */
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 2px 2px 2px 1px #E0E0E0;
+}
+
+.logo-container {
+    margin-right: 25px;
+}
+
+.main-menu {
+    display: flex;
+    align-items: center;
+    margin-right: 70px;
+}
+
+.main-menu a {
+    margin-right: 30px;
+    color: black;
+    font-size: 18px;
+}
+
+.main-menu a:hover {
+    color: red;
+}
+
+.burger-icon.active span {
+    background-color: transparent;
+}
+
+.search-container {
+    margin-right: 180px;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    z-index: 1;
+}
+
+.search-container input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: 300px;
+    padding-left: 30px;
+}
+
+.search-container .search-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+
+}
+
+.search-container i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #555;
+}
+
+.search-container input:hover+i {
+    color: #333;
+}
+
+.search-container input:focus {
+    outline: none;
+    border: 1px solid #555;
+}
+
+.search-container input:focus+i {
+    color: #333;
+}
+
+.icon-nav {
+    display: flex;
+    align-items: center;
+}
+
+.icon-nav .item {
+    margin-left: 10px;
+}
+
+.head nav.main-menu a {
+    text-decoration: none;
+}
+
+.icon-nav .item1 i {
+    margin-right: 30px;
+    color: gray;
+}
+
+.icon-nav .item i {
+    margin-right: 30px;
+    color: gray;
+}
+
+@media screen and (min-width: 769px) {
+    .burger-menu {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .head {
+        flex-wrap: wrap;
+    }
+
+    .head>a {
+        font-size: 1.2rem;
+    }
+
+    .burger-menu {
+        position: absolute;
+        display: block;
+        margin-right: -150px;
+        width: 30px;
+        height: 30px;
+        right: 0%;
+        top: 20%;
+
+    }
+
+    .main-menu {
+        width: 100%;
+        display: none;
+        margin-top: 20px;
+        margin-left: 15px;
+    }
+
+    .main-menu a {
+        display: block;
+        margin-left: 0;
+        padding: 15px 0;
+        text-decoration: none;
+    }
+
+    .main-menu a:hover {
+        color: red;
+    }
+
+    .main-menu a:hover {
+        text-decoration: line-through;
+        text-decoration-color: red;
+    }
+
+    .icon-nav {
+        display: none;
+        width: 30px;
+        height: 30px;
+    }
+
+    .active .icon-nav,
+    .active .main-menu {
+        display: block;
+    }
+
+    .active .icon-nav {
+        display: flex;
+        padding: 15px;
+        margin-left: 0;
+    }
+
+    .icon-nav .item1 i,
+    .icon-nav .item i {
+        font-size: 24px;
+    }
+
+    .search-container {
+        left: 100px;
+    }
+
+    .search-container input {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .search-container .search-icon {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+    }
+
+}
+
+.active-menu {
+    border-bottom: 2px solid #ED4D2D;
+    color: #ED4D2D;
+    color: rgb(189, 189, 31);
+}
+
+#banner {
+    display: flex;
+    height: 100%;
+    flex: 1;
+}
+
+.left-section {
+    background-image: linear-gradient(#9FCBF4, #EAD8FC);
+    width: 100%;
+    flex: 1;
+    background-color: #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+}
+
+#banner .left-section h1 {
+    font-size: 4em;
+    margin-top: 0%;
+}
+
+.right-section {
+    width: 100%;
+    flex: 1;
+}
+
+.right-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+footer {
+    background-color: #121212;
+    padding: 60px 20px;
+}
+
+footer .text {
+    max-width: 500px;
+    margin: auto;
+}
+
+footer .text h2 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 19px;
+    letter-spacing: 1.9px;
+    margin-bottom: 25px;
+}
+
+footer .text .fa-asterisk {
+    font-size: 12px;
+}
+
+footer .text p {
+    line-height: 27px;
+}
+
+footer .contact-container {
+    padding: 40px 0;
+    max-width: 1000px;
+    margin: auto;
+}
+
+footer .contact-container>div {
+    flex: 1;
+}
+
+footer .contact-container h3 {
+    font-size: 19px;
+    letter-spacing: 1.9px;
+}
+
+footer .social-media .links a {
+    margin: 0 10px;
+    font-size: 25px;
+}
+
+footer .newsletter input {
+    padding: 10px;
+    width: 270px;
+    background-color: #eee;
+    border: none;
+    margin-left: -15px;
+}
+
+footer .newsletter i {
+    margin-left: -40px;
+    vertical-align: middle;
+    font-size: 21px;
+}
+
+.copyright {
+    padding: 15px 40px 30px;
+    background-color: #262526;
+}
+
+.copyright .svg-up {
+    top: 0;
+    left: 50%;
+    margin-left: -96px;
+    margin-top: -50px;
+}
+
+.copyright .arrow-up {
+    width: 40px;
+    height: 30px;
+    top: -45px;
+    color: #fff;
+    line-height: 1.9
+}
+
+.copyright ul {
+    justify-content: center;
+}
+
+.copyright li {
+    color: #919191;
+    font-size: 14px;
+}
+
+.copyright li:not(:last-of-type):after {
+    content: '•';
+    margin: 10px;
+}
+
+.copyright .CTA {
+    margin-top: 25px;
+}
+
+.copyright .CTA li a {
+    color: #919191;
+}
+
+/*End Footer*/
+
+/*End Home Page*/
+
+/*Start Contact Page*/
+.contact-header {
+    background-image: url("https://res.cloudinary.com/abdel-rahman-ali/image/upload/v1535988526/contact-food.jpg");
+    height: 40vh;
+}
+
+.contact {
+    padding: 78px 40px;
+}
+
+.contact>div {
+    flex: 50%;
+}
+
+.contact .text p {
+    margin-bottom: 30px;
+}
+
+.contact .text i {
+    width: 50px;
+    height: 50px;
+    background-color: #000;
+    border-radius: 50%;
+    line-height: 48px;
+    font-size: 24px;
+}
+
+.contact .text h2 {
+    font-family: source_sans_problack, sans-serif;
+    font-size: 24px;
+    color: #262626;
+    letter-spacing: 2.4px;
+    margin-bottom: 20px;
+}
+
+.contact .form {
+    margin-left: 48px;
+}
+
+.contact .form form label {
+    margin-bottom: 5px;
+    color: #515151;
+}
+
+.contact .form form input,
+.contact .form form textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 24px;
+    border-radius: 5px;
+    border: 2px solid #D8D8D8;
+    outline: none;
+}
+
+.contact .form form input:focus,
+.contact .form form textarea:focus {
+    border-color: #a96700;
+    box-shadow: 0 1px 1px #737373;
+}
+
+.contact .form form textarea {
+    height: 212px;
+    resize: none;
+}
+
+.contact .form form button {
+    background-color: #262526;
+    padding: 12px 30px;
+    font-size: 12px;
+}

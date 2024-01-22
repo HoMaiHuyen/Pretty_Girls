@@ -1,0 +1,50 @@
+.container-fluid .checkout-page{
+    justify-content: flex-start;
+    font-size: 18px;
+   
+}
+#checkout-infor-user{
+    width: 35% ;
+    height: 30rem;   
+    border-radius: 20px;
+    margin-left: 12%;
+    border: 1px solid #D8BEBE;   
+    /* background: #F4FAFD; */
+}
+#checkout-infor-user form {
+    margin-top: 15px;
+    padding: 15px;
+}
+
+#checkout-infor-order{
+    width: 35% ;
+    height: auto;
+    border-radius: 20px;
+    border: 1px solid #D8BEBE; 
+    margin-left: 25px;
+}
+
+.checkout-infor-order-title, .checkout-infor-user-title{
+    margin-top: 15px;
+    color: #ED4D2D;
+}
+
+#checkout-infor-order {
+    position: relative;
+}
+
+.checkout-button-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+
+    
+}
+.shoppingcart-page {
+    margin-top:50px ;
+}
+.order button a{
+    text-decoration: none;
+    color: black;
+}
