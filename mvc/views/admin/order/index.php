@@ -44,7 +44,7 @@
                        <input type="checkbox" class="order-checkbox" id='box' <?php echo htmlspecialchars($order['orderId']); ?>">
                      </td>
                      <td><?php echo htmlspecialchars($order['orderId']) ?></td>
-                     <td><?php echo  htmlspecialchars(($order['created_at'])) ?></td>
+                     <td><?php echo  htmlspecialchars(($order['name'])) ?></td>
                      <td><?php echo  htmlspecialchars($order['total_price'])  ?></td>
                      <td><?php echo  htmlspecialchars($order['Dates']) ?></td>
                      <td><?php echo  htmlspecialchars($order['payment']) ?></td>

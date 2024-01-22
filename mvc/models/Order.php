@@ -208,7 +208,7 @@ class Order extends Model
             return [];
         }
         try {
-            $query =  "SELECT  users.id as userId,
+            $query =  "SELECT  users.id as userId, users.user_name as name,
                     orders.id as orderId, orders.date as Dates,
                     orders.total_price as total_price,
                     orders.payment_method as payment, order_status.status_name as status,
